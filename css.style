@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0f1117;
+    color: #e6edf3;
+}
+
+header {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #0f1117, #161b22);
+}
+
+header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    color: #00f0ff;
+}
+
+nav {
+    text-align: center;
+    padding: 15px;
+    background-color: #161b22;
+}
+
+nav a {
+    color: #00f0ff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+h2 {
+    color: #00f0ff;
+}
+
+.card {
+    background-color: #161b22;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    transition: 0.3s;
+    border: 1px solid #00f0ff22;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border: 1px solid #00f0ff;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #161b22;
+}
