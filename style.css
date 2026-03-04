@@ -1,34 +1,47 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background-color: #FAFAFA;
-    color: #111111;
+    background: linear-gradient(120deg, #0f1117, #1a1d27);
+    color: #e6edf3;
 }
 
 header {
     text-align: center;
-    padding: 60px 20px;
-    background: #FFFFFF;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #0f1117, #161b22);
+    border-bottom: 2px solid #00f0ff33;
 }
 
 header h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 3em;
-    color: #111111;
+    color: #00f0ff;
+    text-shadow: 0 0 10px #00f0ff66;
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { text-shadow: 0 0 10px #00f0ff66; }
+    50% { text-shadow: 0 0 20px #00f0ff99; }
 }
 
 nav {
     text-align: center;
-    padding: 15px;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #E0E0E0;
+    padding: 20px;
+    background-color: #161b22;
 }
 
 nav a {
-    color: #0070F3;
+    color: #00f0ff;
     margin: 0 15px;
     text-decoration: none;
     font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #00fff0;
+    text-shadow: 0 0 8px #00fff099;
 }
 
 section {
@@ -38,22 +51,24 @@ section {
 }
 
 h2 {
-    color: #111111;
+    color: #00f0ff;
     margin-bottom: 20px;
 }
 
 .card {
-    background-color: #FFFFFF;
+    background-color: #161b22;
     padding: 20px;
     margin: 20px 0;
-    border-radius: 8px;
+    border-radius: 12px;
     transition: 0.3s;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border: 1px solid #00f0ff22;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-7px) scale(1.02);
+    border: 1px solid #00f0ff;
+    box-shadow: 0 6px 18px rgba(0,255,255,0.4);
 }
 
 ul {
@@ -68,7 +83,6 @@ ul li {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #FFFFFF;
-    border-top: 1px solid #E0E0E0;
-    color: #666666;
+    background-color: #161b22;
+    color: #666;
 }
