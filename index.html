@@ -43,14 +43,8 @@
         }
 
         @media (max-width: 768px) {
-            .main-nav {
-                gap: 8px;
-                padding: 12px 5px;
-                justify-content: space-around;
-            }
-            .main-nav a {
-                font-size: 0.65em;
-            }
+            .main-nav { gap: 8px; padding: 12px 5px; justify-content: space-around; }
+            .main-nav a { font-size: 0.65em; }
         }
 
         /* --- LOADER & ZOOM --- */
@@ -187,13 +181,13 @@
     const headerIcon = document.querySelector('#dynamic-header i');
 
     const step1 = "[LECTURE_DU_PROFIL] : AUTHENTIFICATION_REUSSIE";
-    const step2 = "BIENVENUE, THOMAS LEMAIRE";
+    const step2 = "THOMAS LEMAIRE VOUS SOUHAITE LA BIENVENUE";
 
     function typeEffect(text, i, callback) {
         if (i < text.length) {
             textElement.innerHTML = text.substring(0, i + 1);
-            // Vitesse réglée sur 70ms
-            setTimeout(() => typeEffect(text, i + 1, callback), 70); 
+            // Vitesse de 50ms pour un effet plus nerveux
+            setTimeout(() => typeEffect(text, i + 1, callback), 50); 
         } else if (callback) {
             callback();
         }
@@ -201,12 +195,11 @@
 
     function startSequence() {
         typeEffect(step1, 0, () => {
-            // Pause de 1.5s entre les deux étapes
             setTimeout(() => {
                 headerIcon.className = "fas fa-user-check";
                 textElement.innerHTML = "";
                 typeEffect(step2, 0);
-            }, 1500); 
+            }, 1200); // Légère réduction du délai d'attente pour suivre la cadence
         });
     }
 
