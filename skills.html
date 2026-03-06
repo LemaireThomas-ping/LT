@@ -12,16 +12,55 @@
             background: #0b0c13; 
             color: white; 
             margin: 0; 
-            font-family: 'Inter', sans-serif; /* Police de base */
+            font-family: 'Inter', sans-serif; 
         }
-        
+
+        /* --- NAVIGATION RESPONSIVE --- */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: #07080c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+
+        .main-nav a {
+            color: #888;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85em;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav { gap: 8px; padding: 12px 5px; justify-content: space-around; }
+            .main-nav a { font-size: 0.65em; }
+        }
+
+        /* --- CONTENU --- */
         #skills-section { 
             padding: 40px 20px; 
             max-width: 1000px; 
             margin: auto; 
         }
 
-        /* Structure 2x2 forcée sur PC, 1 colonne sur mobile */
+        h2.main-title { 
+            font-family: 'Orbitron'; 
+            border-bottom: 2px solid #00f0ff; 
+            padding-bottom: 10px; 
+            margin-bottom: 30px;
+        }
+
         .skills-grid { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -38,7 +77,6 @@
             border: 1px solid rgba(0, 240, 255, 0.1);
             padding: 25px;
             border-radius: 8px;
-            position: relative;
             transition: 0.3s;
         }
 
@@ -51,7 +89,6 @@
             margin-bottom: 20px; 
             color: #00f0ff; 
             font-family: 'Orbitron', sans-serif; 
-            font-size: 1em;
         }
 
         .sub-group-title { 
@@ -89,22 +126,17 @@
         .led { width: 8px; height: 8px; border-radius: 50%; background: #27c93f; box-shadow: 0 0 8px #27c93f; }
         .status-text { font-size: 0.7em; font-family: 'Orbitron'; color: #888; }
 
-        h2.main-title { 
-            font-family: 'Orbitron'; 
-            border-bottom: 2px solid #00f0ff; 
-            padding-bottom: 10px; 
-            margin-bottom: 30px;
-        }
+        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; }
     </style>
 </head>
 <body>
 
-<header>
+<header style="text-align: center; padding: 40px 20px;">
     <h1>LEMAIRE THOMAS</h1>
     <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
 </header>
 
-<nav>
+<nav class="main-nav">
   <a href="index.html">À PROPOS</a>
   <a href="projects.html">PROJETS</a>
   <a href="skills.html" class="active">COMPÉTENCES</a>
