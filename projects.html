@@ -3,31 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets | Lemaire Thomas</title>
+    <title>Projets & Tutos | Lemaire Thomas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .badge {
+            background: #00f0ff22;
+            color: #00f0ff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            border: 1px solid #00f0ff44;
+            margin-right: 5px;
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .btn-view {
+            display: inline-block;
+            margin-top: 15px;
+            color: #0b0c13;
+            background: #00f0ff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
 
 <header>
-    <h1>Projets & Tutoriels</h1>
+    <h1>Mes Labs & Tutoriels</h1>
+    <p style="color: #00f0ff; font-family: 'Orbitron';">Documentation technique et démonstrations</p>
 </header>
 
 <nav>
   <a href="index.html">À propos</a>
-  <a href="projects.html">Projets</a>
+  <a href="projects.html" class="active">Projets</a>
   <a href="skills.html">Compétences</a>
   <a href="contact.html">Contact</a>
 </nav>
 
-<section id="projects">
+<section>
+    <h2><i class="fas fa-book-open"></i> Tutoriels Récents</h2>
+
     <div class="card">
-        <h3>Installation d’une VM sous VMware</h3>
-        <p>Déploiement complet, configuration réseau et optimisation.</p>
+        <div class="project-header">
+            <h3>Installation & Config Active Directory</h3>
+            <span class="badge">Windows Server 2022</span>
+        </div>
+        <p>Mise en place d'un contrôleur de domaine de A à Z : promotion du rôle AD DS, configuration DNS, et création d'une structure d'OU (Unités d'Organisation).</p>
+        <div style="margin-top: 10px;">
+            <span class="badge"><i class="fab fa-windows"></i> AD DS</span>
+            <span class="badge"><i class="fas fa-network-wired"></i> DNS</span>
+        </div>
+        <a href="#" class="btn-view">Lire le mémo →</a>
     </div>
+
     <div class="card">
-        <h3>Création d’un lab sous Hyper-V</h3>
-        <p>Mise en place d’un environnement Active Directory de test.</p>
+        <div class="project-header">
+            <h3>Lab Virtualisation avec VMware ESXi</h3>
+            <span class="badge">Virtualisation</span>
+        </div>
+        <p>Schéma d'architecture d'un lab domestique sécurisé avec segmentation réseau via pfSense et déploiement de machines virtuelles Debian/Windows.</p>
+        <div style="margin-top: 10px;">
+            <span class="badge"><i class="fas fa-server"></i> ESXi</span>
+            <span class="badge"><i class="fas fa-shield-alt"></i> pfSense</span>
+        </div>
+        <a href="#" class="btn-view">Voir la topologie →</a>
+    </div>
+
+    <div class="card">
+        <div class="project-header">
+            <h3>Automatisation Post-Install (PowerShell)</h3>
+            <span class="badge">Scripting</span>
+        </div>
+        <p>Script PowerShell permettant d'automatiser la configuration réseau et l'installation des outils de base après le déploiement d'un serveur Windows.</p>
+        <div style="margin-top: 10px;">
+            <span class="badge"><i class="fas fa-code"></i> PowerShell</span>
+            <span class="badge"><i class="fas fa-cogs"></i> Automation</span>
+        </div>
+        <a href="#" class="btn-view">Voir le code →</a>
     </div>
 </section>
 
