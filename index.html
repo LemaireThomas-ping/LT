@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* --- LOADER & ANIMATION --- */
+        /* LOADER & ANIMATION */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #0b0c13; display: flex; flex-direction: column;
@@ -16,7 +16,6 @@
             transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease;
         }
         #loader.zoom-out { transform: scale(12); opacity: 0; pointer-events: none; }
-        
         .network-anim { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
         .node { color: #00f0ff; font-size: 45px; filter: drop-shadow(0 0 10px #00f0ff); }
         .packet {
@@ -28,42 +27,26 @@
             50% { opacity: 1; }
             100% { transform: translateX(60px); opacity: 0; }
         }
-        .loader-text {
-            color: #00f0ff; font-family: 'Orbitron', sans-serif;
-            font-weight: bold; letter-spacing: 4px; text-transform: uppercase;
-        }
+        .loader-text { color: #00f0ff; font-family: 'Orbitron', sans-serif; font-weight: bold; letter-spacing: 4px; }
 
-        /* --- STYLE TERMINAL (PRESENTATION) --- */
-        .terminal-style {
-            background: #050505 !important;
-            border: 1px solid #333 !important;
-            font-family: 'Courier New', monospace;
-            padding: 0 !important;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-        .card-header-term {
-            background: #1a1b26; padding: 8px 15px;
-            display: flex; align-items: center; gap: 8px;
-            border-bottom: 1px solid #333;
-        }
+        /* TERMINAL STYLE */
+        .terminal-style { background: #050505 !important; border: 1px solid #333 !important; font-family: 'Courier New', monospace; padding: 0 !important; overflow: hidden; margin-bottom: 30px; }
+        .card-header-term { background: #1a1b26; padding: 8px 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #333; }
         .dot { width: 12px; height: 12px; border-radius: 50%; }
         .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
         .term-title { color: #888; font-size: 0.8em; margin-left: 10px; font-family: 'Inter'; }
         .term-body { padding: 20px; line-height: 1.6; color: #fff; }
         .term-prompt { color: #00f0ff; font-weight: bold; }
 
-        /* --- SKILLS REALISTES --- */
+        /* MONITORING CARDS */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
-        .tag { 
-            background: rgba(0, 240, 255, 0.1); color: #00f0ff; 
-            padding: 4px 10px; border-radius: 4px; font-size: 0.8em; 
-            border: 1px solid rgba(0, 240, 255, 0.3);
-        }
-        .level-bar { height: 6px; background: #111; border-radius: 3px; margin-top: 10px; overflow: hidden; }
-        .level-fill { height: 100%; background: #00f0ff; box-shadow: 0 0 10px #00f0ff; }
-        .level-label { font-size: 0.85em; color: #aaa; margin-top: 5px; display: block; }
+        .skill-card-monitor { position: relative; background: rgba(15, 16, 25, 0.9) !important; border: 1px solid #333 !important; padding: 25px 20px 20px 20px !important; }
+        .status-led { position: absolute; top: 15px; right: 15px; width: 10px; height: 10px; border-radius: 50%; }
+        .led-green { background: #27c93f; box-shadow: 0 0 10px #27c93f; }
+        .led-orange { background: #ffbd2e; box-shadow: 0 0 10px #ffbd2e; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+        .tag { background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 10px; border-radius: 4px; font-size: 0.75em; border: 1px solid rgba(0, 240, 255, 0.2); }
+        .status-label { font-family: 'Orbitron'; font-size: 0.7em; color: #00f0ff; background: #0b0c13; padding: 4px 8px; border: 1px solid #333; display: inline-block; }
     </style>
 </head>
 <body>
@@ -79,7 +62,7 @@
 
 <header>
     <h1>Lemaire Thomas</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Administration Systèmes & Réseaux</p>
+    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
 </header>
 
 <nav>
@@ -90,38 +73,37 @@
 </nav>
 
 <section id="about">
-  <h2><i class="fas fa-terminal"></i> root@lemaire-thomas:~$ whoami</h2>
+  <h2><i class="fas fa-shield-alt"></i> [LECTURE_DU_PROFIL] : AUTHENTIFICATION_REUSSIE</h2>
   
   <div class="card terminal-style">
     <div class="card-header-term">
         <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-        <span class="term-title">profile_summary.sh</span>
+        <span class="term-title">system_info.log</span>
     </div>
     <div class="term-body">
-        <p><span class="term-prompt">> FORMATION :</span> Bac Pro Systèmes Numériques (SN).</p>
-        <p><span class="term-prompt">> FOCUS :</span> Architecture Virtualisée, Services Windows & Sécurité Réseau.</p>
-        <p><span class="term-prompt">> OBJECTIF :</span> Déployer et maintenir des infrastructures IT robustes et automatisées.</p>
+        <p><span class="term-prompt">> GRADE :</span> Technicien Systèmes et Réseaux.</p>
+        <p><span class="term-prompt">> CURSUS :</span> Bac Pro Systèmes Numériques (SN).</p>
+        <p><span class="term-prompt">> INFRA :</span> Déploiement de Labs virtualisés & Services Windows Server.</p>
+        <p><span class="term-prompt">> STATUT :</span> En veille constante sur les infrastructures IT.</p>
     </div>
   </div>
 
-  <h2><i class="fas fa-microchip"></i> Expertise Technique</h2>
+  <h2><i class="fas fa-microchip"></i> État des Systèmes de Maîtrise</h2>
   <div class="skills-grid">
-    <div class="card">
-        <h3>Virtualisation & Cloud</h3>
-        <div class="tech-tags">
-            <span class="tag">VMware ESXi</span><span class="tag">Hyper-V</span><span class="tag">vCenter</span>
-        </div>
-        <div class="level-bar"><div class="level-fill" style="width: 90%;"></div></div>
-        <span class="level-label">Niveau : Déploiement & Gestion de Clusters</span>
+    <div class="card skill-card-monitor">
+        <div class="status-led led-green"></div>
+        <h3>Virtualisation</h3>
+        <div class="tech-tags"><span class="tag">VMware</span><span class="tag">Hyper-V</span><span class="tag">Proxmox</span></div>
+        <p style="font-size: 0.85em; color: #ccc;">Création et isolation d'environnements virtualisés.</p>
+        <div class="status-label">STATUS: OPÉRATIONNEL</div>
     </div>
 
-    <div class="card">
-        <h3>Systèmes d'Exploitation</h3>
-        <div class="tech-tags">
-            <span class="tag">Windows Server</span><span class="tag">Active Directory</span><span class="tag">Linux</span>
-        </div>
-        <div class="level-bar"><div class="level-fill" style="width: 85%;"></div></div>
-        <span class="level-label">Niveau : Administration & GPO</span>
+    <div class="card skill-card-monitor">
+        <div class="status-led led-green"></div>
+        <h3>Systèmes Windows</h3>
+        <div class="tech-tags"><span class="tag">AD DS</span><span class="tag">DNS/DHCP</span><span class="tag">GPO</span></div>
+        <p style="font-size: 0.85em; color: #ccc;">Administration d'annuaires et services réseaux.</p>
+        <div class="status-label">STATUS: OPÉRATIONNEL</div>
     </div>
   </div>
 </section>
@@ -131,10 +113,8 @@
 <script>
     const hasLoaded = sessionStorage.getItem('firstLoadDone');
     const loader = document.getElementById('loader');
-
-    if (hasLoaded) {
-        loader.style.display = 'none';
-    } else {
+    if (hasLoaded) { loader.style.display = 'none'; } 
+    else {
         window.addEventListener('load', function() {
             setTimeout(() => {
                 loader.classList.add('zoom-out');
@@ -144,6 +124,5 @@
         });
     }
 </script>
-
 </body>
 </html>
