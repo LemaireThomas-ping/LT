@@ -9,76 +9,29 @@
     <link rel="stylesheet" href="style.css">
     <style>
         body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
+        #skills-section { padding: 40px 20px; max-width: 1200px; margin: auto; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 30px; }
         
-        #skills { padding: 40px 20px; max-width: 1200px; margin: auto; }
-
-        .skills-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 20px; 
-            margin-top: 30px;
-        }
-
-        .skill-card {
+        .monitor-card {
             background: rgba(26, 27, 38, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            padding: 20px;
-            border-radius: 10px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+            position: relative;
             transition: 0.3s;
         }
+        .monitor-card:hover { border-color: #00f0ff; transform: translateY(-3px); }
 
-        .skill-card:hover {
-            border-color: #00f0ff;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
-        }
+        .led { position: absolute; top: 20px; right: 20px; width: 10px; height: 10px; border-radius: 50%; }
+        .led-on { background: #27c93f; box-shadow: 0 0 10px #27c93f; }
+        .led-sync { background: #ffbd2e; box-shadow: 0 0 10px #ffbd2e; }
 
-        .skill-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            color: #00f0ff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1em;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .tag {
-            background: rgba(0, 240, 255, 0.1);
-            color: #00f0ff;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-        }
-
-        .level-bar {
-            height: 6px;
-            background: #111;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .level-fill {
-            height: 100%;
-            background: #00f0ff;
-            box-shadow: 0 0 8px #00f0ff;
-        }
-
-        .level-label {
-            display: block;
-            margin-top: 8px;
-            font-size: 0.85em;
-            color: #888;
-        }
-
-        h2 { font-family: 'Orbitron'; color: #fff; border-bottom: 2px solid #00f0ff; padding-bottom: 10px; }
+        .card-title { font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .tech-item { background: #1a1b26; border: 1px solid #333; padding: 4px 10px; font-size: 0.8em; border-radius: 4px; color: #aaa; }
+        
+        .description { font-size: 0.9em; line-height: 1.5; color: #ccc; margin-bottom: 20px; border-left: 2px solid #333; padding-left: 15px; }
+        .status-box { font-family: 'Orbitron'; font-size: 0.7em; letter-spacing: 1px; color: #00f0ff; border: 1px solid #00f0ff44; padding: 5px 10px; display: inline-block; }
     </style>
 </head>
 <body>
@@ -95,55 +48,33 @@
   <a href="contact.html">Contact</a>
 </nav>
 
-<section id="skills">
-    <h2><i class="fas fa-microchip"></i> Matrice de Compétences</h2>
+<section id="skills-section">
+    <h2 style="font-family: 'Orbitron'; border-bottom: 2px solid #00f0ff; padding-bottom: 10px;">MATRICE_TECHNIQUE.EXE</h2>
 
     <div class="skills-grid">
-        
-        <div class="skill-card">
-            <div class="skill-header"><i class="fas fa-graduation-cap"></i> Formation</div>
-            <div class="tech-tags">
-                <span class="tag">Bac Pro SN</span>
-                <span class="tag">Maintenance hardware</span>
-                <span class="tag">Support utilisateur</span>
-            </div>
-            <div class="level-bar"><div class="level-fill" style="width: 100%;"></div></div>
-            <span class="level-label">Statut : Diplôme obtenu</span>
+        <div class="monitor-card">
+            <div class="led led-on"></div>
+            <div class="card-title"><i class="fas fa-graduation-cap"></i> FORMATION</div>
+            <div class="tech-list"><span class="tech-item">Bac Pro SN</span><span class="tech-item">Hardware</span><span class="tech-item">Maintenance</span></div>
+            <p class="description">Maîtrise des composants matériels, dépannage physique et fondations des systèmes numériques.</p>
+            <div class="status-box">LOG: DIPLÔMÉ</div>
         </div>
 
-        <div class="skill-card">
-            <div class="skill-header"><i class="fab fa-windows"></i> Systèmes</div>
-            <div class="tech-tags">
-                <span class="tag">Windows Server</span>
-                <span class="tag">Active Directory</span>
-                <span class="tag">Debian / Ubuntu</span>
-            </div>
-            <div class="level-bar"><div class="level-fill" style="width: 80%;"></div></div>
-            <span class="level-label">Niveau : Installation & Configuration</span>
+        <div class="monitor-card">
+            <div class="led led-on"></div>
+            <div class="card-title"><i class="fas fa-server"></i> VIRTUALISATION</div>
+            <div class="tech-list"><span class="tech-item">VMware ESXi</span><span class="tech-item">Hyper-V</span><span class="tech-item">vCenter</span></div>
+            <p class="description">Mise en place d'hyperviseurs et gestion de machines virtuelles pour des environnements de test isolés.</p>
+            <div class="status-box">STATUS: OPÉRATIONNEL</div>
         </div>
 
-        <div class="skill-card">
-            <div class="skill-header"><i class="fas fa-server"></i> Virtualisation</div>
-            <div class="tech-tags">
-                <span class="tag">VMware ESXi</span>
-                <span class="tag">Hyper-V</span>
-                <span class="tag">Proxmox</span>
-            </div>
-            <div class="level-bar"><div class="level-fill" style="width: 85%;"></div></div>
-            <span class="level-label">Niveau : Création de Labs & Gestion VM</span>
+        <div class="monitor-card">
+            <div class="led led-sync"></div>
+            <div class="card-title"><i class="fas fa-network-wired"></i> RÉSEAUX</div>
+            <div class="tech-list"><span class="tech-item">VLAN</span><span class="tech-item">VPN</span><span class="tech-item">Switching</span></div>
+            <p class="description">Segmentation de réseaux locaux et configuration de services de communication sécurisés.</p>
+            <div class="status-box">STATUS: EN PERFECTIONNEMENT</div>
         </div>
-
-        <div class="skill-card">
-            <div class="skill-header"><i class="fas fa-network-wired"></i> Réseau</div>
-            <div class="tech-tags">
-                <span class="tag">VLAN</span>
-                <span class="tag">Cisco IOS (bases)</span>
-                <span class="tag">VPN / Pare-feu</span>
-            </div>
-            <div class="level-bar"><div class="level-fill" style="width: 70%;"></div></div>
-            <span class="level-label">Niveau : Configuration switchs & Routage</span>
-        </div>
-
     </div>
 </section>
 
