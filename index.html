@@ -162,8 +162,8 @@
     function typeEffect(text, i, callback) {
         if (i < text.length) {
             textElement.innerHTML = text.substring(0, i + 1);
-            // Vitesse ralentie à 70ms pour un aspect plus "clavier"
-            setTimeout(() => typeEffect(text, i + 1, callback), 70);
+            // Ralenti à 90ms pour un effet plus mécanique/réel
+            setTimeout(() => typeEffect(text, i + 1, callback), 90);
         } else if (callback) {
             callback();
         }
@@ -171,12 +171,12 @@
 
     function startSequence() {
         typeEffect(step1, 0, () => {
-            // Pause de 1.5s entre les deux messages
+            // Pause de 2 secondes pour bien marquer l'étape d'authentification
             setTimeout(() => {
                 headerIcon.className = "fas fa-user-check";
                 textElement.innerHTML = "";
                 typeEffect(step2, 0);
-            }, 1500);
+            }, 2000);
         });
     }
 
@@ -191,8 +191,8 @@
                 sessionStorage.setItem('firstLoadDone', 'true');
                 setTimeout(() => {
                     loader.style.display = 'none';
-                    // Petit délai de sécurité avant de lancer la frappe
-                    setTimeout(startSequence, 500);
+                    // Délai de 0.6s après le zoom avant de commencer la frappe
+                    setTimeout(startSequence, 600);
                 }, 800);
             }, 1800);
         });
@@ -200,3 +200,4 @@
 </script>
 </body>
 </html>
+
