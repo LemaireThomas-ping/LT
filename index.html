@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
+        body { 
+            background: #0b0c13; 
+            color: white; 
+            margin: 0; 
+            font-family: 'Inter', sans-serif; 
+        }
+
         /* --- NAVIGATION RESPONSIVE --- */
         .main-nav {
             display: flex;
@@ -27,7 +34,7 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 0.85em;
             transition: 0.3s;
-            white-space: nowrap; /* Empêche le texte de se couper en deux */
+            white-space: nowrap;
         }
 
         .main-nav a:hover, .main-nav a.active {
@@ -42,7 +49,7 @@
                 justify-content: space-around;
             }
             .main-nav a {
-                font-size: 0.65em; /* Taille adaptée aux petits écrans */
+                font-size: 0.65em;
             }
         }
 
@@ -107,6 +114,8 @@
         }
         .status-led { position: absolute; top: 15px; right: 15px; width: 10px; height: 10px; border-radius: 50%; background: #27c93f; box-shadow: 0 0 10px #27c93f; }
         .tag { background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 10px; border-radius: 4px; font-size: 0.75em; border: 1px solid rgba(0, 240, 255, 0.2); margin-right: 5px; }
+        
+        h3 { font-family: 'Orbitron', sans-serif; color: #fff; margin-top: 0; }
     </style>
 </head>
 <body>
@@ -121,7 +130,7 @@
 </div>
 
 <header style="text-align: center; padding: 40px 20px;">
-    <h1>Lemaire Thomas</h1>
+    <h1>LEMAIRE THOMAS</h1>
     <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
 </header>
 
@@ -183,7 +192,8 @@
     function typeEffect(text, i, callback) {
         if (i < text.length) {
             textElement.innerHTML = text.substring(0, i + 1);
-            setTimeout(() => typeEffect(text, i + 1, callback), 90); // Vitesse ralentie
+            // Vitesse réglée sur 70ms
+            setTimeout(() => typeEffect(text, i + 1, callback), 70); 
         } else if (callback) {
             callback();
         }
@@ -191,11 +201,12 @@
 
     function startSequence() {
         typeEffect(step1, 0, () => {
+            // Pause de 1.5s entre les deux étapes
             setTimeout(() => {
                 headerIcon.className = "fas fa-user-check";
                 textElement.innerHTML = "";
                 typeEffect(step2, 0);
-            }, 2000); // Pause de 2s
+            }, 1500); 
         });
     }
 
