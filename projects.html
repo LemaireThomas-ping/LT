@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
+        body { 
+            background: #0b0c13; 
+            color: white; 
+            margin: 0; 
+            font-family: 'Inter', sans-serif; /* Police de base */
+        }
 
         /* --- NAVIGATION RESPONSIVE UNIFIÉE --- */
         .main-nav {
@@ -43,7 +48,13 @@
         /* --- SECTION PROJETS --- */
         section { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
         
-        h2 { font-family: 'Orbitron'; color: #00f0ff; border-left: 3px solid #00f0ff; padding-left: 15px; margin-bottom: 30px; }
+        h2 { 
+            font-family: 'Orbitron', sans-serif; 
+            color: #00f0ff; 
+            border-left: 3px solid #00f0ff; 
+            padding-left: 15px; 
+            margin-bottom: 30px; 
+        }
 
         #projects-container {
             display: grid;
@@ -60,6 +71,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            font-family: 'Inter', sans-serif;
         }
 
         .project-card:hover {
@@ -130,8 +142,10 @@
             const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/docs`);
             const files = await response.json();
             container.innerHTML = "";
+            
+            if (!Array.isArray(files)) throw new Error("Format invalide");
+
             files.forEach(file => {
-                // On ignore le fichier d'exemple et les dossiers cachés
                 if (file.name !== "dossiertuto.txt" && file.type === "file") {
                     const card = document.createElement('div');
                     card.className = 'project-card';
@@ -144,13 +158,13 @@
                             <h3 style="margin:0; font-size: 0.9em; font-family: 'Orbitron';">${displayName}</h3>
                             <span class="extension-badge">${extension}</span>
                         </div>
-                        <p style="font-size: 0.8em; color: #888; margin-top: 10px;">Documentation technique disponible sur GitHub.</p>
+                        <p style="font-size: 0.8em; color: #888; margin-top: 10px; font-family: 'Inter';">Documentation technique issue du dépôt distant.</p>
                         <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-open">LIRE LE FICHIER</a>`;
                     container.appendChild(card);
                 }
             });
         } catch (e) { 
-            container.innerHTML = "<p style='color:red; text-align:center;'>ERREUR_FLUX_API : Vérifiez la connexion au dépôt.</p>"; 
+            container.innerHTML = "<p style='color:red; text-align:center; font-family:Orbitron;'>ERREUR_FLUX_API : Connexion échouée.</p>"; 
         }
     }
     fetchProjects();
