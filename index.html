@@ -8,7 +8,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* --- LOADER & ANIMATION --- */
+        /* --- NAVIGATION RESPONSIVE --- */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: #07080c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+
+        .main-nav a {
+            color: #888;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85em;
+            transition: 0.3s;
+            white-space: nowrap; /* Empêche le texte de se couper en deux */
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                gap: 8px;
+                padding: 12px 5px;
+                justify-content: space-around;
+            }
+            .main-nav a {
+                font-size: 0.65em; /* Taille adaptée aux petits écrans */
+            }
+        }
+
+        /* --- LOADER & ZOOM --- */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #0b0c13; display: flex; flex-direction: column;
@@ -28,10 +66,7 @@
             50% { opacity: 1; }
             100% { transform: translateX(60px); opacity: 0; }
         }
-        .loader-text {
-            color: #00f0ff; font-family: 'Orbitron', sans-serif;
-            font-weight: bold; letter-spacing: 4px; text-transform: uppercase;
-        }
+        .loader-text { color: #00f0ff; font-family: 'Orbitron'; font-weight: bold; letter-spacing: 4px; }
 
         /* --- TYPING EFFECT --- */
         #dynamic-header { min-height: 1.5em; font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 20px; }
@@ -39,7 +74,6 @@
             content: "_";
             animation: blink 0.8s infinite;
             margin-left: 5px;
-            color: #00f0ff;
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
@@ -63,27 +97,16 @@
         .term-body { padding: 20px; line-height: 1.6; color: #fff; }
         .term-prompt { color: #00f0ff; font-weight: bold; }
 
-        /* --- MONITORING CARDS --- */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        /* --- CARDS --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .skill-card-monitor { 
             position: relative; 
             background: rgba(15, 16, 25, 0.9) !important; 
             border: 1px solid #333 !important; 
             padding: 25px 20px 20px 20px !important; 
         }
-        .status-led { position: absolute; top: 15px; right: 15px; width: 10px; height: 10px; border-radius: 50%; }
-        .led-green { background: #27c93f; box-shadow: 0 0 10px #27c93f; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
-        .tag { 
-            background: rgba(0, 240, 255, 0.1); color: #00f0ff; 
-            padding: 4px 10px; border-radius: 4px; font-size: 0.75em; 
-            border: 1px solid rgba(0, 240, 255, 0.2); 
-        }
-        .status-label { 
-            font-family: 'Orbitron'; font-size: 0.7em; color: #00f0ff; 
-            background: #0b0c13; padding: 4px 8px; border: 1px solid #333; 
-            display: inline-block; 
-        }
+        .status-led { position: absolute; top: 15px; right: 15px; width: 10px; height: 10px; border-radius: 50%; background: #27c93f; box-shadow: 0 0 10px #27c93f; }
+        .tag { background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 10px; border-radius: 4px; font-size: 0.75em; border: 1px solid rgba(0, 240, 255, 0.2); margin-right: 5px; }
     </style>
 </head>
 <body>
@@ -97,19 +120,19 @@
     <div class="loader-text">CONNEXION AU SERVEUR...</div>
 </div>
 
-<header>
+<header style="text-align: center; padding: 40px 20px;">
     <h1>Lemaire Thomas</h1>
     <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
 </header>
 
-<nav>
+<nav class="main-nav">
   <a href="index.html" class="active">À propos</a>
   <a href="projects.html">Projets</a>
   <a href="skills.html">Compétences</a>
   <a href="contact.html">Contact</a>
 </nav>
 
-<section id="about">
+<section id="about" style="max-width: 1000px; margin: auto; padding: 20px;">
     <h2 id="dynamic-header">
         <i class="fas fa-shield-alt"></i> 
         <span id="typewriter-text"></span>
@@ -128,27 +151,25 @@
         </div>
     </div>
 
-    <h2><i class="fas fa-microchip"></i> État des Systèmes</h2>
+    <h2 style="font-family: 'Orbitron'; margin-top: 40px;"><i class="fas fa-microchip"></i> État des Systèmes</h2>
     <div class="skills-grid">
         <div class="card skill-card-monitor">
-            <div class="status-led led-green"></div>
+            <div class="status-led"></div>
             <h3>Virtualisation</h3>
-            <div class="tech-tags"><span class="tag">VMware</span><span class="tag">Hyper-V</span><span class="tag">Proxmox</span></div>
-            <p style="font-size: 0.85em; color: #ccc;">Création et isolation d'environnements virtualisés.</p>
-            <div class="status-label">STATUS: OPÉRATIONNEL</div>
+            <div style="margin: 15px 0;"><span class="tag">VMware</span><span class="tag">Hyper-V</span></div>
+            <p style="font-size: 0.85em; color: #ccc;">Gestion d'hyperviseurs et environnements isolés.</p>
         </div>
 
         <div class="card skill-card-monitor">
-            <div class="status-led led-green"></div>
+            <div class="status-led"></div>
             <h3>Systèmes Windows</h3>
-            <div class="tech-tags"><span class="tag">AD DS</span><span class="tag">DNS/DHCP</span><span class="tag">GPO</span></div>
+            <div style="margin: 15px 0;"><span class="tag">AD DS</span><span class="tag">GPO</span></div>
             <p style="font-size: 0.85em; color: #ccc;">Administration d'annuaires et services réseaux.</p>
-            <div class="status-label">STATUS: OPÉRATIONNEL</div>
         </div>
     </div>
 </section>
 
-<footer><p>© 2026 Lemaire Thomas | Portfolio IT</p></footer>
+<footer><p style="text-align: center; padding: 40px; color: #444;">© 2026 Lemaire Thomas | Portfolio IT</p></footer>
 
 <script>
     const hasLoaded = sessionStorage.getItem('firstLoadDone');
@@ -162,8 +183,7 @@
     function typeEffect(text, i, callback) {
         if (i < text.length) {
             textElement.innerHTML = text.substring(0, i + 1);
-            // Ralenti à 90ms pour un effet plus mécanique/réel
-            setTimeout(() => typeEffect(text, i + 1, callback), 90);
+            setTimeout(() => typeEffect(text, i + 1, callback), 90); // Vitesse ralentie
         } else if (callback) {
             callback();
         }
@@ -171,12 +191,11 @@
 
     function startSequence() {
         typeEffect(step1, 0, () => {
-            // Pause de 2 secondes pour bien marquer l'étape d'authentification
             setTimeout(() => {
                 headerIcon.className = "fas fa-user-check";
                 textElement.innerHTML = "";
                 typeEffect(step2, 0);
-            }, 2000);
+            }, 2000); // Pause de 2s
         });
     }
 
@@ -191,7 +210,6 @@
                 sessionStorage.setItem('firstLoadDone', 'true');
                 setTimeout(() => {
                     loader.style.display = 'none';
-                    // Délai de 0.6s après le zoom avant de commencer la frappe
                     setTimeout(startSequence, 600);
                 }, 800);
             }, 1800);
@@ -200,4 +218,3 @@
 </script>
 </body>
 </html>
-
