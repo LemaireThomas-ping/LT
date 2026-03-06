@@ -7,40 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .badge {
-            background: #00f0ff22;
-            color: #00f0ff;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            border: 1px solid #00f0ff44;
-            margin-right: 5px;
-        }
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .btn-view {
-            display: inline-block;
-            margin-top: 15px;
-            color: #0b0c13;
-            background: #00f0ff;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-    </style>
 </head>
 <body>
 
 <header>
     <h1>Mes Labs & Tutoriels</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron';">Documentation technique et démonstrations</p>
+    <p style="color: #00f0ff; font-family: 'Orbitron';">Documentation technique dynamique</p>
 </header>
 
 <nav>
@@ -51,51 +23,62 @@
 </nav>
 
 <section>
-    <h2><i class="fas fa-book-open"></i> Tutoriels Récents</h2>
-
-    <div class="card">
-        <div class="project-header">
-            <h3>Installation & Config Active Directory</h3>
-            <span class="badge">Windows Server 2022</span>
-        </div>
-        <p>Mise en place d'un contrôleur de domaine de A à Z : promotion du rôle AD DS, configuration DNS, et création d'une structure d'OU (Unités d'Organisation).</p>
-        <div style="margin-top: 10px;">
-            <span class="badge"><i class="fab fa-windows"></i> AD DS</span>
-            <span class="badge"><i class="fas fa-network-wired"></i> DNS</span>
-        </div>
-        <a href="#" class="btn-view">Lire le mémo →</a>
-    </div>
-
-    <div class="card">
-        <div class="project-header">
-            <h3>Lab Virtualisation avec VMware ESXi</h3>
-            <span class="badge">Virtualisation</span>
-        </div>
-        <p>Schéma d'architecture d'un lab domestique sécurisé avec segmentation réseau via pfSense et déploiement de machines virtuelles Debian/Windows.</p>
-        <div style="margin-top: 10px;">
-            <span class="badge"><i class="fas fa-server"></i> ESXi</span>
-            <span class="badge"><i class="fas fa-shield-alt"></i> pfSense</span>
-        </div>
-        <a href="#" class="btn-view">Voir la topologie →</a>
-    </div>
-
-    <div class="card">
-        <div class="project-header">
-            <h3>Automatisation Post-Install (PowerShell)</h3>
-            <span class="badge">Scripting</span>
-        </div>
-        <p>Script PowerShell permettant d'automatiser la configuration réseau et l'installation des outils de base après le déploiement d'un serveur Windows.</p>
-        <div style="margin-top: 10px;">
-            <span class="badge"><i class="fas fa-code"></i> PowerShell</span>
-            <span class="badge"><i class="fas fa-cogs"></i> Automation</span>
-        </div>
-        <a href="#" class="btn-view">Voir le code →</a>
+    <h2><i class="fas fa-server"></i> Travaux récents</h2>
+    <div id="projects-container">
+        <p style="text-align:center;">Chargement des fichiers du lab...</p>
     </div>
 </section>
+
+<script>
+    async function fetchProjects() {
+        const username = "LemaireThomas-ping";
+        const repo = "LT";
+        const container = document.getElementById('projects-container');
+
+        try {
+            // On demande à GitHub la liste des fichiers dans /docs
+            const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/docs`);
+            const files = await response.json();
+
+            container.innerHTML = ""; // On vide le message de chargement
+
+            files.forEach(file => {
+                // On ignore le fichier .txt de garde
+                if (file.name !== "dossiertuto.txt") {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    // On nettoie le nom pour l'affichage (ex: supprime .pdf)
+                    const displayName = file.name.split('.')[0].replace(/-/g, ' ');
+                    const extension = file.name.split('.').pop().toUpperCase();
+
+                    card.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <h3 style="margin:0;">${displayName}</h3>
+                            <span style="background:#00f0ff22; color:#00f0ff; padding:2px 8px; border-radius:4px; font-size:12px;">${extension}</span>
+                        </div>
+                        <p style="margin:15px 0;">Documentation technique disponible en ligne.</p>
+                        <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-download" style="text-decoration:none; display:inline-block; text-align:center;">
+                            <i class="fas fa-external-link-alt"></i> Ouvrir le document
+                        </a>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        } catch (error) {
+            container.innerHTML = "<p>Erreur lors du chargement des fichiers.</p>";
+        }
+    }
+
+    fetchProjects();
+</script>
 
 <footer>
     <p>© 2026 Lemaire Thomas | Portfolio IT</p>
 </footer>
+
+</body>
+</html>
 
 </body>
 </html>
