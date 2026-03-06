@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Style du Loader Réseau */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #0b0c13; display: none; flex-direction: column;
@@ -37,41 +38,66 @@
     </style>
 </head>
 <body>
+
 <div id="loader">
-    <div class="network-anim"><i class="fas fa-server node"></i><div class="packet"></div><i class="fas fa-network-wired node"></i></div>
+    <div class="network-anim">
+        <i class="fas fa-server node"></i>
+        <div class="packet"></div>
+        <i class="fas fa-network-wired node"></i>
+    </div>
     <div class="loader-text">CONNECTING_TO_PROFIL...</div>
 </div>
+
 <header>
     <h1>Lemaire Thomas</h1>
     <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Tech réseau et système</p>
 </header>
+
 <nav>
   <a href="index.html" class="active">À propos</a>
   <a href="projects.html">Projets</a>
   <a href="skills.html">Compétences</a>
   <a href="contact.html">Contact</a>
 </nav>
+
 <section id="about">
   <h2><i class="fas fa-user-terminal"></i> Présentation</h2>
+  
   <div class="card">
-    <p>Salut, je suis <strong>Thomas Lemaire</strong>, passionné par l’infrastructure et la virtualisation. J’aime explorer les technologies Windows et Linux et documenter mes labs.</p>
+    <p>Salut, je suis <strong>Thomas Lemaire</strong>, passionné par l’infrastructure, la virtualisation et les environnements systèmes. J’aime explorer les technologies Windows et Linux, créer des labs de test, et documenter mes projets pour partager mes connaissances.</p>
   </div>
+
   <div class="card">
     <h3><i class="fas fa-microchip"></i> Mon Expertise Lab</h3>
-    <p>Utilisation de <strong>VMware</strong> et <strong>Hyper-V</strong> pour simuler des environnements <strong>Active Directory</strong> complexes.</p>
+    <p>Sur ce site, vous trouverez mes projets personnels et tutoriels, allant de la création de machines virtuelles sur <strong>VMware</strong> à la mise en place d’un environnement <strong>Active Directory</strong> avec <strong>Hyper-V</strong>.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #00f0ff;">
+    <h3><i class="fas fa-code-branch"></i> Veille & Tech</h3>
+    <p>Quand je ne suis pas plongé dans un lab, j’aime apprendre de nouvelles technologies, tester des outils de virtualisation, et améliorer mes compétences en scripting (PowerShell/Bash) et administration réseau.</p>
   </div>
 </section>
-<footer><p>© 2026 Lemaire Thomas | Portfolio IT</p></footer>
+
+<footer>
+    <p>© 2026 Lemaire Thomas | Portfolio IT</p>
+</footer>
+
 <script>
     document.querySelectorAll('nav a').forEach(link => {
-        if (link.href.includes('index.html')) {
+        // On cible uniquement le lien qui pointe vers index.html
+        if (link.getAttribute('href') === 'index.html') {
             link.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('loader').style.display = 'flex';
-                setTimeout(() => { window.location.href = this.href; }, 1500);
+                e.preventDefault(); // Stoppe le chargement immédiat
+                const target = this.href;
+                document.getElementById('loader').style.display = 'flex'; // Affiche l'anim
+                
+                setTimeout(() => {
+                    window.location.href = target; // Change de page après 1.5s
+                }, 1500);
             });
         }
     });
 </script>
+
 </body>
 </html>
