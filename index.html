@@ -8,150 +8,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* On force le body à être invisible au début pour l'effet */
-        body { margin: 0; padding: 0; opacity: 0; transition: opacity 1s ease; background: #0b0c13; color: white; }
-        body.loaded { opacity: 1; }
+        /* Style du Loader */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0b0c13; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
+            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease;
+        }
 
-        #pixel-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: #0b0c13;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* L'effet tunnel (zoom vers l'avant) */
+        #loader.zoom-out {
+            transform: scale(10);
+            opacity: 0;
             pointer-events: none;
         }
 
-        #pixel-canvas {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+        .network-anim { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+        .node { color: #00f0ff; font-size: 40px; }
+        
+        .packet {
+            width: 12px; height: 12px; background: #00f0ff; border-radius: 50%;
+            box-shadow: 0 0 15px #00f0ff; animation: transfer 0.8s infinite linear;
         }
 
-        .conn-text {
-            position: relative;
-            z-index: 10000;
-            color: #00f0ff;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 5px;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00f0ff;
-            text-align: center;
+        @keyframes transfer {
+            0% { transform: translateX(-60px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(60px); opacity: 0; }
         }
-    </style>
-</head>
-<body>
 
-<div id="pixel-overlay">
-    <canvas id="pixel-canvas"></canvas>
-    <div class="conn-text" id="status-text">CONNECTING TO SERVER...</div>
-</div>
-
-<header>
-    <h1>Lemaire Thomas</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Tech réseau et système</p>
-</header>
-
-<nav>
-  <a href="index.html" class="active">À propos</a>
-  <a href="projects.html">Projets</a>
-  <a href="skills.html">Compétences</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
-<section id="about">
-  <h2><i class="fas fa-user-terminal"></i> Présentation</h2>
-  <div class="card">
-    <p>Salut, je suis <strong>Thomas Lemaire</strong>, passionné par l’infrastructure, la virtualisation et les environnements systèmes.</p>
-  </div>
-  <div class="card">
-    <h3><i class="fas fa-microchip"></i> Mon Expertise Lab</h3>
-    <p>VMware, Hyper-V et environnements Active Directory.</p>
-  </div>
-</section>
-
-<footer><p>© 2026 Lemaire Thomas | Portfolio IT</p></footer>
-
-<script>
-    const canvas = document.getElementById('pixel-canvas');
-    const ctx = canvas.getContext('2d');
-    const statusText = document.getElementById('status-text');
-    const overlay = document.getElementById('pixel-overlay');
-
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    const pixelSize = 20; // Plus gros pour éviter de ramer
-    const pixels = [];
-
-    class Pixel {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.alpha = 1;
-            this.active = false;
+        .loader-text {
+            color: #00f0ff; font-family: 'Courier New', monospace;
+            font-weight: bold; letter-spacing: 3px; animation: glitch 0.3s infinite;
         }
-        draw() {
-            ctx.fillStyle = `rgba(0, 240, 255, ${this.alpha})`;
-            ctx.fillRect(this.x, this.y, pixelSize, pixelSize);
-        }
-        update() {
-            if (!this.active) return;
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const angle = Math.atan2(this.y - centerY, this.x - centerX);
-            this.x += Math.cos(angle) * 20;
-            this.y += Math.sin(angle) * 20;
-            this.alpha -= 0.03;
-        }
-    }
 
-    // Création de la grille
-    for (let y = 0; y < canvas.height; y += pixelSize) {
-        for (let x = 0; x < canvas.width; x += pixelSize) {
-            pixels.push(new Pixel(x, y));
-        }
-    }
-
-    function animate() {
-        ctx.fillStyle = '#0b0c13';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        let stillVisible = false;
-        pixels.forEach(p => {
-            p.update();
-            p.draw();
-            if (p.alpha > 0) stillVisible = true;
-        });
-
-        if (stillVisible) {
-            requestAnimationFrame(animate);
-        } else {
-            finishAnimation();
-        }
-    }
-
-    function finishAnimation() {
-        overlay.style.display = 'none';
-        document.body.classList.add('loaded');
-    }
-
-    // Sécurité : Si l'animation plante, on affiche le site quand même après 4s
-    setTimeout(finishAnimation, 4000);
-
-    // Lancement
-    setTimeout(() => {
-        statusText.style.opacity = '0';
-        pixels.forEach(p => p.active = true);
-        animate();
-    }, 1500);
-</script>
-
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); text-shadow: 2px 0 #ff00c1; }
+            40%
 </body>
 </html>
