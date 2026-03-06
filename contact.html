@@ -8,31 +8,113 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        form input, form textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: #1a1b26; border: 1px solid #00f0ff33; color: white; border-radius: 5px; }
-        button { background: transparent; color: #00f0ff; border: 1px solid #00f0ff; padding: 12px 30px; font-family: 'Orbitron'; cursor: pointer; transition: 0.3s; width: 100%; }
+        body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
+        
+        /* --- NAVIGATION RESPONSIVE UNIFIÉE --- */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: #07080c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+        .main-nav a {
+            color: #888;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85em;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
+        }
+
+        /* Correction Mobile */
+        @media (max-width: 768px) {
+            .main-nav { gap: 8px; padding: 12px 5px; justify-content: space-around; }
+            .main-nav a { font-size: 0.65em; }
+        }
+
+        /* --- STYLE DU FORMULAIRE --- */
+        #contact { max-width: 600px; margin: 40px auto; padding: 20px; }
+        
+        .contact-header { font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 25px; border-left: 3px solid #00f0ff; padding-left: 15px; }
+
+        .card-contact {
+            background: rgba(26, 27, 38, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .email-info { font-family: 'Courier New', monospace; color: #00f0ff; margin-bottom: 25px; display: block; text-align: center; font-size: 0.9em; }
+
+        form input, form textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            background: #0b0c13; 
+            border: 1px solid #333; 
+            color: white; 
+            border-radius: 4px; 
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box; /* Important pour le responsive */
+        }
+
+        form input:focus, form textarea:focus { border-color: #00f0ff; outline: none; box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+
+        button { 
+            background: transparent; 
+            color: #00f0ff; 
+            border: 1px solid #00f0ff; 
+            padding: 15px; 
+            font-family: 'Orbitron'; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            width: 100%; 
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
         button:hover { background: #00f0ff; color: #0b0c13; box-shadow: 0 0 20px #00f0ff; }
     </style>
 </head>
 <body>
-<header><h1>Contact</h1></header>
-<nav>
+
+<header style="text-align: center; padding: 40px 20px;">
+    <h1>LEMAIRE THOMAS</h1>
+    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
+</header>
+
+<nav class="main-nav">
   <a href="index.html">À propos</a>
   <a href="projects.html">Projets</a>
   <a href="skills.html">Compétences</a>
   <a href="contact.html" class="active">Contact</a>
 </nav>
+
 <section id="contact">
-    <div class="card">
-        <p><i class="fas fa-envelope"></i> thomas.lemaire77515@gmail.com</p>
+    <h2 class="contact-header">TRANSMISSION_MESSAGE.EXE</h2>
+    
+    <div class="card-contact">
+        <span class="email-info"><i class="fas fa-envelope"></i> thomas.lemaire77515@gmail.com</span>
+        
         <form action="#" method="POST">
-            <input type="text" placeholder="Nom" required>
-            <input type="email" placeholder="Email" required>
-            <textarea rows="5" placeholder="Message" required></textarea>
-            <button type="submit">Envoyer</button>
+            <input type="text" placeholder="NOM_UTILISATEUR" required>
+            <input type="email" placeholder="EMAIL_DE_RETOUR" required>
+            <textarea rows="5" placeholder="CORPS_DU_MESSAGE..." required></textarea>
+            <button type="submit">ENVOYER LA REQUÊTE</button>
         </form>
     </div>
 </section>
-<script>/* Script du loader (identique à index.html) */</script>
+
+<footer><p style="text-align: center; padding: 40px; color: #444; font-size: 0.8em;">© 2026 Lemaire Thomas | Portfolio IT</p></footer>
+
 </body>
 </html>
 
