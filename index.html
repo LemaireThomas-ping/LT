@@ -3,44 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À propos | Lemaire Thomas</title>
+    <title>Portfolio | Lemaire Thomas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Loader visible par défaut pour éviter le flash blanc */
+        /* --- LOADER & ANIMATION --- */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #0b0c13; display: flex; flex-direction: column;
             justify-content: center; align-items: center; z-index: 9999;
             transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease;
         }
-
-        #loader.zoom-out {
-            transform: scale(12);
-            opacity: 0;
-            pointer-events: none;
-        }
-
+        #loader.zoom-out { transform: scale(12); opacity: 0; pointer-events: none; }
+        
         .network-anim { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
         .node { color: #00f0ff; font-size: 45px; filter: drop-shadow(0 0 10px #00f0ff); }
-        
         .packet {
             width: 14px; height: 14px; background: #00f0ff; border-radius: 50%;
             box-shadow: 0 0 15px #00f0ff; animation: transfer 0.8s infinite linear;
         }
-
         @keyframes transfer {
             0% { transform: translateX(-60px); opacity: 0; }
             50% { opacity: 1; }
             100% { transform: translateX(60px); opacity: 0; }
         }
-
         .loader-text {
             color: #00f0ff; font-family: 'Orbitron', sans-serif;
             font-weight: bold; letter-spacing: 4px; text-transform: uppercase;
-            text-align: center;
         }
+
+        /* --- STYLE TERMINAL (PRESENTATION) --- */
+        .terminal-style {
+            background: #050505 !important;
+            border: 1px solid #333 !important;
+            font-family: 'Courier New', monospace;
+            padding: 0 !important;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .card-header-term {
+            background: #1a1b26; padding: 8px 15px;
+            display: flex; align-items: center; gap: 8px;
+            border-bottom: 1px solid #333;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        .term-title { color: #888; font-size: 0.8em; margin-left: 10px; font-family: 'Inter'; }
+        .term-body { padding: 20px; line-height: 1.6; color: #fff; }
+        .term-prompt { color: #00f0ff; font-weight: bold; }
+
+        /* --- SKILLS REALISTES --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+        .tag { 
+            background: rgba(0, 240, 255, 0.1); color: #00f0ff; 
+            padding: 4px 10px; border-radius: 4px; font-size: 0.8em; 
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+        .level-bar { height: 6px; background: #111; border-radius: 3px; margin-top: 10px; overflow: hidden; }
+        .level-fill { height: 100%; background: #00f0ff; box-shadow: 0 0 10px #00f0ff; }
+        .level-label { font-size: 0.85em; color: #aaa; margin-top: 5px; display: block; }
     </style>
 </head>
 <body>
@@ -56,7 +79,7 @@
 
 <header>
     <h1>Lemaire Thomas</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Tech réseau et système</p>
+    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Administration Systèmes & Réseaux</p>
 </header>
 
 <nav>
@@ -67,40 +90,56 @@
 </nav>
 
 <section id="about">
-  <h2><i class="fas fa-user-terminal"></i> Présentation</h2>
-  <div class="card">
-    <p>Salut, je suis <strong>Thomas Lemaire</strong>, passionné par l’infrastructure, la virtualisation et les environnements systèmes.</p>
+  <h2><i class="fas fa-terminal"></i> root@lemaire-thomas:~$ whoami</h2>
+  
+  <div class="card terminal-style">
+    <div class="card-header-term">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="term-title">profile_summary.sh</span>
+    </div>
+    <div class="term-body">
+        <p><span class="term-prompt">> FORMATION :</span> Bac Pro Systèmes Numériques (SN).</p>
+        <p><span class="term-prompt">> FOCUS :</span> Architecture Virtualisée, Services Windows & Sécurité Réseau.</p>
+        <p><span class="term-prompt">> OBJECTIF :</span> Déployer et maintenir des infrastructures IT robustes et automatisées.</p>
+    </div>
   </div>
-  <div class="card">
-    <h3><i class="fas fa-microchip"></i> Mon Expertise Lab</h3>
-    <p>Mise en place d'environnements virtualisés complexes sous <strong>VMware</strong> et <strong>Hyper-V</strong>.</p>
-  </div>
-  <div class="card" style="border-left: 4px solid #00f0ff;">
-    <h3><i class="fas fa-code-branch"></i> Veille & Tech</h3>
-    <p>Apprentissage continu du scripting et surveillance des nouvelles solutions de cybersécurité réseau.</p>
+
+  <h2><i class="fas fa-microchip"></i> Expertise Technique</h2>
+  <div class="skills-grid">
+    <div class="card">
+        <h3>Virtualisation & Cloud</h3>
+        <div class="tech-tags">
+            <span class="tag">VMware ESXi</span><span class="tag">Hyper-V</span><span class="tag">vCenter</span>
+        </div>
+        <div class="level-bar"><div class="level-fill" style="width: 90%;"></div></div>
+        <span class="level-label">Niveau : Déploiement & Gestion de Clusters</span>
+    </div>
+
+    <div class="card">
+        <h3>Systèmes d'Exploitation</h3>
+        <div class="tech-tags">
+            <span class="tag">Windows Server</span><span class="tag">Active Directory</span><span class="tag">Linux</span>
+        </div>
+        <div class="level-bar"><div class="level-fill" style="width: 85%;"></div></div>
+        <span class="level-label">Niveau : Administration & GPO</span>
+    </div>
   </div>
 </section>
 
 <footer><p>© 2026 Lemaire Thomas | Portfolio IT</p></footer>
 
 <script>
-    // On vérifie si l'animation a déjà été jouée pendant cette session
     const hasLoaded = sessionStorage.getItem('firstLoadDone');
     const loader = document.getElementById('loader');
 
     if (hasLoaded) {
-        // Si déjà chargé, on masque le loader instantanément sans animation
         loader.style.display = 'none';
     } else {
-        // Sinon, on joue l'animation
         window.addEventListener('load', function() {
             setTimeout(() => {
                 loader.classList.add('zoom-out');
-                sessionStorage.setItem('firstLoadDone', 'true'); // On marque comme "chargé"
-                
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 1000);
+                sessionStorage.setItem('firstLoadDone', 'true');
+                setTimeout(() => { loader.style.display = 'none'; }, 1000);
             }, 1800);
         });
     }
