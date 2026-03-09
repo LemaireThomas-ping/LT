@@ -110,6 +110,14 @@
         .tag { background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 10px; border-radius: 4px; font-size: 0.75em; border: 1px solid rgba(0, 240, 255, 0.2); margin-right: 5px; }
         
         h3 { font-family: 'Orbitron', sans-serif; color: #fff; margin-top: 0; }
+
+        /* --- ANIMATION POUR AWS --- */
+        @keyframes pulse-orange {
+            0% { box-shadow: 0 0 0px rgba(255, 153, 0, 0.7); }
+            50% { box-shadow: 0 0 15px rgba(255, 153, 0, 0.9); }
+            100% { box-shadow: 0 0 0px rgba(255, 153, 0, 0.7); }
+        }
+        .led-working { background: #ff9900; animation: pulse-orange 1.5s infinite; }
     </style>
 </head>
 <body>
@@ -125,7 +133,7 @@
 
 <header style="text-align: center; padding: 40px 20px;">
     <h1>LEMAIRE THOMAS</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
+    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Supérieur Systèmes & Réseaux</p>
 </header>
 
 <nav class="main-nav">
@@ -147,27 +155,32 @@
             <span class="term-title">system_info.log</span>
         </div>
         <div class="term-body">
-            <p><span class="term-prompt">> GRADE :</span> Technicien Systèmes et Réseaux.</p>
-            <p><span class="term-prompt">> CURSUS :</span> Bac Pro Systèmes Numériques (SN).</p>
-            <p><span class="term-prompt">> INFRA :</span> Déploiement de Labs virtualisés & Services Windows Server.</p>
-            <p><span class="term-prompt">> STATUT :</span> En veille constante sur les infrastructures IT.</p>
+            <p><span class="term-prompt">> GRADE :</span> Technicien Supérieur Systèmes et Réseaux (TSSR).</p>
+            <p><span class="term-prompt">> CURSUS :</span> Bachelor en Systèmes Numériques.</p>
+            <p><span class="term-prompt">> INFRA :</span> Déploiement de Labs virtualisés & Sécurisation Réseaux.</p>
+            <p><span class="term-prompt">> STATUT :</span> En veille constante sur les infrastructures Cloud & Cyber.</p>
         </div>
     </div>
 
-    <h2 style="font-family: 'Orbitron'; margin-top: 40px;"><i class="fas fa-microchip"></i> État des Systèmes</h2>
+    <h2 style="font-family: 'Orbitron'; margin-top: 40px;"><i class="fas fa-certificate"></i> ACCRÉDITATIONS_&_OBJECTIFS.SYS</h2>
     <div class="skills-grid">
         <div class="card skill-card-monitor">
             <div class="status-led"></div>
-            <h3>Virtualisation</h3>
-            <div style="margin: 15px 0;"><span class="tag">VMware</span><span class="tag">Hyper-V</span></div>
-            <p style="font-size: 0.85em; color: #ccc;">Gestion d'hyperviseurs et environnements isolés.</p>
+            <h3>Certifications NSE</h3>
+            <div style="margin: 15px 0;">
+                <span class="tag">NSE 1</span>
+                <span class="tag">NSE 3</span>
+            </div>
+            <p style="font-size: 0.85em; color: #ccc;">Validation des compétences en cybersécurité et solutions de sécurité réseau Fortinet.</p>
         </div>
 
-        <div class="card skill-card-monitor">
-            <div class="status-led"></div>
-            <h3>Systèmes Windows</h3>
-            <div style="margin: 15px 0;"><span class="tag">AD DS</span><span class="tag">GPO</span></div>
-            <p style="font-size: 0.85em; color: #ccc;">Administration d'annuaires et services réseaux.</p>
+        <div class="card skill-card-monitor" style="border-color: rgba(255, 153, 0, 0.3) !important;">
+            <div class="status-led led-working"></div>
+            <h3>Cloud Computing</h3>
+            <div style="margin: 15px 0;">
+                <span class="tag" style="border-color: #ff9900; color: #ff9900;">AWS IN PROGRESS</span>
+            </div>
+            <p style="font-size: 0.85em; color: #ccc;">Apprentissage des services AWS (EC2, S3, IAM) pour le déploiement d'architectures Cloud.</p>
         </div>
     </div>
 </section>
@@ -186,7 +199,6 @@
     function typeEffect(text, i, callback) {
         if (i < text.length) {
             textElement.innerHTML = text.substring(0, i + 1);
-            // Vitesse de 50ms pour un effet plus nerveux
             setTimeout(() => typeEffect(text, i + 1, callback), 50); 
         } else if (callback) {
             callback();
@@ -199,7 +211,7 @@
                 headerIcon.className = "fas fa-user-check";
                 textElement.innerHTML = "";
                 typeEffect(step2, 0);
-            }, 1200); // Légère réduction du délai d'attente pour suivre la cadence
+            }, 1200);
         });
     }
 
