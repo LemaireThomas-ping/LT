@@ -40,7 +40,7 @@
             text-shadow: 0 0 10px #00f0ff;
         }
 
-        /* --- BOUTON CV STYLE TERMINAL --- */
+        /* --- BOUTON CV --- */
         .cv-container {
             text-align: center;
             margin: 25px 0;
@@ -57,19 +57,13 @@
             background: rgba(0, 240, 255, 0.05);
             transition: all 0.3s ease;
             border-radius: 4px;
-            box-shadow: 0 0 8px rgba(0, 240, 255, 0.2);
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .cv-button:hover {
             background: #00f0ff;
             color: #0b0c13;
-            box-shadow: 0 0 25px #00f0ff;
-            transform: translateY(-3px);
+            box-shadow: 0 0 20px #00f0ff;
         }
-
-        .cv-button i { margin-right: 10px; }
 
         /* --- LOADER --- */
         #loader {
@@ -80,20 +74,7 @@
         }
         #loader.zoom-out { transform: scale(12); opacity: 0; pointer-events: none; }
         
-        .network-anim { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
-        .node { color: #00f0ff; font-size: 45px; filter: drop-shadow(0 0 10px #00f0ff); }
-        .packet {
-            width: 14px; height: 14px; background: #00f0ff; border-radius: 50%;
-            box-shadow: 0 0 15px #00f0ff; animation: transfer 0.8s infinite linear;
-        }
-        @keyframes transfer {
-            0% { transform: translateX(-60px); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateX(60px); opacity: 0; }
-        }
-        .loader-text { color: #00f0ff; font-family: 'Orbitron'; font-weight: bold; letter-spacing: 4px; }
-
-        /* --- TERMINAL STYLE --- */
+        /* --- TERMINAL --- */
         .terminal-style {
             background: #050505;
             border: 1px solid #333;
@@ -102,33 +83,29 @@
             overflow: hidden;
             margin-bottom: 30px;
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .card-header-term {
-            background: #1a1b26; padding: 12px 15px;
+            background: #1a1b26; padding: 10px 15px;
             display: flex; align-items: center; gap: 8px;
             border-bottom: 1px solid #333;
         }
         .dot { width: 12px; height: 12px; border-radius: 50%; }
         .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-        .term-body { padding: 25px; line-height: 1.8; color: #fff; }
+        .term-body { padding: 20px; line-height: 1.6; color: #fff; }
         .term-prompt { color: #00f0ff; font-weight: bold; }
 
-        /* --- SKILLS GRID --- */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        /* --- SKILLS --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .skill-card-monitor { 
             position: relative; 
             background: rgba(15, 16, 25, 0.9); 
             border: 1px solid #333; 
-            padding: 30px 20px; 
+            padding: 25px 20px; 
             border-radius: 8px;
-            transition: 0.3s;
         }
-        .skill-card-monitor:hover { border-color: #00f0ff; }
-        .status-led { position: absolute; top: 15px; right: 15px; width: 10px; height: 10px; border-radius: 50%; background: #27c93f; box-shadow: 0 0 10px #27c93f; }
-        .tag { background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 12px; border-radius: 4px; font-size: 0.75em; border: 1px solid rgba(0, 240, 255, 0.2); margin-right: 8px; }
+        .tag { background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 10px; border-radius: 4px; font-size: 0.75em; border: 1px solid rgba(0, 240, 255, 0.2); margin-right: 5px; }
         
-        #dynamic-header { min-height: 1.5em; font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 25px; }
+        #dynamic-header { min-height: 1.5em; font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 20px; }
         #typewriter-text::after { content: "_"; animation: blink 0.8s infinite; margin-left: 5px; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     </style>
@@ -136,33 +113,28 @@
 <body>
 
 <div id="loader">
-    <div class="network-anim">
-        <i class="fas fa-server node"></i>
-        <div class="packet"></div>
-        <i class="fas fa-network-wired node"></i>
-    </div>
-    <div class="loader-text">INITIALISATION DU SYSTEME...</div>
+    <div class="loader-text" style="color: #00f0ff; font-family: 'Orbitron';">CONNEXION...</div>
 </div>
 
-<header style="text-align: center; padding: 60px 20px 20px 20px;">
-    <h1 style="font-family: 'Orbitron'; letter-spacing: 6px; font-size: 2.5em; margin: 0;">LEMAIRE THOMAS</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 15px; font-size: 1.1em; letter-spacing: 2px;">Technicien Supérieur Systèmes & Réseaux</p>
+<header style="text-align: center; padding: 40px 20px;">
+    <h1>LEMAIRE THOMAS</h1>
+    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
     
     <div class="cv-container">
         <a href="Thomas_Lemaire_CV.pdf" download class="cv-button">
-            <i class="fas fa-file-pdf"></i> TELECHARGER_LE_CV
+            <i class="fas fa-file-pdf"></i> TELECHARGER MON CV
         </a>
     </div>
 </header>
 
 <nav class="main-nav">
-  <a href="index.html" class="active">À PROPOS</a>
-  <a href="projects.html">PROJETS</a>
-  <a href="skills.html">COMPÉTENCES</a>
-  <a href="contact.html">CONTACT</a>
+  <a href="index.html" class="active">À propos</a>
+  <a href="projects.html">Projets</a>
+  <a href="skills.html">Compétences</a>
+  <a href="contact.html">Contact</a>
 </nav>
 
-<section id="about" style="max-width: 1100px; margin: auto; padding: 40px 20px;">
+<section id="about" style="max-width: 1000px; margin: auto; padding: 20px;">
     <h2 id="dynamic-header">
         <i class="fas fa-terminal"></i> 
         <span id="typewriter-text"></span>
@@ -171,40 +143,34 @@
     <div class="terminal-style">
         <div class="card-header-term">
             <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-            <span style="color: #888; font-size: 0.85em; margin-left: 12px; font-family: 'Inter';">profile_summary.sh</span>
+            <span style="color: #888; font-size: 0.8em; margin-left: 10px;">system_info.log</span>
         </div>
         <div class="term-body">
-            <p><span class="term-prompt">thomas@portfolio:~$</span> cat info_technicien.txt</p>
-            <p><span class="term-prompt">> GRADE :</span> Technicien Supérieur Systèmes et Réseaux (TSSR).</p>
-            <p><span class="term-prompt">> CERTIFS :</span> Fortinet NSE 1-2-3 | AWS Cloud Practitioner.</p>
-            <p><span class="term-prompt">> INFRA :</span> Administration Active Directory (AD DS) & GPO.</p>
-            <p><span class="term-prompt">> VIRTUAL :</span> Expert VMware & Hyper-V (Labs isolés).</p>
-            <p><span class="term-prompt">> STATUT :</span> Prêt pour de nouveaux défis technologiques.</p>
+            <p><span class="term-prompt">> GRADE :</span> Technicien Systèmes et Réseaux.</p>
+            <p><span class="term-prompt">> CURSUS :</span> En cours d'obtention Titre TSSR (Bac+2).</p>
+            <p><span class="term-prompt">> INFRA :</span> Déploiement de Labs virtualisés & Services Windows Server.</p>
+            <p><span class="term-prompt">> CERTIFS :</span> Fortinet NSE 1, 2 et 3.</p>
+            <p><span class="term-prompt">> STATUT :</span> En veille constante sur les infrastructures IT.</p>
         </div>
     </div>
 
-    <h2 style="font-family: 'Orbitron'; margin-top: 50px; border-left: 4px solid #00f0ff; padding-left: 15px;">
-        <i class="fas fa-microchip"></i> FOCUS_TECHNIQUE
-    </h2>
-
+    <h2 style="font-family: 'Orbitron'; margin-top: 40px;"><i class="fas fa-microchip"></i> Compétences</h2>
     <div class="skills-grid">
         <div class="skill-card-monitor">
-            <div class="status-led"></div>
-            <h3 style="font-family: 'Orbitron'; margin-top: 0;">Administration & AD</h3>
-            <div style="margin: 15px 0;"><span class="tag">Active Directory</span><span class="tag">GPO</span></div>
-            <p style="font-size: 0.9em; color: #ccc;">Gestion avancée des utilisateurs, des groupes et sécurisation du parc via GPO.</p>
+            <h3>Virtualisation</h3>
+            <div style="margin: 15px 0;"><span class="tag">VMware</span><span class="tag">Hyper-V</span></div>
+            <p style="font-size: 0.85em; color: #ccc;">Gestion d'hyperviseurs et environnements isolés.</p>
         </div>
 
         <div class="skill-card-monitor">
-            <div class="status-led"></div>
-            <h3 style="font-family: 'Orbitron'; margin-top: 0;">Réseaux & Sécurité</h3>
-            <div style="margin: 15px 0;"><span class="tag">Fortinet NSE</span><span class="tag">VLANs</span></div>
-            <p style="font-size: 0.9em; color: #ccc;">Configuration de switchs, routage et sécurisation via Firewall FortiGate.</p>
+            <h3>Systèmes Windows</h3>
+            <div style="margin: 15px 0;"><span class="tag">AD DS</span><span class="tag">GPO</span></div>
+            <p style="font-size: 0.85em; color: #ccc;">Administration d'annuaires et services réseaux.</p>
         </div>
     </div>
 </section>
 
-<footer><p style="text-align: center; padding: 60px; color: #444; font-size: 0.8em; font-family: 'Orbitron';">© 2026 LEMAIRE THOMAS | SYSTÈME OPÉRATIONNEL</p></footer>
+<footer><p style="text-align: center; padding: 40px; color: #444;">© 2026 Lemaire Thomas | Portfolio IT</p></footer>
 
 <script>
     const hasLoaded = sessionStorage.getItem('firstLoadDone');
@@ -212,13 +178,13 @@
     const textElement = document.getElementById('typewriter-text');
     const headerIcon = document.querySelector('#dynamic-header i');
 
-    const step1 = "[SCAN_SYSTEME] : ANALYSE_DU_PROFIL_REUSSIE";
-    const step2 = "BIENVENUE DANS MON INFRASTRUCTURE DIGITALE";
+    const step1 = "[LECTURE_DU_PROFIL] : AUTHENTIFICATION_REUSSIE";
+    const step2 = "PORTFOLIO TECHNIQUE | THOMAS LEMAIRE";
 
     function typeEffect(text, i, callback) {
         if (i < text.length) {
             textElement.innerHTML = text.substring(0, i + 1);
-            setTimeout(() => typeEffect(text, i + 1, callback), 45); 
+            setTimeout(() => typeEffect(text, i + 1, callback), 50); 
         } else if (callback) {
             callback();
         }
@@ -247,10 +213,11 @@
                     loader.style.display = 'none';
                     setTimeout(startSequence, 600);
                 }, 800);
-            }, 1800);
+            }, 1500);
         });
     }
 </script>
 </body>
+</html>
 </html>
 </html>
