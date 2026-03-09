@@ -4,70 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projets | Lemaire Thomas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
 
-        .main-nav {
-            display: flex; justify-content: center; gap: 20px; padding: 15px;
-            background: #07080c; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333;
-        }
-        .main-nav a { color: #888; text-decoration: none; font-family: 'Orbitron'; font-size: 0.85em; transition: 0.3s; }
-        .main-nav a:hover, .main-nav a.active { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
-
-        /* --- TON TITRE RÉINTÉGRÉ --- */
-        .project-header { text-align: center; padding: 50px 20px 20px; }
-        .project-header h1 { 
+        /* --- HEADER (Repris de ta capture) --- */
+        .header-section { text-align: center; padding: 60px 20px 30px; }
+        .header-section h1 { 
             font-family: 'Orbitron'; 
+            font-size: 2.5em; 
             letter-spacing: 5px; 
-            text-shadow: 0 0 15px #00f0ff; 
-            margin-bottom: 5px;
+            color: #00f0ff; 
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+            margin: 0;
             text-transform: uppercase;
         }
-        .project-header p { color: #00f0ff; font-family: 'Orbitron'; font-size: 0.9em; letter-spacing: 2px; }
+        .header-section p { 
+            color: #00f0ff; 
+            font-family: 'Orbitron'; 
+            font-size: 0.9em; 
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
 
         /* --- FILTRES --- */
         .filter-container { text-align: center; margin-bottom: 40px; }
         .filter-btn {
-            background: rgba(15, 16, 25, 0.8);
+            background: transparent;
             border: 1px solid #333;
             color: #888;
-            padding: 10px 20px;
+            padding: 10px 22px;
             margin: 5px;
             font-family: 'Orbitron';
+            font-size: 0.7em;
             cursor: pointer;
             transition: 0.3s;
             border-radius: 4px;
-            font-size: 0.75em;
+            text-transform: uppercase;
         }
         .filter-btn:hover, .filter-btn.active {
             border-color: #00f0ff;
             color: #00f0ff;
+            text-shadow: 0 0 8px #00f0ff;
             box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
         }
 
-        /* --- GRILLE --- */
+        /* --- GRILLE DE PROJETS (Style Live_Feed.exe) --- */
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px; max-width: 1100px; margin: auto; padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
         }
         .project-card {
-            background: rgba(15, 16, 25, 0.9);
-            border: 1px solid #333;
-            padding: 25px;
+            background: rgba(15, 16, 25, 0.5);
+            border: 1px solid #222;
             border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
             transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .project-card:hover { border-color: #00f0ff; transform: translateY(-5px); }
-        .project-card h3 { font-family: 'Orbitron'; color: #fff; margin-top: 10px; }
-        .project-card.hidden { display: none; }
+        .project-card:hover {
+            border-color: #00f0ff;
+            background: rgba(15, 16, 25, 0.8);
+        }
+        .project-card h3 { 
+            font-family: 'Orbitron'; 
+            color: #00f0ff; 
+            margin: 0 0 10px 0; 
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .project-card p { color: #ccc; font-size: 0.9em; line-height: 1.6; margin: 0; }
         
-        .tag {
-            font-size: 0.65em; font-family: 'Orbitron'; background: #00f0ff; color: #0b0c13;
-            padding: 3px 8px; border-radius: 3px; font-weight: bold;
+        .project-card.hidden { display: none; }
+
+        .main-nav {
+            display: flex; justify-content: center; gap: 20px; padding: 15px;
+            background: #07080c; border-bottom: 1px solid #333;
         }
+        .main-nav a { color: #888; text-decoration: none; font-family: 'Orbitron'; font-size: 0.8em; }
+        .main-nav a.active { color: #00f0ff; }
     </style>
 </head>
 <body>
@@ -79,46 +101,41 @@
   <a href="contact.html">Contact</a>
 </nav>
 
-<header class="project-header">
+<header class="header-section">
     <h1>LEMAIRE THOMAS</h1>
-    <p>MES PROJETS IT</p>
+    <p>Technicien Systèmes & Réseaux</p>
 </header>
 
 <div class="filter-container">
-    <button class="filter-btn active" onclick="filterProjects('all', this)">TOUT</button>
-    <button class="filter-btn" onclick="filterProjects('windows', this)"><i class="fab fa-windows"></i> WINDOWS</button>
-    <button class="filter-btn" onclick="filterProjects('linux', this)"><i class="fab fa-linux"></i> LINUX</button>
-    <button class="filter-btn" onclick="filterProjects('network', this)"><i class="fas fa-network-wired"></i> RÉSEAU</button>
+    <button class="filter-btn active" onclick="filterProjects('all', this)">Tout</button>
+    <button class="filter-btn" onclick="filterProjects('windows', this)">Windows</button>
+    <button class="filter-btn" onclick="filterProjects('linux', this)">Linux</button>
+    <button class="filter-btn" onclick="filterProjects('reseau', this)">Réseau</button>
 </div>
 
 <section class="projects-grid">
-    <div class="project-card" data-category="windows">
-        <span class="tag">WINDOWS SERVER</span>
-        <h3>AD DS & GPO</h3>
-        <p>Déploiement d'un contrôleur de domaine avec gestion des utilisateurs et stratégies de groupe sécurisées.</p>
-    </div>
-
     <div class="project-card" data-category="linux">
-        <span class="tag">LINUX / DEBIAN</span>
-        <h3>Serveur Apache</h3>
-        <p>Configuration et durcissement d'un serveur web Linux pour l'hébergement d'applications.</p>
+        <h3><i class="fab fa-linux"></i> Monitoring Zabbix</h3>
+        <p>Initialisation du service de supervision sous Debian : Surveillance du parc informatique et alertes temps réel.</p>
     </div>
 
-    <div class="project-card" data-category="network">
-        <span class="tag">RÉSEAU / CISCO</span>
-        <h3>VLAN & Routing</h3>
-        <p>Segmentation d'un parc informatique via des VLANs et configuration du routage inter-VLAN.</p>
+    <div class="project-card" data-category="windows">
+        <h3><i class="fab fa-windows"></i> Windows Server 2022</h3>
+        <p>Configuration Active Directory : Gestion des rôles AD DS, DNS et déploiement des GPO de sécurité.</p>
+    </div>
+
+    <div class="project-card" data-category="reseau">
+        <h3><i class="fas fa-shield-alt"></i> Sécurité Fortinet</h3>
+        <p>Administration firewall : Mise en place de politiques de filtrage et configuration de tunnels VPN.</p>
     </div>
 </section>
 
 <script>
     function filterProjects(category, btn) {
-        const buttons = document.querySelectorAll('.filter-btn');
-        buttons.forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        const cards = document.querySelectorAll('.project-card');
-        cards.forEach(card => {
+        document.querySelectorAll('.project-card').forEach(card => {
             const cardCat = card.getAttribute('data-category');
             if (category === 'all' || cardCat === category) {
                 card.classList.remove('hidden');
