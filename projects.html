@@ -6,7 +6,6 @@
     <title>Projets | Lemaire Thomas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
         body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
 
@@ -17,8 +16,19 @@
         .main-nav a { color: #888; text-decoration: none; font-family: 'Orbitron'; font-size: 0.85em; transition: 0.3s; }
         .main-nav a:hover, .main-nav a.active { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
 
-        /* --- STYLE DES FILTRES --- */
-        .filter-container { text-align: center; margin: 30px 0; }
+        /* --- TON TITRE RÉINTÉGRÉ --- */
+        .project-header { text-align: center; padding: 50px 20px 20px; }
+        .project-header h1 { 
+            font-family: 'Orbitron'; 
+            letter-spacing: 5px; 
+            text-shadow: 0 0 15px #00f0ff; 
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .project-header p { color: #00f0ff; font-family: 'Orbitron'; font-size: 0.9em; letter-spacing: 2px; }
+
+        /* --- FILTRES --- */
+        .filter-container { text-align: center; margin-bottom: 40px; }
         .filter-btn {
             background: rgba(15, 16, 25, 0.8);
             border: 1px solid #333;
@@ -37,7 +47,7 @@
             box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
         }
 
-        /* --- GRILLE DE PROJETS --- */
+        /* --- GRILLE --- */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -46,17 +56,17 @@
         .project-card {
             background: rgba(15, 16, 25, 0.9);
             border: 1px solid #333;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             transition: 0.3s;
         }
         .project-card:hover { border-color: #00f0ff; transform: translateY(-5px); }
-        .project-card h3 { font-family: 'Orbitron'; color: #00f0ff; margin-top: 0; }
-        .project-card.hidden { display: none; } /* Pour cacher les projets filtrés */
+        .project-card h3 { font-family: 'Orbitron'; color: #fff; margin-top: 10px; }
+        .project-card.hidden { display: none; }
         
         .tag {
-            font-size: 0.7em; background: rgba(0, 240, 255, 0.1); color: #00f0ff;
-            padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px;
+            font-size: 0.65em; font-family: 'Orbitron'; background: #00f0ff; color: #0b0c13;
+            padding: 3px 8px; border-radius: 3px; font-weight: bold;
         }
     </style>
 </head>
@@ -69,46 +79,44 @@
   <a href="contact.html">Contact</a>
 </nav>
 
-<section style="padding: 40px 20px;">
-    <h1 style="text-align: center; font-family: 'Orbitron'; letter-spacing: 3px;">MES TRAVAUX</h1>
+<header class="project-header">
+    <h1>LEMAIRE THOMAS</h1>
+    <p>MES PROJETS IT</p>
+</header>
 
-    <div class="filter-container">
-        <button class="filter-btn active" onclick="filterProjects('all', this)">TOUT</button>
-        <button class="filter-btn" onclick="filterProjects('windows', this)"><i class="fab fa-windows"></i> WINDOWS</button>
-        <button class="filter-btn" onclick="filterProjects('linux', this)"><i class="fab fa-linux"></i> LINUX</button>
-        <button class="filter-btn" onclick="filterProjects('network', this)"><i class="fas fa-network-wired"></i> RÉSEAU</button>
+<div class="filter-container">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">TOUT</button>
+    <button class="filter-btn" onclick="filterProjects('windows', this)"><i class="fab fa-windows"></i> WINDOWS</button>
+    <button class="filter-btn" onclick="filterProjects('linux', this)"><i class="fab fa-linux"></i> LINUX</button>
+    <button class="filter-btn" onclick="filterProjects('network', this)"><i class="fas fa-network-wired"></i> RÉSEAU</button>
+</div>
+
+<section class="projects-grid">
+    <div class="project-card" data-category="windows">
+        <span class="tag">WINDOWS SERVER</span>
+        <h3>AD DS & GPO</h3>
+        <p>Déploiement d'un contrôleur de domaine avec gestion des utilisateurs et stratégies de groupe sécurisées.</p>
     </div>
 
-    <div class="projects-grid" id="projects-container">
-        <div class="project-card" data-category="windows">
-            <span class="tag">Windows Server</span>
-            <h3>AD DS & GPO</h3>
-            <p>Mise en place d'une infrastructure Active Directory avec gestion centralisée des utilisateurs.</p>
-        </div>
+    <div class="project-card" data-category="linux">
+        <span class="tag">LINUX / DEBIAN</span>
+        <h3>Serveur Apache</h3>
+        <p>Configuration et durcissement d'un serveur web Linux pour l'hébergement d'applications.</p>
+    </div>
 
-        <div class="project-card" data-category="linux">
-            <span class="tag">Linux / Debian</span>
-            <h3>Serveur Apache</h3>
-            <p>Configuration et sécurisation d'un serveur web sous environnement Linux.</p>
-        </div>
-
-        <div class="project-card" data-category="network">
-            <span class="tag">Réseau / Cisco</span>
-            <h3>Configuration Switch/Routeur</h3>
-            <p>Segmentation de réseau via VLANs et routage inter-VLAN sur matériel Cisco.</p>
-        </div>
-        
-        </div>
+    <div class="project-card" data-category="network">
+        <span class="tag">RÉSEAU / CISCO</span>
+        <h3>VLAN & Routing</h3>
+        <p>Segmentation d'un parc informatique via des VLANs et configuration du routage inter-VLAN.</p>
+    </div>
 </section>
 
 <script>
     function filterProjects(category, btn) {
-        // Mise à jour des boutons actifs
         const buttons = document.querySelectorAll('.filter-btn');
         buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // Filtrage des cartes
         const cards = document.querySelectorAll('.project-card');
         cards.forEach(card => {
             const cardCat = card.getAttribute('data-category');
