@@ -2,48 +2,105 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Console Admin | Lemaire Thomas</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Console | Lemaire Thomas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: #0b0c13; color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
+        .admin-container { max-width: 900px; margin: 40px auto; }
+        h1, h2 { font-family: 'Orbitron'; color: #00f0ff; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .card { background: rgba(26, 27, 38, 0.9); border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 30px; }
+        
+        label { display: block; margin-bottom: 10px; font-family: 'Orbitron'; font-size: 0.8em; color: #888; }
+        input, textarea, select { 
+            width: 100%; padding: 12px; margin-bottom: 20px; background: #07080c; 
+            border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box;
+        }
+        input:focus { border-color: #00f0ff; outline: none; }
+
+        .btn { 
+            width: 100%; padding: 15px; border: none; border-radius: 4px; font-family: 'Orbitron'; 
+            font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+        }
+        .btn-upload { background: #00f0ff; color: #0b0c13; }
+        .btn-upload:hover { box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); }
+        
+        /* Liste des projets pour suppression */
+        .project-item { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px; border-bottom: 1px solid #222; 
+        }
+        .project-item:last-child { border: none; }
+        .btn-delete { 
+            background: #ff4444; color: white; padding: 8px 15px; font-size: 0.7em; 
+            border-radius: 4px; border: none; cursor: pointer; font-family: 'Orbitron';
+        }
+        .btn-delete:hover { background: #cc0000; }
+
+        #status { text-align: center; font-weight: bold; color: #00f0ff; margin-top: 20px; font-family: 'Orbitron'; }
+    </style>
 </head>
-<body style="background: #0b0c13; color: white; font-family: 'Inter', sans-serif; padding: 20px;">
+<body>
 
-<section id="admin-console" style="max-width: 600px; margin: auto;">
-    <h2 style="font-family: 'Orbitron'; color: #00f0ff;"><i class="fas fa-terminal"></i> Console d'Upload</h2>
-    
-    <div style="background: rgba(26, 27, 38, 0.9); padding: 30px; border-radius: 8px; border: 1px solid #333;">
-        <p>1. Fine-grained Token</p>
-        <input type="password" id="gh-token" placeholder="Ton Token GitHub" style="width: 100%; padding: 10px; margin-bottom: 20px; background: #07080c; border: 1px solid #333; color: white;">
-        
-        <p>2. Fichier (PDF, Doc...)</p>
-        <input type="file" id="file-input" style="margin-bottom: 20px;">
-        
-        <p>3. Description du projet</p>
-        <input type="text" id="proj-desc" placeholder="Ex: Installation d'un serveur AD DS" style="width: 100%; padding: 10px; margin-bottom: 20px; background: #07080c; border: 1px solid #333; color: white;">
+<div class="admin-container">
+    <h1><i class="fas fa-user-shield"></i> Administration_Système</h1>
 
-        <p>4. URL de l'image (Optionnel)</p>
-        <input type="text" id="img-url" placeholder="Lien vers une image" style="width: 100%; padding: 10px; margin-bottom: 20px; background: #07080c; border: 1px solid #333; color: white;">
+    <div class="card">
+        <h2><i class="fas fa-cloud-upload-alt"></i> Nouveau_Projet</h2>
         
-        <button onclick="uploadToGithub()" style="width: 100%; padding: 15px; background: #00f0ff; color: #0b0c13; border: none; font-weight: bold; cursor: pointer; font-family: 'Orbitron';">
-            ENVOYER SUR LE REPO
-        </button>
-        
-        <p id="status" style="margin-top: 20px; text-align: center; font-weight: bold;"></p>
+        <label>GitHub Fine-grained Token</label>
+        <input type="password" id="gh-token" placeholder="Paste your token here...">
+
+        <label>Document (PDF, ZIP, etc.)</label>
+        <input type="file" id="file-input">
+
+        <label>Titre de la fiche</label>
+        <input type="text" id="proj-title" placeholder="Ex: Configuration VPN IPsec Fortinet">
+
+        <label>Description (s'affichera sur la carte)</label>
+        <textarea id="proj-desc" rows="3" placeholder="Résumé technique du lab..."></textarea>
+
+        <label>Lien de l'image d'illustration</label>
+        <input type="text" id="img-url" placeholder="Ex: https://image.png ou /img/lab.jpg">
+
+        <label>Catégorie</label>
+        <select id="proj-cat">
+            <option value="windows">Windows</option>
+            <option value="linux">Linux</option>
+            <option value="reseaux">Réseaux</option>
+        </select>
+
+        <button class="btn btn-upload" onclick="uploadProject()">Exécuter_Upload</button>
+        <p id="status"></p>
     </div>
-</section>
+
+    <div class="card">
+        <h2><i class="fas fa-list"></i> Gestion_des_Logs</h2>
+        <button class="btn" style="background:#222; color:#888; margin-bottom:15px;" onclick="loadProjectsList()">Actualiser_la_liste</button>
+        <div id="projects-list">
+            <p style="color:#444; text-align:center;">Cliquez sur Actualiser pour voir les projets.</p>
+        </div>
+    </div>
+</div>
 
 <script>
-    async function uploadToGithub() {
+    const username = "LemaireThomas-ping";
+    const repo = "LT";
+
+    // 1. FONCTION UPLOAD
+    async function uploadProject() {
         const token = document.getElementById('gh-token').value;
         const fileInput = document.getElementById('file-input');
-        const desc = document.getElementById('proj-desc').value || "Documentation technique";
-        const img = document.getElementById('img-url').value || "";
+        const title = document.getElementById('proj-title').value;
+        const desc = document.getElementById('proj-desc').value;
+        const img = document.getElementById('img-url').value;
+        const cat = document.getElementById('proj-cat').value;
         const status = document.getElementById('status');
-        const username = "LemaireThomas-ping";
-        const repo = "LT";
 
-        if (!token || !fileInput.files[0]) {
-            status.innerText = "❌ Manque token ou fichier";
+        if (!token || !fileInput.files[0] || !title) {
+            status.innerText = "❌ ERREUR : CHAMPS_MANQUANTS";
             return;
         }
 
@@ -52,55 +109,98 @@
 
         reader.onload = async function() {
             const content = reader.result.split(',')[1];
-            const path = `docs/${file.name}`;
-
             try {
-                status.innerText = "⏳ Envoi du fichier...";
-                // 1. Upload le fichier
-                await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`, {
+                status.innerText = "⏳ ENVOI_DOCUMENT...";
+                // Upload fichier
+                await fetch(`https://api.github.com/repos/${username}/${repo}/contents/docs/${file.name}`, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}` },
-                    body: JSON.stringify({ message: `Add ${file.name}`, content: content })
+                    body: JSON.stringify({ message: `Upload ${file.name}`, content: content })
                 });
 
-                status.innerText = "⏳ Mise à jour du registre...";
-                // 2. Récupère data.json
-                let projects = [];
-                let sha = null;
-                try {
-                    const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
-                        headers: { 'Authorization': `token ${token}` }
-                    });
-                    const data = await res.json();
-                    sha = data.sha;
-                    projects = JSON.parse(atob(data.content));
-                } catch (e) { console.log("Nouveau data.json"); }
+                status.innerText = "⏳ SYNCHRONISATION_REGISTRE...";
+                // Update JSON
+                const resJson = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+                const jsonData = await resJson.json();
+                let projects = JSON.parse(atob(jsonData.content));
 
-                // 3. Ajoute le projet
                 projects.push({
                     name: file.name,
-                    title: file.name.split('.')[0].replace(/-/g, ' '),
+                    title: title,
                     description: desc,
                     image: img,
-                    category: file.name.toLowerCase().includes('win') ? 'windows' : 
-                              (file.name.toLowerCase().includes('linux') ? 'linux' : 'reseaux')
+                    category: cat
                 });
 
-                // 4. Envoie le JSON
                 await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}` },
                     body: JSON.stringify({
-                        message: "Update data.json",
+                        message: "Update registry",
                         content: btoa(unescape(encodeURIComponent(JSON.stringify(projects, null, 2)))),
-                        sha: sha
+                        sha: jsonData.sha
                     })
                 });
 
-                status.innerText = "✅ Succès !";
-            } catch (err) { status.innerText = "❌ Erreur"; }
+                status.innerText = "✅ PROJET_PUBLIÉ_AVEC_SUCCÈS";
+                loadProjectsList();
+            } catch (e) { status.innerText = "❌ ERREUR_CRITIQUE_API"; }
         };
         reader.readAsDataURL(file);
+    }
+
+    // 2. CHARGER LA LISTE POUR SUPPRESSION
+    async function loadProjectsList() {
+        const listContainer = document.getElementById('projects-list');
+        try {
+            const res = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/main/data.json?t=${Date.now()}`);
+            const projects = await res.json();
+            listContainer.innerHTML = "";
+            projects.forEach((p, index) => {
+                const div = document.createElement('div');
+                div.className = 'project-item';
+                div.innerHTML = `
+                    <span>${p.title} (${p.category})</span>
+                    <button class="btn-delete" onclick="deleteProject('${p.name}', ${index})">SUPPRIMER</button>
+                `;
+                listContainer.appendChild(div);
+            });
+        } catch (e) { listContainer.innerHTML = "Aucun projet trouvé."; }
+    }
+
+    // 3. FONCTION SUPPRESSION
+    async function deleteProject(fileName, index) {
+        const token = document.getElementById('gh-token').value;
+        if (!token) { alert("Entre ton token en haut pour supprimer !"); return; }
+        if (!confirm("Supprimer définitivement ce log ?")) return;
+
+        try {
+            // Supprimer du JSON
+            const resJson = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
+                headers: { 'Authorization': `token ${token}` }
+            });
+            const jsonData = await resJson.json();
+            let projects = JSON.parse(atob(jsonData.content));
+            projects.splice(index, 1);
+
+            await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
+                method: 'PUT',
+                headers: { 'Authorization': `token ${token}` },
+                body: JSON.stringify({
+                    message: `Delete ${fileName} from registry`,
+                    content: btoa(unescape(encodeURIComponent(JSON.stringify(projects, null, 2)))),
+                    sha: jsonData.sha
+                })
+            });
+
+            // Note: La suppression physique du fichier docs/ est optionnelle ici pour la sécurité, 
+            // le retirer du JSON suffit à le faire disparaître du site.
+
+            alert("Projet supprimé !");
+            loadProjectsList();
+        } catch (e) { alert("Erreur lors de la suppression"); }
     }
 </script>
 </body>
