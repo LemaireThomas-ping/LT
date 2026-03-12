@@ -2,14 +2,21 @@
   {
     "name": "Configuration du Routage Inter-VLAN.docx",
     "title": "Configuration du Routage Inter-Vlan",
-    "description": "DÃ©monstration : Routage Inter-VLAN (Router-on-a-Stick)\nCette dÃ©monstration porte sur la segmentation logique d'un rÃ©seau et la crÃ©ation de passerelles virtuelles.\n\nLe principe : On utilise un switch pour sÃ©parer les services (VLANs) et un routeur pour les faire communiquer via un seul cÃ¢ble physique (Trunk).\n\nLa technique : Le routeur est divisÃ© en sous-interfaces (gateways). Chaque service possÃ¨de sa propre porte de sortie IP pour envoyer des donnÃ©es vers les autres rÃ©seaux.\n\nLe rÃ©sultat : Les tests de connectivitÃ© sont validÃ©s, prouvant que le trafic circule entre les VLANs.\n\nNote de sÃ©curitÃ© : Ce rÃ©seau est actuellement \"ouvert\". Dans la prochaine dÃ©monstration, nous utiliserons des ACL pour filtrer ces accÃ¨s, car en entreprise, on ne laisse jamais tous les services communiquer librement sans contrÃ´le.",
+    "description": "DÃÂ©monstration : Routage Inter-VLAN (Router-on-a-Stick)\nCette dÃÂ©monstration porte sur la segmentation logique d'un rÃÂ©seau et la crÃÂ©ation de passerelles virtuelles.\n\nLe principe : On utilise un switch pour sÃÂ©parer les services (VLANs) et un routeur pour les faire communiquer via un seul cÃÂ¢ble physique (Trunk).\n\nLa technique : Le routeur est divisÃÂ© en sous-interfaces (gateways). Chaque service possÃÂ¨de sa propre porte de sortie IP pour envoyer des donnÃÂ©es vers les autres rÃÂ©seaux.\n\nLe rÃÂ©sultat : Les tests de connectivitÃÂ© sont validÃÂ©s, prouvant que le trafic circule entre les VLANs.\n\nNote de sÃÂ©curitÃÂ© : Ce rÃÂ©seau est actuellement \"ouvert\". Dans la prochaine dÃÂ©monstration, nous utiliserons des ACL pour filtrer ces accÃÂ¨s, car en entreprise, on ne laisse jamais tous les services communiquer librement sans contrÃÂ´le.",
     "image": "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.8_xnZ99r77jNWezOjrY_lgHaEj%3Fpid%3DApi&sp=1773320339Tf723151c20e02e5d279155c9199bc784a95304c0b6d17b7e38cba7368561f7fc",
     "category": "reseaux"
   },
   {
     "name": "Configuration du Routage Inter-VLAN.docx",
     "title": "CONFIGURATION DU ROUTAGE INTER-VLAN",
-    "description": "Démonstration : Routage Inter-VLAN (Router-on-a-Stick) Cette démonstration porte sur la segmentation logique d'un réseau et la création de passerelles virtuelles. Le principe : On utilise un switch pour séparer les services (VLANs) et un routeur pour les faire communiquer via un seul câble physique (Trunk). La technique : Le routeur est divisé en sous-interfaces (gateways). Chaque service possède sa propre porte de sortie IP pour envoyer des données vers les autres réseaux. Le résultat : Les tests de connectivité sont validés, prouvant que le trafic circule entre les VLANs. Note de sécurité : Ce réseau est actuellement \"ouvert\". Dans la prochaine démonstration, nous utiliserons des ACL pour filtrer ces accès, car en entreprise, on ne laisse jamais tous les services communiquer librement sans contrôle.",
+    "description": "DÃ©monstration : Routage Inter-VLAN (Router-on-a-Stick) Cette dÃ©monstration porte sur la segmentation logique d'un rÃ©seau et la crÃ©ation de passerelles virtuelles. Le principe : On utilise un switch pour sÃ©parer les services (VLANs) et un routeur pour les faire communiquer via un seul cÃ¢ble physique (Trunk). La technique : Le routeur est divisÃ© en sous-interfaces (gateways). Chaque service possÃ¨de sa propre porte de sortie IP pour envoyer des donnÃ©es vers les autres rÃ©seaux. Le rÃ©sultat : Les tests de connectivitÃ© sont validÃ©s, prouvant que le trafic circule entre les VLANs. Note de sÃ©curitÃ© : Ce rÃ©seau est actuellement \"ouvert\". Dans la prochaine dÃ©monstration, nous utiliserons des ACL pour filtrer ces accÃ¨s, car en entreprise, on ne laisse jamais tous les services communiquer librement sans contrÃ´le.",
+    "image": "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fdatascientest.com%2Fwp-content%2Fuploads%2F2023%2F07%2FIllu_BLOG__VLAN.png&sp=1773329314T5b89cef3904cdcd5599ac7304f5e377f291cc5d26f1e5a4ceef8badf4403f42d",
+    "category": "reseaux"
+  },
+  {
+    "name": "Configuration du Routage Inter-VLAN.docx",
+    "title": "CONFIGURATION DU ROUTAGE INTER-VLAN",
+    "description": "zezezezeze",
     "image": "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fdatascientest.com%2Fwp-content%2Fuploads%2F2023%2F07%2FIllu_BLOG__VLAN.png&sp=1773329314T5b89cef3904cdcd5599ac7304f5e377f291cc5d26f1e5a4ceef8badf4403f42d",
     "category": "reseaux"
   }
