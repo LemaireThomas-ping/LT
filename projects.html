@@ -3,135 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets | Lemaire Thomas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>Portfolio | Lemaire Thomas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        :root { 
+            --neon-blue: #00f0ff; 
+            --bg-dark: #0b0c13; 
+            --card-bg: #0d1117; 
+            --border-color: #161b22;
+        }
+        
+        body { 
+            background: var(--bg-dark); 
+            color: white; 
+            margin: 0; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+        }
 
-        /* --- HEADER (REMIS) --- */
+        /* --- HEADER (Image 4 & 6) --- */
         header { 
+            padding: 60px 20px 30px; 
             text-align: center; 
-            padding: 60px 20px; 
-            background: radial-gradient(circle at center, rgba(0,240,255,0.05) 0%, transparent 70%); 
         }
-        header h1 { font-family: 'Orbitron'; font-size: 2.5em; margin: 0; letter-spacing: 4px; }
-        header p { color: #00f0ff; font-family: 'Orbitron'; margin-top: 15px; font-size: 0.9em; opacity: 0.8; }
+        .name-glow { 
+            font-family: 'Orbitron'; 
+            font-size: 2.8em; 
+            margin: 0; 
+            letter-spacing: 5px;
+            color: var(--neon-blue); 
+            text-shadow: 0 0 15px var(--neon-blue); 
+        }
+        .subtitle { 
+            color: var(--neon-blue); 
+            font-family: 'Orbitron'; 
+            margin-top: 15px; 
+            font-size: 0.85em; 
+            letter-spacing: 2px;
+        }
 
-        /* --- NAVIGATION --- */
-        .main-nav {
-            display: flex; justify-content: center; gap: 20px; padding: 15px;
-            background: #07080c; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333;
+        /* --- NAVIGATION (Image 7) --- */
+        .main-nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color); 
+            background: rgba(7, 8, 12, 0.8);
         }
-        .main-nav a {
-            color: #888; text-decoration: none; font-family: 'Orbitron', sans-serif;
-            font-size: 0.85em; transition: 0.3s; white-space: nowrap;
+        .main-nav a { 
+            color: #888; 
+            text-decoration: none; 
+            font-family: 'Orbitron'; 
+            font-size: 0.75em; 
+            transition: 0.3s; 
+            text-transform: uppercase;
         }
-        .main-nav a:hover, .main-nav a.active { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
+        .main-nav a:hover, .main-nav a.active { 
+            color: var(--neon-blue); 
+            text-shadow: 0 0 8px var(--neon-blue); 
+        }
 
-        /* --- FILTRES --- */
-        .filter-container {
-            display: flex; justify-content: center; gap: 10px; margin: 40px 0; flex-wrap: wrap;
+        /* --- FILTRES (Image 2) --- */
+        .filter-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 12px; 
+            margin: 40px 0; 
+            flex-wrap: wrap;
         }
         .filter-btn {
-            background: transparent; border: 1px solid #333; color: #888; padding: 10px 20px;
-            font-family: 'Orbitron', sans-serif; font-size: 0.75em; cursor: pointer;
-            transition: 0.3s; border-radius: 4px; text-transform: uppercase;
+            background: transparent; 
+            border: 1px solid #333; 
+            color: #888; 
+            padding: 8px 16px;
+            font-family: 'Orbitron'; 
+            font-size: 0.65em; 
+            cursor: pointer; 
+            border-radius: 4px; 
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .filter-btn:hover, .filter-btn.active {
-            border-color: #00f0ff; color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        .filter-btn:hover, .filter-btn.active { 
+            border-color: var(--neon-blue); 
+            color: var(--neon-blue); 
             background: rgba(0, 240, 255, 0.05);
         }
 
         /* --- SECTION PROJETS --- */
-        section { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
-        h2 { font-family: 'Orbitron', sans-serif; color: #00f0ff; border-left: 4px solid #00f0ff; padding-left: 20px; margin-bottom: 40px; font-size: 1.5em; letter-spacing: 2px; }
+        section { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+        .section-title { 
+            font-family: 'Orbitron'; 
+            color: var(--neon-blue); 
+            font-size: 1.1em; 
+            margin-bottom: 30px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+        }
 
-        #projects-container {
+        #projects-container { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
         }
 
-        /* --- CARTE COMPACTE (Style Cyber Image 2) --- */
+        /* --- CARTE PROJET (Image 1) --- */
         .project-card {
-            background: #0d1117; border: 1px solid #161b22;
-            padding: 12px; border-radius: 4px; transition: 0.3s;
-            display: flex; flex-direction: column;
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            padding: 12px;
+            border-radius: 6px; 
+            transition: 0.3s; 
+            display: flex; 
+            flex-direction: column;
         }
-        .project-card:hover {
-            border-color: #00f0ff;
+        .project-card:hover { 
+            border-color: var(--neon-blue); 
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
         }
 
-        /* IMAGE : Bannière ultra-compacte forçée */
         .project-img {
-            width: 100%;
-            aspect-ratio: 21 / 8;
+            width: 100%; 
+            aspect-ratio: 21 / 9; 
             object-fit: cover;
-            border-radius: 2px;
-            margin-bottom: 10px;
+            border-radius: 4px; 
+            margin-bottom: 12px; 
             border: 1px solid #30363d;
         }
 
-        .card-header {
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+        .card-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 10px; 
         }
-        .card-title {
-            margin: 0; font-family: 'Orbitron'; font-size: 0.75em; letter-spacing: 1px; color: #eee;
+        .card-title { 
+            margin: 0; 
+            font-family: 'Orbitron'; 
+            font-size: 0.75em; 
+            color: #eee; 
+            letter-spacing: 0.5px;
         }
-        .extension-badge {
-            font-size: 0.55em; font-family: 'Orbitron'; color: #00f0ff;
-            border: 1px solid #00f0ff; padding: 1px 5px; border-radius: 2px;
+        .badge { 
+            font-size: 0.55em; 
+            color: var(--neon-blue); 
+            border: 1px solid var(--neon-blue); 
+            padding: 1px 5px; 
+            font-family: 'Orbitron';
         }
 
-        /* ACCORDÉON DESCRIPTION */
-        .desc-details {
-            border: 1px solid #30363d; background: #090c10; margin-bottom: 12px; border-radius: 2px;
+        /* DESCRIPTION ACCORDÉON */
+        .desc-details { 
+            border: 1px solid #30363d; 
+            background: #090c10; 
+            margin-bottom: 12px; 
+            border-radius: 2px;
         }
-        .desc-summary {
-            list-style: none; padding: 6px 10px; cursor: pointer;
-            font-family: 'Orbitron'; font-size: 0.6em; color: #00f0ff;
-            display: flex; justify-content: space-between; align-items: center;
+        .desc-summary { 
+            padding: 8px 10px; 
+            cursor: pointer; 
+            font-family: 'Orbitron'; 
+            font-size: 0.6em; 
+            color: var(--neon-blue); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
         }
         .desc-summary::-webkit-details-marker { display: none; }
-        .desc-content {
-            padding: 10px; font-size: 0.75em; color: #8b949e; border-top: 1px solid #30363d; line-height: 1.4;
+        .desc-content { 
+            padding: 10px; 
+            font-size: 0.75em; 
+            color: #8b949e; 
+            border-top: 1px solid #30363d; 
+            line-height: 1.5; 
         }
 
-        /* BOUTON TÉLÉCHARGER */
-        .btn-download {
-            text-align: center; padding: 10px; background: transparent; color: #00f0ff; border: 1px solid #00f0ff;
-            text-decoration: none; font-family: 'Orbitron'; font-size: 0.7em; transition: 0.3s;
-            border-radius: 2px; text-transform: uppercase; font-weight: 600;
+        /* BOUTON ACTION (Image 1) */
+        .btn-action {
+            text-align: center; 
+            padding: 10px; 
+            background: transparent; 
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue); 
+            text-decoration: none; 
+            font-family: 'Orbitron';
+            font-size: 0.7em; 
+            border-radius: 2px; 
+            transition: 0.3s; 
+            letter-spacing: 1.5px;
+            font-weight: bold;
         }
-        .btn-download:hover { background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 10px rgba(0, 240, 255, 0.3); }
+        .btn-action:hover { 
+            background: rgba(0, 240, 255, 0.1); 
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.2); 
+        }
 
-        footer { border-top: 1px solid #1a1b26; margin-top: 60px; text-align: center; padding: 40px; color: #444; font-size: 0.8em; font-family: 'Orbitron'; }
+        footer { 
+            text-align: center; 
+            padding: 50px; 
+            color: #333; 
+            font-family: 'Orbitron'; 
+            font-size: 0.65em; 
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>LEMAIRE THOMAS</h1>
-    <p>> TECHNICIEN SYSTÈMES & RÉSEAUX</p>
+    <h1 class="name-glow">LEMAIRE THOMAS</h1>
+    <p class="subtitle">> TECHNICIEN SYSTÈMES & RÉSEAUX</p>
 </header>
 
 <nav class="main-nav">
-  <a href="index.html">À propos</a>
-  <a href="projects.html" class="active">Projets</a>
-  <a href="skills.html">Compétences</a>
-  <a href="contact.html">Contact</a>
+    <a href="index.html">À propos</a>
+    <a href="projects.html" class="active">Projets</a>
+    <a href="skills.html">Compétences</a>
+    <a href="contact.html">Contact</a>
 </nav>
 
 <section>
-    <h2><i class="fas fa-terminal" style="margin-right: 15px;"></i>RÉPERTOIRE_DES_DOCS</h2>
+    <h2 class="section-title">|_> RÉPERTOIRE_DES_DOCS</h2>
 
     <div class="filter-container">
-        <button class="filter-btn active" onclick="filterProjects('all')">Tous les Labs</button>
-        <button class="filter-btn" onclick="filterProjects('windows')"><i class="fab fa-windows"></i> Windows</button>
-        <button class="filter-btn" onclick="filterProjects('linux')"><i class="fab fa-linux"></i> Linux</button>
-        <button class="filter-btn" onclick="filterProjects('reseaux')"><i class="fas fa-network-wired"></i> Réseaux</button>
+        <button class="filter-btn active" onclick="filterProjects('all')">TOUS LES LABS</button>
+        <button class="filter-btn" onclick="filterProjects('windows')"><i class="fab fa-windows"></i> WINDOWS</button>
+        <button class="filter-btn" onclick="filterProjects('linux')"><i class="fab fa-linux"></i> LINUX</button>
+        <button class="filter-btn" onclick="filterProjects('reseaux')"><i class="fas fa-network-wired"></i> RÉSEAUX</button>
     </div>
 
     <div id="projects-container">
@@ -141,52 +246,53 @@
 <footer>© 2026 Lemaire Thomas | Système d'administration GitHub v2.0</footer>
 
 <script>
-    let allFiles = []; 
-    const username = "LemaireThomas-ping";
-    const repo = "LT";
+    let allFiles = [];
+    const container = document.getElementById('projects-container');
 
-    async function fetchProjects() {
-        const container = document.getElementById('projects-container');
+    async function loadData() {
         try {
-            const response = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/main/data.json?t=${Date.now()}`);
-            if (!response.ok) return;
+            const response = await fetch(`https://raw.githubusercontent.com/LemaireThomas-ping/LT/main/data.json?t=${Date.now()}`);
+            if (!response.ok) throw new Error();
             allFiles = await response.json();
-            renderProjects(allFiles);
-        } catch (e) { console.error("Erreur flux"); }
+            render(allFiles);
+        } catch (e) { 
+            container.innerHTML = "<p style='text-align:center; font-family:Orbitron; font-size:0.8em; color:#555;'>ERREUR_FLUX_SYNC</p>"; 
+        }
     }
 
-    function renderProjects(filesToDisplay) {
-        const container = document.getElementById('projects-container');
+    function render(data) {
         container.innerHTML = "";
-        [...filesToDisplay].reverse().forEach(file => {
+        [...data].reverse().forEach(file => {
             const card = document.createElement('div');
             card.className = 'project-card';
-            const extension = file.name.split('.').pop().toUpperCase();
+            const ext = file.name.split('.').pop().toUpperCase();
+            
             card.innerHTML = `
                 ${file.image ? `<img src="${file.image}" class="project-img">` : ''}
                 <div class="card-header">
                     <h3 class="card-title">${file.title.toUpperCase()}</h3>
-                    <span class="extension-badge">${extension}</span>
+                    <span class="badge">${ext}</span>
                 </div>
                 <details class="desc-details">
-                    <summary class="desc-summary">DESCRIPTION <i class="fas fa-chevron-down"></i></summary>
+                    <summary class="desc-summary">DESCRIPTION <i class="fas fa-chevron-down" style="font-size:0.8em;"></i></summary>
                     <div class="desc-content">${file.description}</div>
                 </details>
-                <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-download">
-                    TÉLÉCHARGER LE COURS <i class="fas fa-download" style="margin-left:8px;"></i>
-                </a>`;
+                <a href="https://raw.githubusercontent.com/LemaireThomas-ping/LT/main/docs/${file.name}" target="_blank" class="btn-action">
+                    LIRE LE FICHIER
+                </a>
+            `;
             container.appendChild(card);
         });
     }
 
     function filterProjects(category) {
         document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
+        event.currentTarget.classList.add('active');
         const filtered = (category === 'all') ? allFiles : allFiles.filter(f => f.category === category);
-        renderProjects(filtered);
+        render(filtered);
     }
 
-    fetchProjects();
+    loadData();
 </script>
 </body>
 </html>
