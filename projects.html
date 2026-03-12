@@ -21,9 +21,7 @@
         header h1 {
             font-family: 'Orbitron', sans-serif; font-size: 3.2em;
             color: #00f0ff; 
-            /* --- EFFET GLOW ADOUCI --- */
             text-shadow: 0 0 4px rgba(0, 240, 255, 0.6);
-            /* --------------------------- */
             margin: 0;
         }
 
@@ -145,38 +143,57 @@
         <button class="filter-btn" onclick="filterProjects('linux', this)">LINUX</button>
     </div>
 
-    <div id="projects-container" class="projects-grid"></div>
+    <div id="projects-container" class="projects-grid">
+        <p style='text-align:center; color:#555;'>Initialisation du système...</p>
+    </div>
 </div>
 
 <footer>© 2026 Lemaire Thomas | Portfolio IT</footer>
 
 <script>
     let allProjects = [];
+    const username = "LemaireThomas-ping";
+    const repo = "LT";
 
     async function loadProjects() {
         const container = document.getElementById('projects-container');
-        const username = "LemaireThomas-ping";
-        const repo = "LT";
 
         try {
+            // Fetch avec anti-cache pour le développement
             const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json?t=${Date.now()}`);
-            const jsonData = await response.json();
-            const decodedContent = decodeURIComponent(escape(atob(jsonData.content)));
-            allProjects = JSON.parse(decodedContent).reverse();
             
+            if (!response.ok) {
+                throw new Error(`Réponse réseau non OK (Statut: ${response.status})`);
+            }
+
+            const jsonData = await response.json();
+            
+            // Décodage UTF-8 robuste pour les accents français
+            const binaryString = atob(jsonData.content);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            const decodedContent = new TextDecoder('utf-8').decode(bytes);
+            
+            allProjects = JSON.parse(decodedContent).reverse();
             renderProjects(allProjects);
+
         } catch (e) {
-            container.innerHTML = "<p style='text-align:center;'>Erreur de chargement...</p>";
+            console.error("ERREUR_CHARGEMENT:", e);
+            container.innerHTML = `
+                <div style='text-align:center; padding: 20px; border: 1px solid #ff4b4b; border-radius: 8px;'>
+                    <p style='color: #ff4b4b; font-family: "Orbitron";'>[!] ERREUR_SYSTEME : Échec de la récupération des données</p>
+                    <small style='color: #555;'>Détails : ${e.message}</small>
+                </div>`;
         }
     }
 
     function renderProjects(data) {
         const container = document.getElementById('projects-container');
-        const username = "LemaireThomas-ping";
-        const repo = "LT";
 
-        if (data.length === 0) {
-            container.innerHTML = "<p style='text-align:center; color:#555;'>Aucun projet dans cette catégorie.</p>";
+        if (!data || data.length === 0) {
+            container.innerHTML = "<p style='text-align:center; color:#555;'>Aucun projet trouvé dans cette catégorie.</p>";
             return;
         }
 
@@ -188,12 +205,12 @@
                     </div>
                 ` : ''}
                 <div class="card-header">
-                    <h3 class="card-title">${file.title.toUpperCase()}</h3>
+                    <h3 class="card-title">${(file.title || 'Sans titre').toUpperCase()}</h3>
                     <span class="badge">${file.category || 'LAB'}</span>
                 </div>
                 <details>
                     <summary>DETAILS_PROJET <i class="fas fa-chevron-down"></i></summary>
-                    <div class="desc-content">${file.description}</div>
+                    <div class="desc-content">${file.description || 'Description indisponible.'}</div>
                 </details>
                 <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-action">
                     OUVRIR LE DOCUMENT
@@ -203,17 +220,22 @@
     }
 
     function filterProjects(category, btn) {
+        // Gestion visuelle des boutons
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         if (category === 'all') {
             renderProjects(allProjects);
         } else {
-            const filtered = allProjects.filter(p => p.category === category);
+            // Filtrage insensible à la casse
+            const filtered = allProjects.filter(p => 
+                p.category && p.category.toLowerCase() === category.toLowerCase()
+            );
             renderProjects(filtered);
         }
     }
 
+    // Exécution au chargement de la page
     loadProjects();
 </script>
 </body>
