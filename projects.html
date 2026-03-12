@@ -14,10 +14,10 @@
             color: #e0e5eb;
         }
 
-        /* HEADER FUTURISTE */
+        /* HEADER AJUSTÉ (Comme skills.html) */
         header {
             text-align: center;
-            padding: 100px 20px;
+            padding: 40px 20px; /* Espace réduit */
             background: linear-gradient(135deg, #0b0c13, #1b1d26);
             border-bottom: 2px solid #00f0ff33;
             box-shadow: 0 4px 20px rgba(0,255,255,0.1);
@@ -32,6 +32,8 @@
             margin: 0;
         }
 
+        /* Trait supprimé ici aussi */
+
         .subtitle {
             color: #00f0ff;
             font-family: 'Orbitron', sans-serif;
@@ -43,16 +45,6 @@
         @keyframes pulse {
             0%, 100% { text-shadow: 0 0 15px #00f0ff66, 0 0 25px #00fff099; }
             50% { text-shadow: 0 0 25px #00f0ff99, 0 0 40px #00fff0aa; }
-        }
-
-        header::after {
-            content: "";
-            display: block;
-            width: 120px;
-            height: 2px;
-            margin: 20px auto 0;
-            background: #00f0ff;
-            box-shadow: 0 0 10px #00f0ff;
         }
 
         /* NAVIGATION */
@@ -115,6 +107,7 @@
 
         .project-card:hover {
             border-color: #00f0ff;
+            transform: translateY(-3px);
         }
 
         .project-img {
@@ -200,6 +193,11 @@
             padding: 60px;
             color: #444;
             font-size: 0.8em;
+        }
+
+        @media (max-width:768px) {
+            .main-nav { gap:8px; padding:12px 5px; justify-content:space-around; }
+            .main-nav a { font-size:0.65em; }
         }
     </style>
 </head>
