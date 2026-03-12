@@ -16,9 +16,10 @@
             color: #e0e5eb;
         }
 
+        /* HEADER AJUSTÉ */
         header {
             text-align: center;
-            padding: 100px 20px;
+            padding: 40px 20px; /* Espace réduit ici */
             background: linear-gradient(135deg, #0b0c13, #1b1d26);
             border-bottom: 2px solid #00f0ff33;
             box-shadow: 0 4px 20px rgba(0,255,255,0.1);
@@ -30,7 +31,10 @@
             color: #00f0ff;
             text-shadow: 0 0 15px #00f0ff66, 0 0 25px #00fff099;
             animation: pulse 3s infinite;
+            margin: 0; /* Supprime les marges par défaut du h1 */
         }
+
+        /* Trait sous le nom supprimé */
 
         .subtitle {
             color: #00f0ff;
@@ -43,16 +47,6 @@
         @keyframes pulse {
             0%, 100% { text-shadow: 0 0 15px #00f0ff66, 0 0 25px #00fff099; }
             50% { text-shadow: 0 0 25px #00f0ff99, 0 0 40px #00fff0aa; }
-        }
-
-        header::after {
-            content: "";
-            display: block;
-            width: 120px;
-            height: 2px;
-            margin: 20px auto 0;
-            background: #00f0ff;
-            box-shadow: 0 0 10px #00f0ff;
         }
 
         .main-nav {
