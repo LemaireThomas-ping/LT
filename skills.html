@@ -16,7 +16,6 @@
             color: #e0e5eb;
         }
 
-        /* HEADER FUTURISTE */
         header {
             text-align: center;
             padding: 100px 20px;
@@ -56,7 +55,6 @@
             box-shadow: 0 0 10px #00f0ff;
         }
 
-        /* NAVIGATION */
         .main-nav {
             display: flex;
             justify-content: center;
@@ -79,18 +77,11 @@
             text-transform: lowercase;
         }
 
-        .main-nav a:hover,
-        .main-nav a.active {
+        .main-nav a:hover, .main-nav a.active {
             color: #00f0ff;
             text-shadow: 0 0 10px #00f0ff;
         }
 
-        @media (max-width:768px) {
-            .main-nav { gap:8px; padding:12px 5px; justify-content:space-around; }
-            .main-nav a { font-size:0.65em; }
-        }
-
-        /* CONTENU */
         #skills-section { 
             padding:40px 20px;
             max-width:1000px;
@@ -110,10 +101,6 @@
             grid-template-columns:repeat(2,1fr);
             gap:25px;
             margin-top:30px;
-        }
-
-        @media (max-width:768px) {
-            .skills-grid { grid-template-columns:1fr; }
         }
 
         .skill-card {
@@ -166,7 +153,6 @@
 
         .tag.blue { border-color:#00f0ff; color:#00f0ff; }
         .tag.orange { border-color:#ff9d00; color:#ff9d00; }
-        .tag.purple { border-color:#a855f7; color:#a855f7; }
 
         .status-footer {
             margin-top:15px;
@@ -197,9 +183,14 @@
             color:#444;
             font-size:0.8em;
         }
+
+        @media (max-width:768px) {
+            .main-nav { gap:8px; padding:12px 5px; justify-content:space-around; }
+            .main-nav a { font-size:0.65em; }
+            .skills-grid { grid-template-columns:1fr; }
+        }
     </style>
 </head>
-
 <body>
 
 <header>
@@ -215,26 +206,9 @@
 </nav>
 
 <div id="skills-section">
-
     <h2 class="main-title"><i class="fas fa-microchip"></i> MES COMPÉTENCES TECHNIQUES</h2>
 
     <div class="skills-grid">
-
-        <div class="skill-card">
-            <div class="card-header"><i class="fas fa-microchip"></i> SYSTÈMES DIGITAUX</div>
-            <span class="sub-group-title">Électronique & Embarqué</span>
-            <div class="tag-list">
-                <span class="tag purple">Architecture des Processeurs</span>
-                <span class="tag purple">Logique Combinatoire</span>
-                <span class="tag purple">Microcontrôleurs</span>
-                <span class="tag purple">Traitement du Signal</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: DIPLÔME ACQUIS</span>
-            </div>
-        </div>
-
         <div class="skill-card">
             <div class="card-header"><i class="fab fa-windows"></i> SYSTÈMES</div>
             <span class="sub-group-title">Microsoft & Linux</span>
@@ -265,35 +239,6 @@
         </div>
 
         <div class="skill-card">
-            <div class="card-header"><i class="fas fa-network-wired"></i> RÉSEAU</div>
-            <span class="sub-group-title">Infrastructure & Sécurité</span>
-            <div class="tag-list">
-                <span class="tag blue">VLAN</span>
-                <span class="tag blue">IPv4 Subnetting</span>
-                <span class="tag orange">VPN</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: CONFIGURATION ACTIVE</span>
-            </div>
-        </div>
-
-        <div class="skill-card">
-            <div class="card-header"><i class="fas fa-code"></i> DÉVELOPPEMENT</div>
-            <span class="sub-group-title">Langages & Scripting</span>
-            <div class="tag-list">
-                <span class="tag orange">C / C++</span>
-                <span class="tag orange">Python</span>
-                <span class="tag blue">PowerShell</span>
-                <span class="tag blue">HTML / CSS</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: DÉVELOPPEMENT ACTIF</span>
-            </div>
-        </div>
-
-        <div class="skill-card">
             <div class="card-header"><i class="fas fa-tools"></i> MAINTENANCE</div>
             <span class="sub-group-title">Matériel & Infra</span>
             <div class="tag-list">
@@ -307,6 +252,19 @@
             </div>
         </div>
 
+        <div class="skill-card">
+            <div class="card-header"><i class="fas fa-network-wired"></i> RÉSEAU</div>
+            <span class="sub-group-title">Infrastructure & Sécurité</span>
+            <div class="tag-list">
+                <span class="tag blue">VLAN</span>
+                <span class="tag blue">IPv4 Subnetting</span>
+                <span class="tag orange">VPN</span>
+            </div>
+            <div class="status-footer">
+                <div class="led"></div>
+                <span class="status-text">STATUS: CONFIGURATION ACTIVE</span>
+            </div>
+        </div>
     </div>
 </div>
 
