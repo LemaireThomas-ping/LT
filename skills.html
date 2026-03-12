@@ -4,216 +4,174 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compétences | Lemaire Thomas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        body { 
-            background: #0b0c13; 
-            color: white; 
-            margin: 0; 
-            font-family: 'Inter', sans-serif; 
+        :root {
+            --neon-blue: #00f0ff;
+            --neon-orange: #ff9d00;
+            --bg-dark: #07080c;
         }
 
-        /* --- NAVIGATION RESPONSIVE --- */
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- HEADER & NAV (image_203379 & image_20335c) --- */
+        header {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .name-glow {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            margin: 0;
+            letter-spacing: 5px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue); /* Effet image_203379 */
+        }
+
+        .subtitle {
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 15px;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+        }
+
         .main-nav {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             padding: 15px;
-            background: #07080c;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #111;
         }
 
         .main-nav a {
             color: #888;
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85em;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-
-        .main-nav a:hover, .main-nav a.active {
-            color: #00f0ff;
-            text-shadow: 0 0 10px #00f0ff;
-        }
-
-        @media (max-width: 768px) {
-            .main-nav { gap: 8px; padding: 12px 5px; justify-content: space-around; }
-            .main-nav a { font-size: 0.65em; }
-        }
-
-        /* --- CONTENU --- */
-        #skills-section { 
-            padding: 40px 20px; 
-            max-width: 1000px; 
-            margin: auto; 
-        }
-
-        h2.main-title { 
-            font-family: 'Orbitron'; 
-            border-bottom: 2px solid #00f0ff; 
-            padding-bottom: 10px; 
-            margin-bottom: 30px;
-            font-size: 1.4em;
-        }
-
-        .skills-grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 25px; 
-            margin-top: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .skills-grid { grid-template-columns: 1fr; }
-        }
-
-        .skill-card {
-            background: rgba(26, 27, 38, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            padding: 25px;
-            border-radius: 8px;
+            font-size: 0.75em;
+            text-transform: lowercase; /* Minuscules demandées */
             transition: 0.3s;
         }
 
-        .skill-card:hover { border-color: #00f0ff; transform: translateY(-3px); }
-
-        .card-header { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            margin-bottom: 20px; 
-            color: #00f0ff; 
-            font-family: 'Orbitron', sans-serif; 
+        .main-nav a.active {
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px var(--neon-blue);
         }
 
-        .sub-group-title { 
-            display: block; 
-            font-size: 0.75em; 
-            color: #555; 
-            text-transform: uppercase; 
-            font-weight: bold; 
-            margin-bottom: 10px; 
-            letter-spacing: 1px;
+        /* --- SKILLS GRID --- */
+        section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
         }
 
-        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
-        
-        .tag { 
-            background: #1a1b26; 
-            border: 1px solid #333; 
-            padding: 4px 10px; 
-            border-radius: 4px; 
-            font-size: 0.8em; 
-            color: #ccc; 
+        .category {
+            margin-bottom: 45px;
         }
 
-        .tag.highlight { border-color: #00f0ff; color: #00f0ff; }
-
-        .status-footer { 
-            margin-top: 15px; 
-            padding-top: 15px; 
-            border-top: 1px solid #1a1b26; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
+        .category-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            border-left: 3px solid var(--neon-blue);
+            padding-left: 15px;
         }
 
-        .led { width: 8px; height: 8px; border-radius: 50%; background: #27c93f; box-shadow: 0 0 8px #27c93f; }
-        .status-text { font-size: 0.7em; font-family: 'Orbitron'; color: #888; }
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
 
-        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; }
+        /* --- BADGES (image_1f5d88, image_1f5d7f, etc.) --- */
+        .badge {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            background: rgba(13, 17, 23, 0.8);
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        /* Style Bleu (Windows / Réseau) */
+        .badge-blue {
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        /* Style Orange (Debian, Ubuntu, Proxmox, VPN) */
+        .badge-orange {
+            border-color: var(--neon-orange);
+            color: var(--neon-orange);
+            text-shadow: 0 0 5px var(--neon-orange);
+        }
     </style>
 </head>
 <body>
 
-<header style="text-align: center; padding: 40px 20px;">
-    <h1>LEMAIRE THOMAS</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
+<header>
+    <h1 class="name-glow">LEMAIRE THOMAS</h1>
+    <p class="subtitle">> TECHNICIEN SYSTÈMES & RÉSEAUX</p>
 </header>
 
 <nav class="main-nav">
-  <a href="index.html">À PROPOS</a>
-  <a href="projects.html">PROJETS</a>
-  <a href="skills.html" class="active">COMPÉTENCES</a>
-  <a href="contact.html">CONTACT</a>
+    <a href="index.html">à propos</a>
+    <a href="projects.html">projets</a>
+    <a href="skills.html" class="active">compétences</a>
+    <a href="contact.html">contact</a>
 </nav>
 
-<div id="skills-section">
-    <h2 class="main-title"><i class="fas fa-microchip"></i> MES COMPÉTENCES TECHNIQUES</h2>
-
-    <div class="skills-grid">
-        
-        <div class="skill-card">
-            <div class="card-header"><i class="fab fa-windows"></i> SYSTÈMES</div>
-            <span class="sub-group-title">Microsoft & Linux</span>
-            <div class="tag-list">
-                <span class="tag highlight">Windows Server</span>
-                <span class="tag highlight">Active Directory</span>
-                <span class="tag">GPO / DNS / DHCP</span>
-                <span class="tag">Debian</span>
-                <span class="tag">Ubuntu</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: OPÉRATIONNEL</span>
-            </div>
+<section>
+    <div class="category">
+        <h2 class="category-title">SYSTEMES</h2>
+        <div class="skills-list">
+            <span class="badge badge-blue">Windows Server</span>
+            <span class="badge badge-blue">Active Directory</span>
+            <span class="badge badge-blue">GPO</span>
+            <span class="badge badge-blue">DNS</span>
+            <span class="badge badge-blue">DHCP</span>
+            <span class="badge badge-orange">Debian</span>
+            <span class="badge badge-orange">Ubuntu</span>
         </div>
-
-        <div class="skill-card">
-            <div class="card-header"><i class="fas fa-layer-group"></i> VIRTUALISATION</div>
-            <span class="sub-group-title">Environnements de Lab</span>
-            <div class="tag-list">
-                <span class="tag highlight">VMware ESXi</span>
-                <span class="tag highlight">vCenter</span>
-                <span class="tag">Hyper-V</span>
-                <span class="tag">Proxmox</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: OPÉRATIONNEL</span>
-            </div>
-        </div>
-
-        <div class="skill-card">
-            <div class="card-header"><i class="fas fa-network-wired"></i> RÉSEAU</div>
-            <span class="sub-group-title">Infrastructure & Flux</span>
-            <div class="tag-list">
-                <span class="tag highlight">Modèle OSI</span>
-                <span class="tag">VLAN</span>
-                <span class="tag">IPv4 / Subnetting</span>
-                <span class="tag">VPN</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: CONFIGURATION ACTIVE</span>
-            </div>
-        </div>
-
-        <div class="skill-card">
-            <div class="card-header"><i class="fas fa-tools"></i> MAINTENANCE</div>
-            <span class="sub-group-title">Bac Pro SN</span>
-            <div class="tag-list">
-                <span class="tag highlight">Diagnostic Hardware</span>
-                <span class="tag">Assemblage PC/Serveur</span>
-                <span class="tag">Câblage RJ45</span>
-                <span class="tag">Dépannage</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: FONDAMENTAUX ACQUIS</span>
-            </div>
-        </div>
-
     </div>
-</div>
 
-<footer>© 2026 Lemaire Thomas | Portfolio Technicien Numérique</footer>
+    <div class="category">
+        <h2 class="category-title">VIRTUALISATION</h2>
+        <div class="skills-list">
+            <span class="badge badge-orange">Proxmox</span>
+            <span class="badge badge-blue">Hyper-V</span>
+        </div>
+    </div>
 
+    <div class="category">
+        <h2 class="category-title">INFRASTRUCTURE</h2>
+        <div class="skills-list">
+            <span class="badge badge-blue">Assemblage PC / Serveur</span>
+            <span class="badge badge-blue">Câble RJ45</span>
+            <span class="badge badge-blue">Dépannage</span>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-title">RESEAUX</h2>
+        <div class="skills-list">
+            <span class="badge badge-blue">VLAN</span>
+            <span class="badge badge-blue">IPv4 Subnetting</span>
+            <span class="badge badge-orange">VPN</span>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
 </body>
 </html>
