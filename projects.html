@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets Compacts | Lemaire Thomas</title>
+    <title>Projets | Lemaire Thomas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* --- NAVIGATION (Inchangé) --- */
+        /* --- NAVIGATION --- */
         .main-nav {
             display: flex; justify-content: center; gap: 20px; padding: 15px;
             background: #07080c; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333;
@@ -20,113 +20,120 @@
         }
         .main-nav a:hover, .main-nav a.active { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
 
-        @media (max-width: 768px) {
-            .main-nav { gap: 8px; padding: 12px 5px; justify-content: space-around; }
-            .main-nav a { font-size: 0.65em; }
-        }
-
-        /* --- FILTRES (Inchangé) --- */
-        .filter-container {
-            display: flex; justify-content: center; gap: 10px; margin: 40px 0; flex-wrap: wrap;
-        }
-        .filter-btn {
-            background: transparent; border: 1px solid #333; color: #888; padding: 10px 20px;
-            font-family: 'Orbitron', sans-serif; font-size: 0.75em; cursor: pointer;
-            transition: 0.3s; border-radius: 4px; text-transform: uppercase;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            border-color: #00f0ff; color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
-            background: rgba(0, 240, 255, 0.05);
-        }
-
         /* --- SECTION PROJETS --- */
         section { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
         h2 { font-family: 'Orbitron', sans-serif; color: #00f0ff; border-left: 4px solid #00f0ff; padding-left: 20px; margin-bottom: 40px; font-size: 1.5em; letter-spacing: 2px; }
 
         #projects-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px;
         }
 
+        /* --- CARTE COMPACTE --- */
         .project-card {
-            background: rgba(26, 27, 38, 0.8); border: 1px solid rgba(0, 240, 255, 0.1);
-            /* --- MODIFICATION : Réduction du padding --- */
-            padding: 18px; border-radius: 12px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; flex-direction: column; justify-content: space-between;
-            position: relative; overflow: hidden;
+            background: #0d1117; 
+            border: 1px solid #161b22;
+            padding: 12px; 
+            border-radius: 4px; 
+            transition: 0.3s;
+            display: flex; 
+            flex-direction: column;
+            position: relative;
         }
         .project-card:hover {
-            border-color: #00f0ff; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 240, 255, 0.12);
-            background: rgba(26, 27, 38, 1);
+            border-color: #00f0ff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
         }
 
-        /* --- IMAGES REDIMENSIONNÉES (Plus Petites) --- */
+        /* --- IMAGE BANNIÈRE FORCÉE (21/7) --- */
         .project-img {
             width: 100%;
-            /* --- MODIFICATION : Aspect ratio réduit --- */
-            aspect-ratio: 21 / 9; /* Beaucoup plus large, moins haute */
+            aspect-ratio: 21 / 7; 
             object-fit: cover;
-            border-radius: 8px;
-            /* --- MODIFICATION : Marge réduite --- */
-            margin-bottom: 15px;
-            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 2px;
+            margin-bottom: 10px;
+            border: 1px solid #30363d;
             background: #07080c;
+        }
+
+        /* --- HEADER CARTE --- */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .card-title {
+            margin: 0;
+            font-family: 'Orbitron';
+            font-size: 0.75em;
+            letter-spacing: 1px;
+            color: #eee;
+        }
+        .extension-badge {
+            font-size: 0.55em;
+            font-family: 'Orbitron';
+            color: #00f0ff;
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            padding: 1px 5px;
+            border-radius: 2px;
+            font-weight: bold;
         }
 
         /* --- ACCORDÉON DESCRIPTION --- */
         .desc-details {
-            /* --- MODIFICATION : Marges réduites --- */
-            margin: 10px 0;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 4px;
-            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid #30363d;
+            background: #090c10;
+            margin-bottom: 10px;
+            border-radius: 2px;
         }
         .desc-summary {
             list-style: none;
-            /* --- MODIFICATION : Padding réduit --- */
-            padding: 8px; cursor: pointer;
-            font-family: 'Orbitron'; font-size: 0.7em; color: #00f0ff;
-            display: flex; justify-content: space-between; align-items: center;
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-family: 'Orbitron';
+            font-size: 0.6em;
+            color: #00f0ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .desc-summary:hover { background: rgba(0, 240, 255, 0.1); }
         .desc-summary::-webkit-details-marker { display: none; }
         
         .desc-content {
-            /* --- MODIFICATION : Padding réduit et taille police --- */
-            padding: 10px; font-size: 0.8em; color: #aaa;
-            border-top: 1px solid rgba(0, 240, 255, 0.1); line-height: 1.5;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .extension-badge {
-            background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 10px; border-radius: 4px;
-            font-size: 11px; font-family: 'Orbitron'; border: 1px solid rgba(0, 240, 255, 0.3); font-weight: bold;
-        }
-
-        .btn-open {
-            margin-top: 10px; display: block; text-align: center;
-            /* --- MODIFICATION : Padding réduit et taille police --- */
             padding: 10px;
-            background: transparent; color: #00f0ff; border: 1px solid #00f0ff;
-            text-decoration: none; font-family: 'Orbitron'; font-size: 0.8em; transition: 0.3s;
-            border-radius: 4px; letter-spacing: 1px; font-weight: 600;
+            font-size: 0.75em;
+            color: #8b949e;
+            border-top: 1px solid #30363d;
+            line-height: 1.4;
         }
-        .btn-open:hover { background: #00f0ff; color: #0b0c13; box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); }
 
-        footer { border-top: 1px solid #1a1b26; margin-top: 60px; }
+        /* --- BOUTON TÉLÉCHARGER --- */
+        .btn-download {
+            text-align: center;
+            padding: 10px;
+            background: transparent;
+            color: #00f0ff;
+            border: 1px solid #00f0ff;
+            text-decoration: none;
+            font-family: 'Orbitron';
+            font-size: 0.7em;
+            transition: 0.3s;
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .btn-download:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        footer { border-top: 1px solid #1a1b26; margin-top: 60px; text-align: center; padding: 40px; color: #444; font-size: 0.8em; font-family: 'Orbitron'; }
     </style>
 </head>
 <body>
-
-<header style="text-align: center; padding: 60px 20px; background: radial-gradient(circle at center, rgba(0,240,255,0.05) 0%, transparent 70%);">
-    <h1 style="font-family: 'Orbitron'; font-size: 2.5em; margin: 0; letter-spacing: 4px;">LEMAIRE THOMAS</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 15px; font-size: 0.9em; opacity: 0.8;">&gt; ACCÈS_LOG_PROJETS_SÉCURISÉ</p>
-</header>
 
 <nav class="main-nav">
   <a href="index.html">À propos</a>
@@ -138,22 +145,11 @@
 <section>
     <h2><i class="fas fa-terminal" style="margin-right: 15px;"></i>RÉPERTOIRE_DES_DOCS</h2>
 
-    <div class="filter-container">
-        <button class="filter-btn active" onclick="filterProjects('all')">Tous les Labs</button>
-        <button class="filter-btn" onclick="filterProjects('windows')"><i class="fab fa-windows"></i> Windows</button>
-        <button class="filter-btn" onclick="filterProjects('linux')"><i class="fab fa-linux"></i> Linux</button>
-        <button class="filter-btn" onclick="filterProjects('reseaux')"><i class="fas fa-network-wired"></i> Réseaux</button>
-    </div>
-
     <div id="projects-container">
-        <div style="grid-column: 1/-1; text-align: center; padding: 50px;">
-            <i class="fas fa-circle-notch fa-spin" style="font-size: 2em; color: #00f0ff; margin-bottom: 20px;"></i>
-            <p style="font-family: 'Orbitron'; color: #888;">INITIALISATION_DU_FLUX_API...</p>
         </div>
-    </div>
 </section>
 
-<footer><p style="text-align: center; padding: 40px; color: #444; font-size: 0.8em; font-family: 'Orbitron';">© 2026 Lemaire Thomas | Système d'administration GitHub v2.0</p></footer>
+<footer>© 2026 Lemaire Thomas | Système d'administration GitHub v2.0</footer>
 
 <script>
     let allFiles = []; 
@@ -165,13 +161,13 @@
         try {
             const response = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/main/data.json?t=${Date.now()}`);
             if (!response.ok) {
-                container.innerHTML = "<div style='grid-column: 1/-1; text-align:center; padding:40px;'><p style='color:#888; font-family:Orbitron;'>AUCUNE_DONNÉE_DÉTECTÉE. VEUILLEZ_UPLOADER_VIA_ADMIN.</p></div>";
+                container.innerHTML = "<p style='color:#888; font-family:Orbitron; text-align:center; grid-column:1/-1;'>AUCUNE_DONNÉE_DÉTECTÉE.</p>";
                 return;
             }
             allFiles = await response.json();
             renderProjects(allFiles);
         } catch (e) { 
-            container.innerHTML = "<div style='grid-column: 1/-1; text-align:center; padding:40px;'><p style='color:#ff4444; font-family:Orbitron;'>ERREUR_FLUX_SYSTÈME : CONNEXION_REFUSÉE</p></div>"; 
+            container.innerHTML = "<p style='color:#ff4444; font-family:Orbitron; text-align:center; grid-column:1/-1;'>ERREUR_FLUX_SYSTÈME</p>"; 
         }
     }
 
@@ -181,22 +177,16 @@
         const username = "LemaireThomas-ping";
         const repo = "LT";
 
-        if (filesToDisplay.length === 0) {
-            container.innerHTML = "<p style='text-align:center; color:#555; width:100%; grid-column: 1/-1;'>Aucun fichier trouvé pour cette catégorie.</p>";
-            return;
-        }
-
         [...filesToDisplay].reverse().forEach(file => {
             const card = document.createElement('div');
             card.className = 'project-card';
             
             const extension = file.name.split('.').pop().toUpperCase();
-            const imgTag = file.image ? `<img src="${file.image}" class="project-img" alt="${file.title}">` : '';
             
             card.innerHTML = `
-                ${imgTag}
-                <div style="display:flex; justify-content:space-between; align-items:start; gap: 15px;">
-                    <h3 style="margin:0; font-size: 0.9em; font-family: 'Orbitron'; color:#eee; line-height:1.3;">${file.title.toUpperCase()}</h3>
+                ${file.image ? `<img src="${file.image}" class="project-img">` : ''}
+                <div class="card-header">
+                    <h3 class="card-title">${file.title.toUpperCase()}</h3>
                     <span class="extension-badge">${extension}</span>
                 </div>
                 
@@ -209,22 +199,11 @@
                     </div>
                 </details>
 
-                <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-open">OUVRIR_LE_LOG <i class="fas fa-external-link-alt" style="font-size:0.8em; margin-left:5px;"></i></a>`;
+                <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-download">
+                    TÉLÉCHARGER LE COURS <i class="fas fa-download" style="margin-left:8px; font-size:0.9em;"></i>
+                </a>`;
             container.appendChild(card);
         });
-    }
-
-    function filterProjects(category) {
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-            const btnText = btn.innerText.toLowerCase();
-            if(btnText.includes(category) || (category === 'all' && btnText.includes('tous'))) {
-                btn.classList.add('active');
-            }
-        });
-
-        const filtered = (category === 'all') ? allFiles : allFiles.filter(f => f.category === category);
-        renderProjects(filtered);
     }
 
     fetchProjects();
