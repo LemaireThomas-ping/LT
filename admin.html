@@ -1,92 +1,86 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Console Admin | Lemaire Thomas</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
+async function uploadToGithub() {
+    const token = document.getElementById('gh-token').value;
+    const fileInput = document.getElementById('file-input');
+    const msg = document.getElementById('commit-msg').value || "Nouveau projet";
+    const status = document.getElementById('status');
 
-<section id="admin-console">
-    <h2><i class="fas fa-terminal"></i> Console d'Upload sécurisée</h2>
-    
-    <div class="card">
-        <p><i class="fas fa-key"></i> 1. Authentification</p>
-        <input type="password" id="gh-token" placeholder="Colle ton Fine-grained Token ici..." style="width: 100%; padding: 10px; margin-bottom: 20px;">
-        
-        <p><i class="fas fa-file-upload"></i> 2. Sélection du document (PDF ou Image)</p>
-        <input type="file" id="file-input" style="margin-bottom: 20px;">
-        
-        <p><i class="fas fa-pen"></i> 3. Description rapide</p>
-        <input type="text" id="commit-msg" placeholder="Ex: Tuto Installation AD DS" style="width: 100%; padding: 10px; margin-bottom: 20px;">
-        
-        <button onclick="uploadToGithub()" class="btn-download" style="width: 100%; padding: 15px; background: #00f0ff; color: #0b0c13; border: none; font-weight: bold; cursor: pointer;">
-            <i class="fas fa-cloud-upload-alt"></i> ENVOYER SUR LE REPO
-        </button>
-        
-        <p id="status" style="margin-top: 20px; font-weight: bold; text-align: center;"></p>
-    </div>
-</section>
-
-<script>
-    async function uploadToGithub() {
-        const token = document.getElementById('gh-token').value;
-        const fileInput = document.getElementById('file-input');
-        const msg = document.getElementById('commit-msg').value || "Upload via Admin Console";
-        const status = document.getElementById('status');
-
-        if (!token || !fileInput.files[0]) {
-            status.style.color = "#ff4444";
-            status.innerText = "❌ Erreur : Token ou fichier manquant.";
-            return;
-        }
-
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-
-        reader.onload = async function() {
-            const content = reader.result.split(',')[1];
-            // On envoie dans le dossier docs/
-            const path = `docs/${file.name}`; 
-            
-            // REMPLACE CES DEUX LIGNES PAR TES INFOS GITHUB
-            const username = "LemaireThomas-ping"; 
-            const repo = "LT";
-
-            status.style.color = "#00f0ff";
-            status.innerText = "⏳ Upload en cours vers GitHub...";
-
-            try {
-                const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: msg,
-                        content: content
-                    })
-                });
-
-                if (response.ok) {
-                    status.style.color = "#00ff00";
-                    status.innerText = "✅ Succès ! Ton fichier est sur le repo. Le site se mettra à jour d'ici 1 à 2 minutes.";
-                } else {
-                    const errorData = await response.json();
-                    status.style.color = "#ff4444";
-                    status.innerText = "❌ Erreur API : " + errorData.message;
-                }
-            } catch (err) {
-                status.style.color = "#ff4444";
-                status.innerText = "❌ Erreur réseau.";
-            }
-        };
-        reader.readAsDataURL(file);
+    if (!token || !fileInput.files[0]) {
+        status.style.color = "#ff4444";
+        status.innerText = "❌ Erreur : Token ou fichier manquant.";
+        return;
     }
-</script>
 
-</body>
-</html>
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    const username = "LemaireThomas-ping"; 
+    const repo = "LT";
+
+    reader.onload = async function() {
+        const content = reader.result.split(',')[1];
+        const path = `docs/${file.name}`; 
+
+        status.style.color = "#00f0ff";
+        status.innerText = "⏳ Phase 1 : Upload du fichier...";
+
+        try {
+            // --- 1. UPLOAD DU FICHIER ---
+            const fileResponse = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`, {
+                method: 'PUT',
+                headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: `Upload: ${file.name}`, content: content })
+            });
+
+            if (!fileResponse.ok) throw new Error("Échec upload fichier");
+
+            // --- 2. MISE À JOUR DU DATA.JSON (AUTOMATISATION) ---
+            status.innerText = "⏳ Phase 2 : Mise à jour de la base de données...";
+            
+            // On récupère le data.json actuel
+            const getJson = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
+                headers: { 'Authorization': `token ${token}` }
+            });
+            const jsonData = await getJson.json();
+            const currentProjects = JSON.parse(atob(jsonData.content));
+
+            // On ajoute le nouveau projet à la liste
+            const newEntry = {
+                title: file.name.split('.')[0].replace(/-/g, ' '),
+                description: msg,
+                link: `https://raw.githubusercontent.com/${username}/${repo}/main/${path}`,
+                category: detectCategory(file.name),
+                date: new Date().toLocaleDateString()
+            };
+            
+            currentProjects.push(newEntry);
+
+            // On renvoie le data.json mis à jour
+            await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
+                method: 'PUT',
+                headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: `Update data.json: add ${file.name}`,
+                    content: btoa(JSON.stringify(currentProjects, null, 2)),
+                    sha: jsonData.sha // Obligatoire pour mettre à jour un fichier existant
+                })
+            });
+
+            status.style.color = "#00ff00";
+            status.innerText = "✅ Succès total ! Fichier envoyé et base de données mise à jour.";
+
+        } catch (err) {
+            status.style.color = "#ff4444";
+            status.innerText = "❌ Erreur : " + err.message;
+        }
+    };
+
+    reader.readAsDataURL(file);
+}
+
+// Fonction pour deviner la catégorie
+function detectCategory(name) {
+    const n = name.toLowerCase();
+    if (n.includes('win') || n.includes('ad')) return 'windows';
+    if (n.includes('linux') || n.includes('debian') || n.includes('zabbix')) return 'linux';
+    if (n.includes('cisco') || n.includes('vlan') || n.includes('fortinet')) return 'reseau';
+    return 'other';
+}
