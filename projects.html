@@ -4,247 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projets | Lemaire Thomas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --neon-blue: #00f0ff;
-            --bg-dark: #07080c;
-            --card-bg: #0d1117;
-            --border-color: #161b22;
-        }
+        /* --- STYLE DE BASE (RETOUR À L'ANCIEN) --- */
+        body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
+        
+        header { text-align: center; padding: 40px 20px; }
+        header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5em; margin: 0; letter-spacing: 4px; }
+        header p { color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* --- HEADER AVEC GLOW (Image 203379) --- */
-        header {
-            padding: 50px 20px 30px;
-            text-align: center;
-        }
-
-        .name-glow {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.2em;
-            margin: 0;
-            letter-spacing: 5px;
-            color: var(--neon-blue);
-            text-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
-        }
-
-        .subtitle {
-            color: var(--neon-blue);
-            font-family: 'Orbitron', sans-serif;
-            margin-top: 15px;
-            font-size: 0.9em;
-            letter-spacing: 1px;
-        }
-
-        /* --- NAVIGATION (Image 203379) --- */
         .main-nav {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            padding: 20px;
-            border-bottom: 1px solid #111;
+            gap: 20px;
+            padding: 15px;
+            background: #07080c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
         }
-
         .main-nav a {
             color: #888;
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.75em;
-            text-transform: uppercase;
+            font-size: 0.85em;
             transition: 0.3s;
+            white-space: nowrap;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
         }
 
-        .main-nav a.active {
-            color: var(--neon-blue);
-            text-shadow: 0 0 8px var(--neon-blue);
-            border-bottom: 2px solid var(--neon-blue);
-            padding-bottom: 5px;
-        }
-
-        /* --- CONTENU --- */
-        section {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-blue);
-            font-size: 1.4em;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* --- FILTRES (Image 204add) --- */
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
-
+        /* --- FILTRES --- */
+        .filter-container { display: flex; justify-content: center; gap: 12px; margin: 40px 0; flex-wrap: wrap; }
         .filter-btn {
-            background: transparent;
-            border: 1px solid #222;
-            color: #666;
-            padding: 8px 16px;
-            font-family: 'Orbitron';
-            font-size: 0.65em;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
+            background: transparent; border: 1px solid #333; color: #888; padding: 10px 20px;
+            font-family: 'Orbitron'; font-size: 0.7em; cursor: pointer; border-radius: 4px; transition: 0.3s;
+            display: flex; align-items: center; gap: 8px; text-transform: uppercase;
+        }
+        .filter-btn:hover, .filter-btn.active { border-color: #00f0ff; color: #00f0ff; background: rgba(0, 240, 255, 0.05); }
+
+        /* --- PROJETS --- */
+        section { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .section-title { font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 25px; border-left: 3px solid #00f0ff; padding-left: 15px; }
+
+        #projects-container { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; 
         }
 
-        .filter-btn.active {
-            border-color: var(--neon-blue);
-            color: var(--neon-blue);
-        }
-
-        /* --- CARTE PROJET LARGE (Image 203f5d / 204add) --- */
         .project-card {
-            background: #090c10;
-            border: 1px solid #1b2129;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 40px;
+            background: rgba(26, 27, 38, 0.9); border: 1px solid rgba(0, 240, 255, 0.1); padding: 15px;
+            border-radius: 8px; transition: 0.3s; display: flex; flex-direction: column;
         }
+        .project-card:hover { border-color: #00f0ff; transform: translateY(-5px); }
 
         .project-img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            display: block;
+            width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 15px; border: 1px solid #333;
         }
 
-        .card-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .card-title { margin: 0; font-family: 'Orbitron'; font-size: 0.8em; color: #eee; }
+        .badge { font-size: 0.6em; color: #00f0ff; border: 1px solid #00f0ff; padding: 2px 6px; font-family: 'Orbitron'; }
 
-        .card-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85em;
-            letter-spacing: 1px;
-            margin: 0;
-        }
+        /* ACCORDÉON */
+        .desc-details { border: 1px solid #333; background: #0b0c13; margin-bottom: 15px; border-radius: 4px; }
+        .desc-summary { padding: 10px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.65em; color: #00f0ff; display: flex; justify-content: space-between; }
+        .desc-content { padding: 10px; font-size: 0.8em; color: #888; border-top: 1px solid #333; }
 
-        .badge-type {
-            font-family: 'Orbitron';
-            font-size: 0.6em;
-            color: var(--neon-blue);
-            border: 1px solid var(--neon-blue);
-            padding: 2px 6px;
+        /* BOUTON */
+        .btn-action {
+            text-align: center; padding: 12px; background: transparent; color: #00f0ff; border: 1px solid #00f0ff;
+            text-decoration: none; font-family: 'Orbitron'; font-size: 0.75em; border-radius: 4px; transition: 0.3s;
         }
+        .btn-action:hover { background: #00f0ff; color: #0b0c13; box-shadow: 0 0 20px #00f0ff; }
 
-        /* ACCORDÉON DESCRIPTION */
-        .desc-box {
-            border: 1px solid #1b2129;
-            background: #0d1117;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-
-        .desc-header {
-            padding: 10px 15px;
-            font-family: 'Orbitron';
-            font-size: 0.65em;
-            color: var(--neon-blue);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* BOUTON OUVRIR_LE_LOG */
-        .btn-log {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--neon-blue);
-            background: transparent;
-            color: var(--neon-blue);
-            text-align: center;
-            text-decoration: none;
-            font-family: 'Orbitron';
-            font-size: 0.8em;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
-
-        .btn-log:hover {
-            background: rgba(0, 240, 255, 0.1);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            font-family: 'Orbitron';
-            font-size: 0.6em;
-            color: #333;
-        }
+        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; margin-top: 60px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 class="name-glow">LEMAIRE THOMAS</h1>
-    <p class="subtitle">Technicien Systèmes & Réseaux</p>
+    <h1>LEMAIRE THOMAS</h1>
+    <p>Technicien Systèmes & Réseaux</p>
 </header>
 
 <nav class="main-nav">
-    <a href="index.html">À propos</a>
-    <a href="projects.html" class="active">Projets</a>
-    <a href="skills.html">Compétences</a>
-    <a href="contact.html">Contact</a>
+  <a href="index.html">À propos</a>
+  <a href="projects.html" class="active">Projets</a>
+  <a href="skills.html">Compétences</a>
+  <a href="contact.html">Contact</a>
 </nav>
 
 <section>
-    <h2 class="section-title">| > RÉPERTOIRE_DES_DOCS</h2>
+    <h2 class="section-title">|_> RÉPERTOIRE_DES_DOCS</h2>
 
     <div class="filter-container">
-        <button class="filter-btn active">TOUS LES LABS</button>
-        <button class="filter-btn"><i class="fab fa-windows"></i> WINDOWS</button>
-        <button class="filter-btn"><i class="fab fa-linux"></i> LINUX</button>
-        <button class="filter-btn"><i class="fas fa-network-wired"></i> RÉSEAUX</button>
+        <button class="filter-btn active" onclick="filterProjects('all')">TOUS LES LABS</button>
+        <button class="filter-btn" onclick="filterProjects('windows')"><i class="fab fa-windows"></i> WINDOWS</button>
+        <button class="filter-btn" onclick="filterProjects('linux')"><i class="fab fa-linux"></i> LINUX</button>
+        <button class="filter-btn" onclick="filterProjects('reseaux')"><i class="fas fa-network-wired"></i> RÉSEAUX</button>
     </div>
 
-    <div id="projects-container">
-        <div class="project-card">
-            <img src="https://raw.githubusercontent.com/LemaireThomas-ping/LT/main/img/vlan.png" class="project-img" alt="VLAN">
-            
-            <div class="card-info">
-                <h3 class="card-title">CONFIGURATION DU ROUTAGE INTER-VLAN</h3>
-                <span class="badge-type">DOCX</span>
-            </div>
-
-            <div class="desc-box">
-                <div class="desc-header">
-                    <span>DESCRIPTION</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
-
-            <a href="#" class="btn-log">OUVRIR_LE_LOG <i class="fas fa-external-link-alt" style="font-size: 0.8em;"></i></a>
-        </div>
-    </div>
+    <div id="projects-container"></div>
 </section>
 
-<footer>© 2026 Lemaire Thomas | Système d'administration GitHub v2.0</footer>
+<footer>© 2026 Lemaire Thomas | Portfolio IT</footer>
 
+<script>
+    let allFiles = [];
+    async function fetchData() {
+        try {
+            const resp = await fetch(`https://raw.githubusercontent.com/LemaireThomas-ping/LT/main/data.json?t=${Date.now()}`);
+            allFiles = await resp.json();
+            render(allFiles);
+        } catch (e) { document.getElementById('projects-container').innerHTML = "<p>Erreur flux...</p>"; }
+    }
+
+    function render(data) {
+        document.getElementById('projects-container').innerHTML = data.reverse().map(file => `
+            <div class="project-card">
+                ${file.image ? `<img src="${file.image}" class="project-img">` : ''}
+                <div class="card-header">
+                    <h3 class="card-title">${file.title.toUpperCase()}</h3>
+                    <span class="badge">${file.name.split('.').pop().toUpperCase()}</span>
+                </div>
+                <details class="desc-details">
+                    <summary class="desc-summary">DESCRIPTION <i class="fas fa-chevron-down"></i></summary>
+                    <div class="desc-content">${file.description}</div>
+                </details>
+                <a href="https://raw.githubusercontent.com/LemaireThomas-ping/LT/main/docs/${file.name}" target="_blank" class="btn-action">
+                    OUVRIR LE COURS
+                </a>
+            </div>
+        `).join('');
+    }
+
+    function filterProjects(cat) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        render(cat === 'all' ? allFiles : allFiles.filter(f => f.category === cat));
+    }
+    fetchData();
+</script>
 </body>
 </html>
