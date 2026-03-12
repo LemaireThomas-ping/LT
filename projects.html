@@ -6,7 +6,6 @@
     <title>Projets | Lemaire Thomas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
         body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
@@ -54,14 +53,47 @@
             display: flex; flex-direction: column; justify-content: space-between;
             position: relative; overflow: hidden;
         }
-        .project-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, #00f0ff, transparent); transform: translateX(-100%); transition: 0.5s;
-        }
-        .project-card:hover::before { transform: translateX(100%); }
         .project-card:hover {
             border-color: #00f0ff; transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
             background: rgba(26, 27, 38, 1);
+        }
+
+        /* --- IMAGES REDIMENSIONNÉES --- */
+        .project-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            background: #07080c;
+        }
+
+        /* --- ACCORDÉON DESCRIPTION --- */
+        .desc-details {
+            margin: 15px 0;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .desc-summary {
+            list-style: none; padding: 10px; cursor: pointer;
+            font-family: 'Orbitron'; font-size: 0.7em; color: #00f0ff;
+            display: flex; justify-content: space-between; align-items: center;
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+        }
+        .desc-summary:hover { background: rgba(0, 240, 255, 0.1); }
+        .desc-summary::-webkit-details-marker { display: none; }
+        
+        .desc-content {
+            padding: 12px; font-size: 0.85em; color: #aaa;
+            border-top: 1px solid rgba(0, 240, 255, 0.1); line-height: 1.6;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .extension-badge {
@@ -70,7 +102,7 @@
         }
 
         .btn-open {
-            margin-top: 25px; display: block; text-align: center; padding: 12px;
+            margin-top: 10px; display: block; text-align: center; padding: 12px;
             background: transparent; color: #00f0ff; border: 1px solid #00f0ff;
             text-decoration: none; font-family: 'Orbitron'; font-size: 0.85em; transition: 0.3s;
             border-radius: 4px; letter-spacing: 1px; font-weight: 600;
@@ -150,7 +182,7 @@
             card.className = 'project-card';
             
             const extension = file.name.split('.').pop().toUpperCase();
-            const imgTag = file.image ? `<img src="${file.image}" style="width:100%; height:170px; object-fit:cover; border-radius:8px; margin-bottom:20px; border:1px solid rgba(0,240,255,0.1);">` : '';
+            const imgTag = file.image ? `<img src="${file.image}" class="project-img" alt="${file.title}">` : '';
             
             card.innerHTML = `
                 ${imgTag}
@@ -158,8 +190,17 @@
                     <h3 style="margin:0; font-size: 0.95em; font-family: 'Orbitron'; color:#eee; line-height:1.4;">${file.title.toUpperCase()}</h3>
                     <span class="extension-badge">${extension}</span>
                 </div>
-                <p style="font-size: 0.85em; color: #aaa; margin-top: 15px; font-family: 'Inter'; line-height:1.6; flex-grow:1;">${file.description}</p>
-                <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-open">OuvRIR_LE_LOG <i class="fas fa-external-link-alt" style="font-size:0.8em; margin-left:5px;"></i></a>`;
+                
+                <details class="desc-details">
+                    <summary class="desc-summary">
+                        DESCRIPTION <i class="fas fa-chevron-down" style="font-size:0.8em;"></i>
+                    </summary>
+                    <div class="desc-content">
+                        ${file.description}
+                    </div>
+                </details>
+
+                <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-open">OUVRIR_LE_LOG <i class="fas fa-external-link-alt" style="font-size:0.8em; margin-left:5px;"></i></a>`;
             container.appendChild(card);
         });
     }
