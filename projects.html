@@ -1,143 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets | Lemaire Thomas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
-
-        /* --- NAVIGATION --- */
-        .main-nav {
-            display: flex; justify-content: center; gap: 20px; padding: 15px;
-            background: #07080c; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333;
-        }
-        .main-nav a {
-            color: #888; text-decoration: none; font-family: 'Orbitron', sans-serif;
-            font-size: 0.85em; transition: 0.3s; white-space: nowrap;
-        }
-        .main-nav a:hover, .main-nav a.active { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
-
-        @media (max-width: 768px) {
-            .main-nav { gap: 8px; padding: 12px 5px; justify-content: space-around; }
-            .main-nav a { font-size: 0.65em; }
-        }
-
-        /* --- FILTRES --- */
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: transparent;
-            border: 1px solid #333;
-            color: #888;
-            padding: 8px 16px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7em;
-            cursor: pointer;
-            transition: 0.3s;
-            border-radius: 4px;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            border-color: #00f0ff;
-            color: #00f0ff;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
-        }
-
-        /* --- SECTION PROJETS --- */
-        section { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-        h2 { font-family: 'Orbitron', sans-serif; color: #00f0ff; border-left: 3px solid #00f0ff; padding-left: 15px; margin-bottom: 30px; }
-
-        #projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card {
-            background: rgba(26, 27, 38, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .project-card:hover {
-            border-color: #00f0ff;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
-        }
-
-        .extension-badge {
-            background: rgba(0, 240, 255, 0.1);
-            color: #00f0ff;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-family: 'Orbitron';
-            border: 1px solid rgba(0, 240, 255, 0.3);
-        }
-
-        .btn-open {
-            margin-top: 20px;
-            display: block;
-            text-align: center;
-            padding: 10px;
-            background: transparent;
-            color: #00f0ff;
-            border: 1px solid #00f0ff;
-            text-decoration: none;
-            font-family: 'Orbitron';
-            font-size: 0.8em;
-            transition: 0.3s;
-        }
-
-        .btn-open:hover { background: #00f0ff; color: #0b0c13; }
-    </style>
-</head>
-<body>
-
-<header style="text-align: center; padding: 40px 20px;">
-    <h1>LEMAIRE THOMAS</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Mes Labs & Tutoriels</p>
-</header>
-
-<nav class="main-nav">
-  <a href="index.html">À propos</a>
-  <a href="projects.html" class="active">Projets</a>
-  <a href="skills.html">Compétences</a>
-  <a href="contact.html">Contact</a>
-</nav>
-
-<section>
-    <h2><i class="fas fa-terminal"></i> RÉPERTOIRE_DES_DOCS</h2>
-
-    <div class="filter-container">
-        <button class="filter-btn active" onclick="filterProjects('all')">TOUS</button>
-        <button class="filter-btn" onclick="filterProjects('windows')">WINDOWS</button>
-        <button class="filter-btn" onclick="filterProjects('linux')">LINUX</button>
-        <button class="filter-btn" onclick="filterProjects('reseaux')">RÉSEAUX</button>
-    </div>
-
-    <div id="projects-container">
-        <p style="text-align:center; color: #888; font-family: 'Orbitron';">Initialisation du flux API...</p>
-    </div>
-</section>
-
-<footer><p style="text-align: center; padding: 40px; color: #444; font-size: 0.8em;">© 2026 Lemaire Thomas | Accès GitHub sécurisé</p></footer>
-
 <script>
     let allFiles = []; // Stockage global pour le filtrage
 
@@ -146,13 +6,12 @@
         const repo = "LT";
         const container = document.getElementById('projects-container');
         try {
-            const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/docs`);
-            const files = await response.json();
+            // On récupère les données depuis le fichier data.json qui contient tes descriptions
+            const response = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/main/data.json?t=${Date.now()}`);
             
-            if (!Array.isArray(files)) throw new Error("Format invalide");
+            if (!response.ok) throw new Error("Base de données introuvable");
 
-            // Filtrer pour exclure le fichier tuteur et ne garder que les fichiers
-            allFiles = files.filter(f => f.name !== "dossiertuto.txt" && f.type === "file");
+            allFiles = await response.json();
             renderProjects(allFiles);
 
         } catch (e) { 
@@ -171,41 +30,47 @@
             return;
         }
 
-        filesToDisplay.forEach(file => {
+        // On affiche les projets (les derniers envoyés apparaissent en premier)
+        [...filesToDisplay].reverse().forEach(file => {
             const card = document.createElement('div');
             card.className = 'project-card';
             
-            const displayName = file.name.split('.')[0].replace(/-/g, ' ').toUpperCase();
+            // On extrait l'extension du nom du fichier
             const extension = file.name.split('.').pop().toUpperCase();
             
+            // Gestion de l'image : si elle existe dans le JSON, on l'affiche
+            const imgTag = file.image ? `<img src="${file.image}" style="width:100%; height:160px; object-fit:cover; border-radius:4px; margin-bottom:15px; border:1px solid rgba(0, 240, 255, 0.1);">` : '';
+            
             card.innerHTML = `
+                ${imgTag}
                 <div style="display:flex; justify-content:space-between; align-items:start; gap: 10px;">
-                    <h3 style="margin:0; font-size: 0.9em; font-family: 'Orbitron';">${displayName}</h3>
+                    <h3 style="margin:0; font-size: 0.9em; font-family: 'Orbitron';">${file.title.toUpperCase()}</h3>
                     <span class="extension-badge">${extension}</span>
                 </div>
-                <p style="font-size: 0.8em; color: #888; margin-top: 10px; font-family: 'Inter';">Documentation technique issue du dépôt distant.</p>
+                <p style="font-size: 0.8em; color: #888; margin-top: 10px; font-family: 'Inter';">${file.description}</p>
                 <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-open">LIRE LE FICHIER</a>`;
+            
             container.appendChild(card);
         });
     }
 
     function filterProjects(category) {
-        // Mise à jour de l'apparence des boutons
+        // Mise à jour visuelle des boutons (ton code original)
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.classList.remove('active');
-            if(btn.innerText.toLowerCase() === category || (category === 'all' && btn.innerText === 'TOUS')) {
+            const btnText = btn.innerText.toLowerCase();
+            if(btnText === category || (category === 'all' && btnText === 'tous') || (category === 'reseaux' && btnText === 'réseaux')) {
                 btn.classList.add('active');
             }
         });
 
-        // Logique de filtrage par nom de fichier (mots clés)
+        // Filtrage basé sur la catégorie enregistrée dans le JSON
         if (category === 'all') {
             renderProjects(allFiles);
         } else {
             const filtered = allFiles.filter(file => {
-                const name = file.name.toLowerCase();
-                if (category === 'reseaux') return name.includes('reseau') || name.includes('ip') || name.includes('vlan') || name.includes('vpn');
-                return name.includes(category);
+                // On vérifie la catégorie ou on cherche des mots-clés dans le nom si besoin
+                return file.category === category;
             });
             renderProjects(filtered);
         }
@@ -213,5 +78,3 @@
 
     fetchProjects();
 </script>
-</body>
-</html>
