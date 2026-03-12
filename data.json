@@ -1,9 +1,1 @@
-[
-  {
-    "name": "Configuration du Routage Inter-VLAN.docx",
-    "title": "CONFIGURATION DU ROUTAGE INTER-VLAN",
-    "description": "Démonstration : Routage Inter-VLAN (Router-on-a-Stick). Cette démonstration porte sur la segmentation logique d'un réseau et la création de passerelles virtuelles. Le routeur est divisé en sous-interfaces (gateways) pour permettre la communication entre services via un lien Trunk.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNMP_Architecture_v2.png/800px-SNMP_Architecture_v2.png",
-    "category": "reseaux"
-  }
-]
+[]
