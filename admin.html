@@ -10,24 +10,19 @@
         body { background: #0b0c13; color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 20px; }
         .admin-container { max-width: 900px; margin: 40px auto; }
         h1, h2 { font-family: 'Orbitron'; color: #00f0ff; text-transform: uppercase; letter-spacing: 2px; }
-        
         .card { background: rgba(26, 27, 38, 0.9); border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 30px; }
-        
         label { display: block; margin-bottom: 10px; font-family: 'Orbitron'; font-size: 0.8em; color: #888; }
         input, textarea, select { 
             width: 100%; padding: 12px; margin-bottom: 20px; background: #07080c; 
             border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box;
         }
         input:focus { border-color: #00f0ff; outline: none; }
-
         .btn { 
             width: 100%; padding: 15px; border: none; border-radius: 4px; font-family: 'Orbitron'; 
             font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase;
         }
         .btn-upload { background: #00f0ff; color: #0b0c13; }
         .btn-upload:hover { box-shadow: 0 0 20px rgba(0, 240, 255, 0.4); }
-        
-        /* Liste des projets pour suppression */
         .project-item { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 15px; border-bottom: 1px solid #222; 
@@ -38,7 +33,6 @@
             border-radius: 4px; border: none; cursor: pointer; font-family: 'Orbitron';
         }
         .btn-delete:hover { background: #cc0000; }
-
         #status { text-align: center; font-weight: bold; color: #00f0ff; margin-top: 20px; font-family: 'Orbitron'; }
     </style>
 </head>
@@ -89,7 +83,10 @@
     const username = "LemaireThomas-ping";
     const repo = "LT";
 
-    // 1. FONCTION UPLOAD
+    // Fonctions utilitaires pour l'encodage UTF-8 sécurisé
+    function utoa(str) { return btoa(unescape(encodeURIComponent(str))); }
+    function atou(str) { return decodeURIComponent(escape(atob(str))); }
+
     async function uploadProject() {
         const token = document.getElementById('gh-token').value;
         const fileInput = document.getElementById('file-input');
@@ -111,7 +108,8 @@
             const content = reader.result.split(',')[1];
             try {
                 status.innerText = "⏳ ENVOI_DOCUMENT...";
-                // Upload fichier
+                
+                // 1. Upload du fichier
                 await fetch(`https://api.github.com/repos/${username}/${repo}/contents/docs/${file.name}`, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}` },
@@ -119,13 +117,15 @@
                 });
 
                 status.innerText = "⏳ SYNCHRONISATION_REGISTRE...";
-                // Update JSON
+                
+                // 2. Récupération du data.json (toujours via l'API pour le SHA frais)
                 const resJson = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
                     headers: { 'Authorization': `token ${token}` }
                 });
                 const jsonData = await resJson.json();
-                let projects = JSON.parse(atob(jsonData.content));
+                let projects = JSON.parse(atou(jsonData.content));
 
+                // 3. Mise à jour des données
                 projects.push({
                     name: file.name,
                     title: title,
@@ -134,29 +134,43 @@
                     category: cat
                 });
 
-                await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
+                // 4. Renvoi du JSON mis à jour
+                const updateRes = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}` },
                     body: JSON.stringify({
                         message: "Update registry",
-                        content: btoa(unescape(encodeURIComponent(JSON.stringify(projects, null, 2)))),
+                        content: utoa(JSON.stringify(projects, null, 2)),
                         sha: jsonData.sha
                     })
                 });
 
-                status.innerText = "✅ PROJET_PUBLIÉ_AVEC_SUCCÈS";
-                loadProjectsList();
-            } catch (e) { status.innerText = "❌ ERREUR_CRITIQUE_API"; }
+                if(updateRes.ok) {
+                    status.innerText = "✅ PROJET_PUBLIÉ_AVEC_SUCCÈS";
+                    loadProjectsList();
+                } else {
+                    throw new Error("Erreur lors de la mise à jour du JSON");
+                }
+
+            } catch (e) { 
+                console.error(e);
+                status.innerText = "❌ ERREUR_CRITIQUE_API"; 
+            }
         };
         reader.readAsDataURL(file);
     }
 
-    // 2. CHARGER LA LISTE POUR SUPPRESSION
     async function loadProjectsList() {
         const listContainer = document.getElementById('projects-list');
+        const token = document.getElementById('gh-token').value;
         try {
-            const res = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/main/data.json?t=${Date.now()}`);
-            const projects = await res.json();
+            // Lecture via l'API pour éviter le cache et les problèmes d'accents
+            const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json?t=${Date.now()}`, {
+                headers: token ? { 'Authorization': `token ${token}` } : {}
+            });
+            const jsonData = await res.json();
+            const projects = JSON.parse(atou(jsonData.content));
+
             listContainer.innerHTML = "";
             projects.forEach((p, index) => {
                 const div = document.createElement('div');
@@ -167,22 +181,23 @@
                 `;
                 listContainer.appendChild(div);
             });
-        } catch (e) { listContainer.innerHTML = "Aucun projet trouvé."; }
+        } catch (e) { 
+            listContainer.innerHTML = "Aucun projet trouvé ou erreur de connexion."; 
+        }
     }
 
-    // 3. FONCTION SUPPRESSION
     async function deleteProject(fileName, index) {
         const token = document.getElementById('gh-token').value;
         if (!token) { alert("Entre ton token en haut pour supprimer !"); return; }
         if (!confirm("Supprimer définitivement ce log ?")) return;
 
         try {
-            // Supprimer du JSON
             const resJson = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
                 headers: { 'Authorization': `token ${token}` }
             });
             const jsonData = await resJson.json();
-            let projects = JSON.parse(atob(jsonData.content));
+            let projects = JSON.parse(atou(jsonData.content));
+            
             projects.splice(index, 1);
 
             await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
@@ -190,13 +205,10 @@
                 headers: { 'Authorization': `token ${token}` },
                 body: JSON.stringify({
                     message: `Delete ${fileName} from registry`,
-                    content: btoa(unescape(encodeURIComponent(JSON.stringify(projects, null, 2)))),
+                    content: utoa(JSON.stringify(projects, null, 2)),
                     sha: jsonData.sha
                 })
             });
-
-            // Note: La suppression physique du fichier docs/ est optionnelle ici pour la sécurité, 
-            // le retirer du JSON suffit à le faire disparaître du site.
 
             alert("Projet supprimé !");
             loadProjectsList();
