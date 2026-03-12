@@ -4,136 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compétences | Lemaire Thomas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --neon-blue: #00f0ff;
-            --neon-orange: #ff9d00;
-            --bg-dark: #07080c;
+        body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
+        
+        header { text-align: center; padding: 40px 20px; }
+        header h1 { 
+            font-family: 'Orbitron', sans-serif; font-size: 2.5em; margin: 0; letter-spacing: 4px; 
+            color: #00f0ff; text-shadow: 0 0 15px #00f0ff; /* Effet glow de ton screen */
         }
+        header p { color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px; font-size: 0.9em; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* --- HEADER & NAV (image_203379 & image_20335c) --- */
-        header {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .name-glow {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3em;
-            margin: 0;
-            letter-spacing: 5px;
-            color: var(--neon-blue);
-            text-shadow: 0 0 15px var(--neon-blue); /* Effet image_203379 */
-        }
-
-        .subtitle {
-            color: var(--neon-blue);
-            font-family: 'Orbitron', sans-serif;
-            margin-top: 15px;
-            font-size: 0.85em;
-            letter-spacing: 1px;
-        }
-
+        /* NAV EN MINUSCULE */
         .main-nav {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            padding: 15px;
-            border-bottom: 1px solid #111;
+            display: flex; justify-content: center; gap: 20px; padding: 15px;
+            background: #07080c; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333;
         }
-
         .main-nav a {
-            color: #888;
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75em;
-            text-transform: lowercase; /* Minuscules demandées */
-            transition: 0.3s;
+            color: #888; text-decoration: none; font-family: 'Orbitron'; font-size: 0.85em;
+            transition: 0.3s; text-transform: lowercase; 
+        }
+        .main-nav a:hover, .main-nav a.active { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
+
+        section { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .skill-category { margin-bottom: 40px; }
+        .category-title { 
+            font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 20px; 
+            border-left: 3px solid #00f0ff; padding-left: 15px; 
         }
 
-        .main-nav a.active {
-            color: var(--neon-blue);
-            text-shadow: 0 0 8px var(--neon-blue);
-        }
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
 
-        /* --- SKILLS GRID --- */
-        section {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-
-        .category {
-            margin-bottom: 45px;
-        }
-
-        .category-title {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-blue);
-            font-size: 1.1em;
-            margin-bottom: 25px;
-            border-left: 3px solid var(--neon-blue);
-            padding-left: 15px;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        /* --- BADGES (image_1f5d88, image_1f5d7f, etc.) --- */
+        /* STYLE DES CASES (STRICTEMENT COMME TES SCREENS) */
         .badge {
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9em;
-            background: rgba(13, 17, 23, 0.8);
-            border: 1px solid transparent;
-            transition: 0.3s;
+            padding: 8px 16px; border-radius: 4px; font-family: 'Inter'; font-size: 0.9em;
+            background: transparent; border: 1px solid transparent;
         }
 
-        /* Style Bleu (Windows / Réseau) */
-        .badge-blue {
-            border-color: var(--neon-blue);
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px var(--neon-blue);
-        }
+        /* BLEU : Windows / Réseau */
+        .badge-blue { border-color: #00f0ff; color: #00f0ff; text-shadow: 0 0 5px #00f0ff; }
 
-        /* Style Orange (Debian, Ubuntu, Proxmox, VPN) */
-        .badge-orange {
-            border-color: var(--neon-orange);
-            color: var(--neon-orange);
-            text-shadow: 0 0 5px var(--neon-orange);
-        }
+        /* ORANGE : Linux / Cloud / VPN */
+        .badge-orange { border-color: #ff9d00; color: #ff9d00; text-shadow: 0 0 5px #ff9d00; }
+
+        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 class="name-glow">LEMAIRE THOMAS</h1>
-    <p class="subtitle">> TECHNICIEN SYSTÈMES & RÉSEAUX</p>
+    <h1>LEMAIRE THOMAS</h1>
+    <p>> TECHNICIEN SYSTÈMES & RÉSEAUX</p>
 </header>
 
 <nav class="main-nav">
-    <a href="index.html">à propos</a>
-    <a href="projects.html">projets</a>
-    <a href="skills.html" class="active">compétences</a>
-    <a href="contact.html">contact</a>
+  <a href="index.html">à propos</a>
+  <a href="projects.html">projets</a>
+  <a href="skills.html" class="active">compétences</a>
+  <a href="contact.html">contact</a>
 </nav>
 
 <section>
-    <div class="category">
-        <h2 class="category-title">SYSTEMES</h2>
-        <div class="skills-list">
+    <div class="skill-category">
+        <h2 class="category-title">SYSTEMES_EXPLOITATION</h2>
+        <div class="skills-grid">
             <span class="badge badge-blue">Windows Server</span>
             <span class="badge badge-blue">Active Directory</span>
             <span class="badge badge-blue">GPO</span>
@@ -144,26 +79,26 @@
         </div>
     </div>
 
-    <div class="category">
+    <div class="skill-category">
         <h2 class="category-title">VIRTUALISATION</h2>
-        <div class="skills-list">
+        <div class="skills-grid">
             <span class="badge badge-orange">Proxmox</span>
             <span class="badge badge-blue">Hyper-V</span>
         </div>
     </div>
 
-    <div class="category">
-        <h2 class="category-title">INFRASTRUCTURE</h2>
-        <div class="skills-list">
+    <div class="skill-category">
+        <h2 class="category-title">MAINTENANCE_IT</h2>
+        <div class="skills-grid">
             <span class="badge badge-blue">Assemblage PC / Serveur</span>
-            <span class="badge badge-blue">Câble RJ45</span>
+            <span class="badge badge-blue">Câblage RJ45</span>
             <span class="badge badge-blue">Dépannage</span>
         </div>
     </div>
 
-    <div class="category">
-        <h2 class="category-title">RESEAUX</h2>
-        <div class="skills-list">
+    <div class="skill-category">
+        <h2 class="category-title">RESEAUX_SECURITE</h2>
+        <div class="skills-grid">
             <span class="badge badge-blue">VLAN</span>
             <span class="badge badge-blue">IPv4 Subnetting</span>
             <span class="badge badge-orange">VPN</span>
@@ -171,7 +106,7 @@
     </div>
 </section>
 
-</body>
-</html>
+<footer>© 2026 Lemaire Thomas | Portfolio IT</footer>
+
 </body>
 </html>
