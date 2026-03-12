@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "name": "Configuration du Routage Inter-VLAN.docx",
+    "title": "Configuration du Routage Inter-Vlan",
+    "description": "Démonstration : Routage Inter-VLAN (Router-on-a-Stick)\nCette démonstration porte sur la segmentation logique d'un réseau et la création de passerelles virtuelles.\n\nLe principe : On utilise un switch pour séparer les services (VLANs) et un routeur pour les faire communiquer via un seul câble physique (Trunk).\n\nLa technique : Le routeur est divisé en sous-interfaces (gateways). Chaque service possède sa propre porte de sortie IP pour envoyer des données vers les autres réseaux.\n\nLe résultat : Les tests de connectivité sont validés, prouvant que le trafic circule entre les VLANs.\n\nNote de sécurité : Ce réseau est actuellement \"ouvert\". Dans la prochaine démonstration, nous utiliserons des ACL pour filtrer ces accès, car en entreprise, on ne laisse jamais tous les services communiquer librement sans contrôle.",
+    "image": "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.8_xnZ99r77jNWezOjrY_lgHaEj%3Fpid%3DApi&sp=1773320339Tf723151c20e02e5d279155c9199bc784a95304c0b6d17b7e38cba7368561f7fc",
+    "category": "reseaux"
+  }
+]
