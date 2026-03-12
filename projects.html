@@ -9,6 +9,15 @@
     <style>
         body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
+        /* --- HEADER (REMIS) --- */
+        header { 
+            text-align: center; 
+            padding: 60px 20px; 
+            background: radial-gradient(circle at center, rgba(0,240,255,0.05) 0%, transparent 70%); 
+        }
+        header h1 { font-family: 'Orbitron'; font-size: 2.5em; margin: 0; letter-spacing: 4px; }
+        header p { color: #00f0ff; font-family: 'Orbitron'; margin-top: 15px; font-size: 0.9em; opacity: 0.8; }
+
         /* --- NAVIGATION --- */
         .main-nav {
             display: flex; justify-content: center; gap: 20px; padding: 15px;
@@ -20,120 +29,93 @@
         }
         .main-nav a:hover, .main-nav a.active { color: #00f0ff; text-shadow: 0 0 10px #00f0ff; }
 
+        /* --- FILTRES --- */
+        .filter-container {
+            display: flex; justify-content: center; gap: 10px; margin: 40px 0; flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: transparent; border: 1px solid #333; color: #888; padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif; font-size: 0.75em; cursor: pointer;
+            transition: 0.3s; border-radius: 4px; text-transform: uppercase;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: #00f0ff; color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
         /* --- SECTION PROJETS --- */
         section { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
         h2 { font-family: 'Orbitron', sans-serif; color: #00f0ff; border-left: 4px solid #00f0ff; padding-left: 20px; margin-bottom: 40px; font-size: 1.5em; letter-spacing: 2px; }
 
         #projects-container {
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
             gap: 20px;
         }
 
-        /* --- CARTE COMPACTE --- */
+        /* --- CARTE COMPACTE (Style Cyber Image 2) --- */
         .project-card {
-            background: #0d1117; 
-            border: 1px solid #161b22;
-            padding: 12px; 
-            border-radius: 4px; 
-            transition: 0.3s;
-            display: flex; 
-            flex-direction: column;
-            position: relative;
+            background: #0d1117; border: 1px solid #161b22;
+            padding: 12px; border-radius: 4px; transition: 0.3s;
+            display: flex; flex-direction: column;
         }
         .project-card:hover {
             border-color: #00f0ff;
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
         }
 
-        /* --- IMAGE BANNIÈRE FORCÉE (21/7) --- */
+        /* IMAGE : Bannière ultra-compacte forçée */
         .project-img {
             width: 100%;
-            aspect-ratio: 21 / 7; 
+            aspect-ratio: 21 / 8;
             object-fit: cover;
             border-radius: 2px;
             margin-bottom: 10px;
             border: 1px solid #30363d;
-            background: #07080c;
         }
 
-        /* --- HEADER CARTE --- */
         .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
         }
         .card-title {
-            margin: 0;
-            font-family: 'Orbitron';
-            font-size: 0.75em;
-            letter-spacing: 1px;
-            color: #eee;
+            margin: 0; font-family: 'Orbitron'; font-size: 0.75em; letter-spacing: 1px; color: #eee;
         }
         .extension-badge {
-            font-size: 0.55em;
-            font-family: 'Orbitron';
-            color: #00f0ff;
-            border: 1px solid rgba(0, 240, 255, 0.4);
-            padding: 1px 5px;
-            border-radius: 2px;
-            font-weight: bold;
+            font-size: 0.55em; font-family: 'Orbitron'; color: #00f0ff;
+            border: 1px solid #00f0ff; padding: 1px 5px; border-radius: 2px;
         }
 
-        /* --- ACCORDÉON DESCRIPTION --- */
+        /* ACCORDÉON DESCRIPTION */
         .desc-details {
-            border: 1px solid #30363d;
-            background: #090c10;
-            margin-bottom: 10px;
-            border-radius: 2px;
+            border: 1px solid #30363d; background: #090c10; margin-bottom: 12px; border-radius: 2px;
         }
         .desc-summary {
-            list-style: none;
-            padding: 6px 10px;
-            cursor: pointer;
-            font-family: 'Orbitron';
-            font-size: 0.6em;
-            color: #00f0ff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            list-style: none; padding: 6px 10px; cursor: pointer;
+            font-family: 'Orbitron'; font-size: 0.6em; color: #00f0ff;
+            display: flex; justify-content: space-between; align-items: center;
         }
         .desc-summary::-webkit-details-marker { display: none; }
-        
         .desc-content {
-            padding: 10px;
-            font-size: 0.75em;
-            color: #8b949e;
-            border-top: 1px solid #30363d;
-            line-height: 1.4;
+            padding: 10px; font-size: 0.75em; color: #8b949e; border-top: 1px solid #30363d; line-height: 1.4;
         }
 
-        /* --- BOUTON TÉLÉCHARGER --- */
+        /* BOUTON TÉLÉCHARGER */
         .btn-download {
-            text-align: center;
-            padding: 10px;
-            background: transparent;
-            color: #00f0ff;
-            border: 1px solid #00f0ff;
-            text-decoration: none;
-            font-family: 'Orbitron';
-            font-size: 0.7em;
-            transition: 0.3s;
-            border-radius: 2px;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
+            text-align: center; padding: 10px; background: transparent; color: #00f0ff; border: 1px solid #00f0ff;
+            text-decoration: none; font-family: 'Orbitron'; font-size: 0.7em; transition: 0.3s;
+            border-radius: 2px; text-transform: uppercase; font-weight: 600;
         }
-        .btn-download:hover {
-            background: rgba(0, 240, 255, 0.1);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-        }
+        .btn-download:hover { background: rgba(0, 240, 255, 0.1); box-shadow: 0 0 10px rgba(0, 240, 255, 0.3); }
 
         footer { border-top: 1px solid #1a1b26; margin-top: 60px; text-align: center; padding: 40px; color: #444; font-size: 0.8em; font-family: 'Orbitron'; }
     </style>
 </head>
 <body>
+
+<header>
+    <h1>LEMAIRE THOMAS</h1>
+    <p>> TECHNICIEN SYSTÈMES & RÉSEAUX</p>
+</header>
 
 <nav class="main-nav">
   <a href="index.html">À propos</a>
@@ -145,6 +127,13 @@
 <section>
     <h2><i class="fas fa-terminal" style="margin-right: 15px;"></i>RÉPERTOIRE_DES_DOCS</h2>
 
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterProjects('all')">Tous les Labs</button>
+        <button class="filter-btn" onclick="filterProjects('windows')"><i class="fab fa-windows"></i> Windows</button>
+        <button class="filter-btn" onclick="filterProjects('linux')"><i class="fab fa-linux"></i> Linux</button>
+        <button class="filter-btn" onclick="filterProjects('reseaux')"><i class="fas fa-network-wired"></i> Réseaux</button>
+    </div>
+
     <div id="projects-container">
         </div>
 </section>
@@ -153,57 +142,48 @@
 
 <script>
     let allFiles = []; 
+    const username = "LemaireThomas-ping";
+    const repo = "LT";
 
     async function fetchProjects() {
-        const username = "LemaireThomas-ping";
-        const repo = "LT";
         const container = document.getElementById('projects-container');
         try {
             const response = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/main/data.json?t=${Date.now()}`);
-            if (!response.ok) {
-                container.innerHTML = "<p style='color:#888; font-family:Orbitron; text-align:center; grid-column:1/-1;'>AUCUNE_DONNÉE_DÉTECTÉE.</p>";
-                return;
-            }
+            if (!response.ok) return;
             allFiles = await response.json();
             renderProjects(allFiles);
-        } catch (e) { 
-            container.innerHTML = "<p style='color:#ff4444; font-family:Orbitron; text-align:center; grid-column:1/-1;'>ERREUR_FLUX_SYSTÈME</p>"; 
-        }
+        } catch (e) { console.error("Erreur flux"); }
     }
 
     function renderProjects(filesToDisplay) {
         const container = document.getElementById('projects-container');
         container.innerHTML = "";
-        const username = "LemaireThomas-ping";
-        const repo = "LT";
-
         [...filesToDisplay].reverse().forEach(file => {
             const card = document.createElement('div');
             card.className = 'project-card';
-            
             const extension = file.name.split('.').pop().toUpperCase();
-            
             card.innerHTML = `
                 ${file.image ? `<img src="${file.image}" class="project-img">` : ''}
                 <div class="card-header">
                     <h3 class="card-title">${file.title.toUpperCase()}</h3>
                     <span class="extension-badge">${extension}</span>
                 </div>
-                
                 <details class="desc-details">
-                    <summary class="desc-summary">
-                        DESCRIPTION <i class="fas fa-chevron-down" style="font-size:0.8em;"></i>
-                    </summary>
-                    <div class="desc-content">
-                        ${file.description}
-                    </div>
+                    <summary class="desc-summary">DESCRIPTION <i class="fas fa-chevron-down"></i></summary>
+                    <div class="desc-content">${file.description}</div>
                 </details>
-
                 <a href="https://raw.githubusercontent.com/${username}/${repo}/main/docs/${file.name}" target="_blank" class="btn-download">
-                    TÉLÉCHARGER LE COURS <i class="fas fa-download" style="margin-left:8px; font-size:0.9em;"></i>
+                    TÉLÉCHARGER LE COURS <i class="fas fa-download" style="margin-left:8px;"></i>
                 </a>`;
             container.appendChild(card);
         });
+    }
+
+    function filterProjects(category) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        const filtered = (category === 'all') ? allFiles : allFiles.filter(f => f.category === category);
+        renderProjects(filtered);
     }
 
     fetchProjects();
