@@ -4,202 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projets | Lemaire Thomas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- COPIE STRICTE DES STYLES DE TA PAGE CONTACT --- */
-        body { background: #0b0c13; color: white; margin: 0; font-family: 'Inter', sans-serif; }
-        
-        header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5em; margin: 0; letter-spacing: 4px; } /* Taille exacte du contact */
-        header p { color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px; }
+        :root {
+            --neon-blue: #00f0ff;
+            --bg-dark: #07080c;
+            --card-bg: #0d1117;
+            --border-color: #161b22;
+        }
 
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- HEADER AVEC GLOW (Image 203379) --- */
+        header {
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+
+        .name-glow {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2em;
+            margin: 0;
+            letter-spacing: 5px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+        }
+
+        .subtitle {
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 15px;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        /* --- NAVIGATION (Image 203379) --- */
         .main-nav {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            padding: 15px;
-            background: #07080c;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #333;
+            gap: 30px;
+            padding: 20px;
+            border-bottom: 1px solid #111;
         }
+
         .main-nav a {
             color: #888;
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85em;
+            font-size: 0.75em;
+            text-transform: uppercase;
             transition: 0.3s;
-            white-space: nowrap;
-        }
-        .main-nav a:hover, .main-nav a.active {
-            color: #00f0ff;
-            text-shadow: 0 0 10px #00f0ff;
         }
 
-        /* Correction Mobile */
-        @media (max-width: 768px) {
-            .main-nav { gap: 8px; padding: 12px 5px; justify-content: space-around; }
-            .main-nav a { font-size: 0.65em; }
+        .main-nav a.active {
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 5px;
         }
 
-        /* --- STYLE DES PROJETS (ADAPTÉ AU DESIGN CONTACT) --- */
-        section { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        
-        .project-header { 
-            font-family: 'Orbitron'; 
-            color: #00f0ff; 
-            margin-bottom: 25px; 
-            border-left: 3px solid #00f0ff; 
-            padding-left: 15px; 
+        /* --- CONTENU --- */
+        section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        #projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card {
-            background: rgba(26, 27, 38, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            padding: 15px;
-            border-radius: 8px;
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            font-size: 1.4em;
+            margin-bottom: 30px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
 
-        /* CORRECTION DIMENSION IMAGE */
+        /* --- FILTRES (Image 204add) --- */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #222;
+            color: #666;
+            padding: 8px 16px;
+            font-family: 'Orbitron';
+            font-size: 0.65em;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .filter-btn.active {
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+        }
+
+        /* --- CARTE PROJET LARGE (Image 203f5d / 204add) --- */
+        .project-card {
+            background: #090c10;
+            border: 1px solid #1b2129;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
         .project-img {
             width: 100%;
-            height: 120px; 
-            object-fit: cover;
+            height: auto;
             border-radius: 4px;
-            margin-bottom: 15px;
-            border: 1px solid #333;
+            margin-bottom: 20px;
+            display: block;
         }
 
-        .card-header {
+        .card-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85em;
+            letter-spacing: 1px;
             margin: 0;
-            font-family: 'Orbitron';
-            font-size: 0.8em;
-            color: #eee;
         }
 
-        .badge {
+        .badge-type {
+            font-family: 'Orbitron';
             font-size: 0.6em;
-            color: #00f0ff;
-            border: 1px solid #00f0ff;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
             padding: 2px 6px;
-            font-family: 'Orbitron';
         }
 
-        .desc-details {
-            border: 1px solid #333;
-            background: #0b0c13;
-            margin-bottom: 15px;
+        /* ACCORDÉON DESCRIPTION */
+        .desc-box {
+            border: 1px solid #1b2129;
+            background: #0d1117;
             border-radius: 4px;
+            margin-bottom: 20px;
         }
 
-        .desc-summary {
-            padding: 8px 10px;
-            cursor: pointer;
+        .desc-header {
+            padding: 10px 15px;
             font-family: 'Orbitron';
             font-size: 0.65em;
-            color: #00f0ff;
+            color: var(--neon-blue);
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
-        .desc-content {
-            padding: 10px;
-            font-size: 0.8em;
-            color: #888;
-            border-top: 1px solid #333;
-        }
-
-        .btn-action {
-            background: transparent;
-            color: #00f0ff;
-            border: 1px solid #00f0ff;
+        /* BOUTON OUVRIR_LE_LOG */
+        .btn-log {
+            display: block;
+            width: 100%;
             padding: 12px;
-            font-family: 'Orbitron';
-            cursor: pointer;
-            transition: 0.3s;
+            border: 1px solid var(--neon-blue);
+            background: transparent;
+            color: var(--neon-blue);
             text-align: center;
             text-decoration: none;
-            font-size: 0.75em;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-family: 'Orbitron';
+            font-size: 0.8em;
+            letter-spacing: 2px;
+            transition: 0.3s;
         }
 
-        .btn-action:hover {
-            background: #00f0ff;
-            color: #0b0c13;
-            box-shadow: 0 0 20px #00f0ff;
+        .btn-log:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
         }
 
-        footer p { text-align: center; padding: 40px; color: #444; font-size: 0.8em; }
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-family: 'Orbitron';
+            font-size: 0.6em;
+            color: #333;
+        }
     </style>
 </head>
 <body>
 
-<header style="text-align: center; padding: 40px 20px;">
-    <h1>LEMAIRE THOMAS</h1>
-    <p>Technicien Systèmes & Réseaux</p>
+<header>
+    <h1 class="name-glow">LEMAIRE THOMAS</h1>
+    <p class="subtitle">Technicien Systèmes & Réseaux</p>
 </header>
 
 <nav class="main-nav">
-  <a href="index.html">À propos</a>
-  <a href="projects.html" class="active">Projets</a>
-  <a href="skills.html">Compétences</a>
-  <a href="contact.html">Contact</a>
+    <a href="index.html">À propos</a>
+    <a href="projects.html" class="active">Projets</a>
+    <a href="skills.html">Compétences</a>
+    <a href="contact.html">Contact</a>
 </nav>
 
 <section>
-    <h2 class="project-header">REPERTOIRE_PROJETS.EXE</h2>
-    
+    <h2 class="section-title">| > RÉPERTOIRE_DES_DOCS</h2>
+
+    <div class="filter-container">
+        <button class="filter-btn active">TOUS LES LABS</button>
+        <button class="filter-btn"><i class="fab fa-windows"></i> WINDOWS</button>
+        <button class="filter-btn"><i class="fab fa-linux"></i> LINUX</button>
+        <button class="filter-btn"><i class="fas fa-network-wired"></i> RÉSEAUX</button>
+    </div>
+
     <div id="projects-container">
+        <div class="project-card">
+            <img src="https://raw.githubusercontent.com/LemaireThomas-ping/LT/main/img/vlan.png" class="project-img" alt="VLAN">
+            
+            <div class="card-info">
+                <h3 class="card-title">CONFIGURATION DU ROUTAGE INTER-VLAN</h3>
+                <span class="badge-type">DOCX</span>
+            </div>
+
+            <div class="desc-box">
+                <div class="desc-header">
+                    <span>DESCRIPTION</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <a href="#" class="btn-log">OUVRIR_LE_LOG <i class="fas fa-external-link-alt" style="font-size: 0.8em;"></i></a>
         </div>
+    </div>
 </section>
 
-<footer><p>© 2026 Lemaire Thomas | Portfolio IT</p></footer>
+<footer>© 2026 Lemaire Thomas | Système d'administration GitHub v2.0</footer>
 
-<script>
-    async function loadProjects() {
-        const container = document.getElementById('projects-container');
-        try {
-            const response = await fetch(`https://raw.githubusercontent.com/LemaireThomas-ping/LT/main/data.json?t=${Date.now()}`);
-            const data = await response.json();
-            
-            container.innerHTML = data.reverse().map(file => `
-                <div class="project-card">
-                    ${file.image ? `<img src="${file.image}" class="project-img">` : ''}
-                    <div class="card-header">
-                        <h3 class="card-title">${file.title.toUpperCase()}</h3>
-                        <span class="badge">${file.name.split('.').pop().toUpperCase()}</span>
-                    </div>
-                    <details class="desc-details">
-                        <summary class="desc-summary">DETAILS_PROJET <i class="fas fa-chevron-down"></i></summary>
-                        <div class="desc-content">${file.description}</div>
-                    </details>
-                    <a href="https://raw.githubusercontent.com/LemaireThomas-ping/LT/main/docs/${file.name}" target="_blank" class="btn-action">
-                        OUVRIR LE DOCUMENT
-                    </a>
-                </div>
-            `).join('');
-        } catch (e) {
-            container.innerHTML = "<p>Erreur lors du chargement des projets.</p>";
-        }
-    }
-    loadProjects();
-</script>
 </body>
 </html>
