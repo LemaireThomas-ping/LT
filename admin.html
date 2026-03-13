@@ -90,7 +90,10 @@
         const token = document.getElementById('gh-token').value;
         const fileInput = document.getElementById('file-input');
         const title = document.getElementById('proj-title').value;
-        const desc = document.getElementById('proj-desc').value;
+        
+        // MODIFICATION ICI : Remplace les sauts de ligne par \n pour le JSON
+        const desc = document.getElementById('proj-desc').value.replace(/\n/g, "\\n");
+        
         const img = document.getElementById('img-url').value;
         const cat = document.getElementById('proj-cat').value;
         const status = document.getElementById('status');
@@ -108,7 +111,6 @@
             try {
                 status.innerText = "⏳ ENVOI_DOCUMENT...";
                 
-               
                 await fetch(`https://api.github.com/repos/${username}/${repo}/contents/docs/${file.name}`, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}` },
@@ -117,14 +119,12 @@
 
                 status.innerText = "⏳ SYNCHRONISATION_REGISTRE...";
                 
-                
                 const resJson = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
                     headers: { 'Authorization': `token ${token}` }
                 });
                 const jsonData = await resJson.json();
                 let projects = JSON.parse(atou(jsonData.content));
 
-               
                 projects.push({
                     name: file.name,
                     title: title,
@@ -133,7 +133,6 @@
                     category: cat
                 });
 
-                
                 const updateRes = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}` },
@@ -163,7 +162,6 @@
         const listContainer = document.getElementById('projects-list');
         const token = document.getElementById('gh-token').value;
         try {
-            
             const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json?t=${Date.now()}`, {
                 headers: token ? { 'Authorization': `token ${token}` } : {}
             });
