@@ -4,53 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compétences | Lemaire Thomas</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+    <link rel="stylesheet" href="style.css">
     <style>
         body { 
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #0b0c13, #1b1d26);
-            color: #e0e5eb;
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 20px; 
-            background: linear-gradient(135deg, #0b0c13, #1b1d26);
-            border-bottom: 2px solid #00f0ff33;
-            box-shadow: 0 4px 20px rgba(0,255,255,0.1);
-        }
-
-        header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.2em;
-            color: #00f0ff;
-            text-shadow: 0 0 15px #00f0ff66, 0 0 25px #00fff099;
-            animation: pulse 3s infinite;
+            background: #0b0c13; 
+            color: white; 
             margin: 0; 
-            word-wrap: break-word;
+            font-family: 'Inter', sans-serif; 
         }
 
-        .subtitle {
-            color: #00f0ff;
-            font-family: 'Orbitron', sans-serif;
-            margin-top: 10px;
-            font-size: 1.1em;
-            text-shadow: 0 0 8px #00f0ff55;
+        /* --- LOADER (IDENTIQUE À INDEX) --- */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0b0c13; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
+            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s ease;
         }
-
-        @keyframes pulse {
-            0%, 100% { text-shadow: 0 0 15px #00f0ff66, 0 0 25px #00fff099; }
-            50% { text-shadow: 0 0 25px #00f0ff99, 0 0 40px #00fff0aa; }
+        #loader.zoom-out { transform: scale(12); opacity: 0; pointer-events: none; }
+        
+        .network-anim { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+        .node { color: #00f0ff; font-size: 45px; filter: drop-shadow(0 0 10px #00f0ff); }
+        .packet {
+            width: 14px; height: 14px; background: #00f0ff; border-radius: 50%;
+            box-shadow: 0 0 15px #00f0ff; animation: transfer 0.8s infinite linear;
         }
+        @keyframes transfer {
+            0% { transform: translateX(-60px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(60px); opacity: 0; }
+        }
+        .loader-text { color: #00f0ff; font-family: 'Orbitron'; font-weight: bold; letter-spacing: 4px; }
 
-        .main-nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+        /* --- NAVIGATION (MARGE 18PX) --- */
+        nav {
+            text-align: center;
             padding: 15px;
             background: #07080c;
             position: sticky;
@@ -59,237 +48,173 @@
             border-bottom: 1px solid #333;
         }
 
-        .main-nav a {
+        nav a {
             color: #888;
+            margin: 0 18px; /* Écart exact de ton CSS */
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.85em;
             transition: 0.3s;
             white-space: nowrap;
-            text-transform: lowercase;
         }
 
-        .main-nav a:hover, .main-nav a.active {
+        nav a:hover, nav a.active {
             color: #00f0ff;
             text-shadow: 0 0 10px #00f0ff;
         }
 
-        #skills-section { 
-            padding:40px 20px;
-            max-width:1000px;
-            margin:auto;
+        /* --- STYLES SPÉCIFIQUES SKILLS --- */
+        #dynamic-header { min-height: 1.5em; font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 20px; }
+        #typewriter-text::after {
+            content: "_";
+            animation: blink 0.8s infinite;
+            margin-left: 5px;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .skills-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+            margin-top: 30px;
         }
 
-        h2.main-title { 
-            font-family:'Orbitron';
-            border-bottom:2px solid #00f0ff;
-            padding-bottom:10px;
-            margin-bottom:30px;
-            font-size:1.4em;
-            color: #00f0ff;
+        /* Utilisation de tes classes monitor du CSS */
+        .skill-card-monitor { 
+            position: relative; 
+            background: rgba(15, 16, 25, 0.9) !important; 
+            border: 1px solid #333 !important; 
+            padding: 25px 20px 20px 20px !important; 
+            border-radius: 4px;
         }
 
-        .skills-grid {
-            display:grid;
-            grid-template-columns:repeat(2,1fr);
-            gap:25px;
-            margin-top:30px;
+        .status-led { 
+            position: absolute; top: 15px; right: 15px; 
+            width: 10px; height: 10px; border-radius: 50%; 
+            background: #27c93f; box-shadow: 0 0 10px #27c93f; 
         }
 
-        .skill-card {
-            background:rgba(26,27,38,0.9);
-            border:1px solid rgba(0,240,255,0.1);
-            padding:25px;
-            border-radius:8px;
-            transition:0.3s;
+        .tag { 
+            background: rgba(0, 240, 255, 0.1); 
+            color: #00f0ff; padding: 4px 10px; 
+            border-radius: 4px; font-size: 0.75em; 
+            border: 1px solid rgba(0, 240, 255, 0.2); 
+            margin-right: 5px; 
+            display: inline-block;
+            margin-bottom: 5px;
         }
 
-        .skill-card:hover {
-            border-color:#00f0ff;
-            transform:translateY(-3px);
-        }
-
-        .card-header {
-            display:flex;
-            align-items:center;
-            gap:12px;
-            margin-bottom:20px;
-            color:#00f0ff;
-            font-family:'Orbitron';
-        }
-
-        .sub-group-title {
-            display:block;
-            font-size:0.75em;
-            color:#555;
-            text-transform:uppercase;
-            font-weight:bold;
-            margin-bottom:10px;
-            letter-spacing:1px;
-        }
-
-        .tag-list {
-            display:flex;
-            flex-wrap:wrap;
-            gap:8px;
-            margin-bottom:15px;
-        }
-
-        .tag {
-            background:#1a1b26;
-            border:1px solid #333;
-            padding:4px 10px;
-            border-radius:4px;
-            font-size:0.8em;
-            color:#ccc;
-        }
-
-        .tag.blue { border-color:#00f0ff; color:#00f0ff; }
-        .tag.orange { border-color:#ff9d00; color:#ff9d00; }
-
-        .status-footer {
-            margin-top:15px;
-            padding-top:15px;
-            border-top:1px solid #1a1b26;
-            display:flex;
-            align-items:center;
-            gap:10px;
-        }
-
-        .led {
-            width:8px;
-            height:8px;
-            border-radius:50%;
-            background:#27c93f;
-            box-shadow:0 0 8px #27c93f;
-        }
-
-        .status-text {
-            font-size:0.7em;
-            font-family:'Orbitron';
-            color:#888;
-        }
-
-        footer {
-            text-align:center;
-            padding:40px;
-            color:#444;
-            font-size:0.8em;
-        }
-
-        /* --- HARMONISATION MOBILE --- */
-        @media (max-width: 600px) {
-            header {
-                padding: 30px 15px !important;
-            }
-
-            header h1 {
-                font-size: 1.8em !important;
-                letter-spacing: 1px;
-            }
-
-            .subtitle {
-                font-size: 0.9em !important;
-            }
-
-            .main-nav {
-                gap: 10px;
-                padding: 10px;
-                justify-content: center;
-            }
-
-            .main-nav a {
-                font-size: 0.7em;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr; /* Une seule colonne sur mobile */
-            }
-
-            h2.main-title {
-                font-size: 1.1em;
-            }
+        @media (max-width: 768px) {
+            nav a { margin: 0 8px; font-size: 0.65em; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>LEMAIRE THOMAS</h1>
-    <p class="subtitle">Technicien Systèmes & Réseaux</p>
-</header>
-
-<nav class="main-nav">
-    <a href="index.html">à propos</a>
-    <a href="projects.html">projets</a>
-    <a href="skills.html" class="active">compétences</a>
-    <a href="contact.html">contact</a>
-</nav>
-
-<div id="skills-section">
-    <h2 class="main-title"><i class="fas fa-microchip"></i> MES COMPÉTENCES TECHNIQUES</h2>
-
-    <div class="skills-grid">
-        <div class="skill-card">
-            <div class="card-header"><i class="fab fa-windows"></i> SYSTÈMES</div>
-            <span class="sub-group-title">Microsoft & Linux</span>
-            <div class="tag-list">
-                <span class="tag blue">Windows Server</span>
-                <span class="tag blue">Active Directory</span>
-                <span class="tag blue">GPO / DNS / DHCP</span>
-                <span class="tag orange">Debian</span>
-                <span class="tag orange">Ubuntu</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: OPÉRATIONNEL</span>
-            </div>
-        </div>
-
-        <div class="skill-card">
-            <div class="card-header"><i class="fas fa-layer-group"></i> VIRTUALISATION</div>
-            <span class="sub-group-title">Environnements de Lab</span>
-            <div class="tag-list">
-                <span class="tag blue">Hyper-V</span>
-                <span class="tag orange">Proxmox</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: OPÉRATIONNEL</span>
-            </div>
-        </div>
-
-        <div class="skill-card">
-            <div class="card-header"><i class="fas fa-tools"></i> MAINTENANCE</div>
-            <span class="sub-group-title">Matériel & Infra</span>
-            <div class="tag-list">
-                <span class="tag blue">Assemblage PC / Serveur</span>
-                <span class="tag blue">Câblage RJ45</span>
-                <span class="tag blue">Dépannage</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: FONDAMENTAUX ACQUIS</span>
-            </div>
-        </div>
-
-        <div class="skill-card">
-            <div class="card-header"><i class="fas fa-network-wired"></i> RÉSEAU</div>
-            <span class="sub-group-title">Infrastructure & Sécurité</span>
-            <div class="tag-list">
-                <span class="tag blue">VLAN</span>
-                <span class="tag blue">IPv4 Subnetting</span>
-                <span class="tag orange">VPN</span>
-            </div>
-            <div class="status-footer">
-                <div class="led"></div>
-                <span class="status-text">STATUS: CONFIGURATION ACTIVE</span>
-            </div>
-        </div>
+<div id="loader">
+    <div class="network-anim">
+        <i class="fas fa-server node"></i>
+        <div class="packet"></div>
+        <i class="fas fa-network-wired node"></i>
     </div>
+    <div class="loader-text">SCAN DES SYSTÈMES...</div>
 </div>
 
-<footer>© 2026 Lemaire Thomas | Portfolio Technicien Numérique</footer>
+<header style="text-align: center; padding: 40px 20px;">
+    <h1>LEMAIRE THOMAS</h1>
+    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
+</header>
 
+<nav>
+  <a href="index.html">À propos</a>
+  <a href="projects.html">Projets</a>
+  <a href="skills.html" class="active">Compétences</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<section id="skills" style="max-width: 1100px; margin: auto; padding: 40px 20px;">
+    <h2 id="dynamic-header">
+        <i class="fas fa-microchip"></i> 
+        <span id="typewriter-text"></span>
+    </h2>
+
+    <div class="skills-grid">
+        <div class="skill-card-monitor">
+            <div class="status-led"></div>
+            <h3 style="font-family: 'Orbitron'; color: #fff;">Systèmes & Virtualisation</h3>
+            <div style="margin: 15px 0;">
+                <span class="tag">Windows Server</span>
+                <span class="tag">Linux (Debian/Ubuntu)</span>
+                <span class="tag">VMware ESXi</span>
+                <span class="tag">Hyper-V</span>
+            </div>
+            <p style="font-size: 0.85em; color: #ccc;">Administration et déploiement d'environnements virtualisés et serveurs d'entreprise.</p>
+        </div>
+
+        <div class="skill-card-monitor">
+            <div class="status-led"></div>
+            <h3 style="font-family: 'Orbitron'; color: #fff;">Réseaux & Sécurité</h3>
+            <div style="margin: 15px 0;">
+                <span class="tag">Cisco (VLAN, Routage)</span>
+                <span class="tag">Fortinet (NSE)</span>
+                <span class="tag">VPN IPsec/SSL</span>
+                <span class="tag">Firewalling</span>
+            </div>
+            <p style="font-size: 0.85em; color: #ccc;">Configuration d'infrastructures réseaux sécurisées et gestion des accès distants.</p>
+        </div>
+
+        <div class="skill-card-monitor" style="border-color: rgba(255, 153, 0, 0.3) !important;">
+            <div class="status-led led-working" style="background: #ff9900; box-shadow: 0 0 10px #ff9900;"></div>
+            <h3 style="font-family: 'Orbitron'; color: #fff;">Cloud & DevOps</h3>
+            <div style="margin: 15px 0;">
+                <span class="tag" style="border-color: #ff9900; color: #ff9900;">AWS (En cours)</span>
+                <span class="tag">Docker</span>
+                <span class="tag">Azure AD</span>
+            </div>
+            <p style="font-size: 0.85em; color: #ccc;">Transition vers le Cloud et conteneurisation des services.</p>
+        </div>
+    </div>
+</section>
+
+<footer><p style="text-align: center; padding: 40px; color: #444;">© 2026 Lemaire Thomas | Portfolio IT</p></footer>
+
+<script>
+    const hasLoaded = sessionStorage.getItem('firstLoadDone');
+    const loader = document.getElementById('loader');
+    const textElement = document.getElementById('typewriter-text');
+
+    const step1 = "[SCANNING_SKILLS] : 1024_NODES_DETECTED";
+    const step2 = "CORE_COMPETENCES_SYSTEM";
+
+    function typeEffect(text, i, callback) {
+        if (i < text.length) {
+            textElement.innerHTML = text.substring(0, i + 1);
+            setTimeout(() => typeEffect(text, i + 1, callback), 50); 
+        } else if (callback) {
+            callback();
+        }
+    }
+
+    if (hasLoaded) {
+        loader.style.display = 'none';
+        textElement.innerHTML = step2;
+    } else {
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                loader.classList.add('zoom-out');
+                sessionStorage.setItem('firstLoadDone', 'true');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    typeEffect(step1, 0, () => {
+                        setTimeout(() => {
+                            textElement.innerHTML = "";
+                            typeEffect(step2, 0);
+                        }, 1200);
+                    });
+                }, 800);
+            }, 1800);
+        });
+    }
+</script>
 </body>
 </html>
