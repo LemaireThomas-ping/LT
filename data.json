@@ -2,7 +2,7 @@
   {
     "name": "Configuration du Routage Inter-VLAN.docx",
     "title": "Configuration du Routage INTER-VLAN",
-    "description": ""description": "Mise en place et configuration de réseaux locaux virtuels (VLAN) pour segmenter le trafic et optimiser l'infrastructure réseau.\n\nCe projet inclut la configuration de switches et le routage inter-VLAN.\n\nAttention : Le réseau est actuellement configuré comme un environnement ouvert (aucune ACL implémentée).",",
+    "description": "Mise en place et configuration de réseaux locaux virtuels (VLAN) pour segmenter le trafic et optimiser l'infrastructure réseau.\n\nCe projet inclut la configuration de switches et le routage inter-VLAN.\n\nAttention : Le réseau est actuellement configuré comme un environnement ouvert (aucune ACL implémentée).",",
     "image": "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.CZ53HFAszRWYIwva-2zzaAHaEE%3Fpid%3DApi&sp=1773399454T4ec1af425063ab426629cb47b53ad612e9d6d6bd6d3b4885b8635bb030ae61f9",
     "category": "reseaux"
   }
