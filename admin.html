@@ -54,7 +54,7 @@
         <input type="text" id="proj-title" placeholder="Ex: Configuration VPN IPsec Fortinet">
 
         <label>Description (s'affichera sur la carte)</label>
-        <textarea id="proj-desc" rows="3" placeholder="Résumé technique du lab..."></textarea>
+        <textarea id="proj-desc" rows="6" placeholder="Résumé technique du lab..."></textarea>
 
         <label>Lien de l'image d'illustration</label>
         <input type="text" id="img-url" placeholder="Ex: https://image.png ou /img/lab.jpg">
@@ -91,8 +91,8 @@
         const fileInput = document.getElementById('file-input');
         const title = document.getElementById('proj-title').value;
         
-        // MODIFICATION ICI : Remplace les sauts de ligne par \n pour le JSON
-        const desc = document.getElementById('proj-desc').value.replace(/\n/g, "\\n");
+        // CORRECTION : On prend la valeur brute, JSON.stringify gérera les sauts de ligne
+        const desc = document.getElementById('proj-desc').value;
         
         const img = document.getElementById('img-url').value;
         const cat = document.getElementById('proj-cat').value;
@@ -125,6 +125,7 @@
                 const jsonData = await resJson.json();
                 let projects = JSON.parse(atou(jsonData.content));
 
+                // CORRECTION : Structure propre de l'objet
                 projects.push({
                     name: file.name,
                     title: title,
@@ -146,6 +147,10 @@
                 if(updateRes.ok) {
                     status.innerText = "✅ PROJET_PUBLIÉ_AVEC_SUCCÈS";
                     loadProjectsList();
+                    // Nettoyage des champs
+                    document.getElementById('proj-title').value = "";
+                    document.getElementById('proj-desc').value = "";
+                    document.getElementById('file-input').value = "";
                 } else {
                     throw new Error("Erreur lors de la mise à jour du JSON");
                 }
@@ -201,7 +206,7 @@
                 method: 'PUT',
                 headers: { 'Authorization': `token ${token}` },
                 body: JSON.stringify({
-                    message: `Delete ${fileName} from registry`,
+                    message: `Delete project from registry`,
                     content: utoa(JSON.stringify(projects, null, 2)),
                     sha: jsonData.sha
                 })
