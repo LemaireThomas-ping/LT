@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "name": "Configuration du Routage Inter-VLAN.docx",
+    "title": "ADMINISTRATION D'INFRASTRUCTURE RÉSEAU ET ROUTAGE INTER-VLAN",
+    "description": "Description du Projet\nMise en œuvre d'une architecture réseau commutée et routée simulant une structure d'entreprise multi-services. Ce projet assure l'isolation des flux de données et la gestion du trafic inter-départements via des technologies de niveau 2 et 3.\n\nCaractéristiques Techniques\nSegmentation LAN : Création de VLANs dédiés (RH, Comptabilité, IT, Vente) pour limiter les domaines de diffusion.\n\nCommutation Cisco : Configuration des interfaces en mode Access et Trunking (802.1Q) sur switches 2960.\n\nRoutage Inter-VLAN : Déploiement d'une solution Router-on-a-Stick sur routeur 1841 via des sous-interfaces logiques.\n\nAdministration : Configuration complète par ligne de commande (CLI Cisco IOS) et tests de connectivité ICMP.\n\n⚠️ Sécurité et Filtrage : L'architecture actuelle permet une communication libre entre les segments. En environnement de production, l'implémentation de Listes de Contrôle d'Accès (ACL) est requise pour restreindre les flux et sécuriser les données sensibles entre les services.",
+    "image": "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.CZ53HFAszRWYIwva-2zzaAHaEE%3Fpid%3DApi&sp=1773403143Tfbbae08cce5b7b71c997332acc6c027a4e1dbebcefbdfefccadcbdae2bff488b",
+    "category": "reseaux"
+  }
+]
