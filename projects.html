@@ -133,17 +133,21 @@
 
         footer { text-align: center; padding: 60px; color: #444; font-size: 0.8em; }
 
-        /* --- CORRECTION VERSION TÉLÉPHONE (Uniquement) --- */
+        /* --- HARMONISATION MOBILE --- */
         @media (max-width: 600px) {
             header { padding: 30px 15px !important; }
             header h1 { 
-                font-size: 1.8em !important; /* Taille réduite pour mobile */
+                font-size: 1.8em !important; 
                 letter-spacing: 1px;
             }
-            .subtitle { font-size: 0.85em !important; }
+            .subtitle { 
+                font-size: 0.85em !important; 
+                margin-top: 5px !important;
+                display: block !important;
+            }
             .main-nav { gap: 10px; padding: 10px; }
             .main-nav a { font-size: 0.7em; }
-            .img-wrapper { height: 250px; } /* Image moins haute sur mobile */
+            .img-wrapper { height: 250px; }
             .card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
             .badge { align-self: flex-start; }
             .project-card { padding: 15px; }
