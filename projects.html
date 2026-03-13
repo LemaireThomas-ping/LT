@@ -118,7 +118,16 @@
 
         details { border: 1px solid #1a1b26; background: #07080c; margin-bottom: 20px; border-radius: 4px; }
         summary { padding: 12px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.75em; color: #00f0ff; }
-        .desc-content { padding: 15px; font-size: 0.9em; color: #aaa; border-top: 1px solid #1a1b26; line-height: 1.6; }
+        
+        /* MODIFICATION ICI : Interprétation des sauts de ligne */
+        .desc-content { 
+            padding: 15px; 
+            font-size: 0.9em; 
+            color: #aaa; 
+            border-top: 1px solid #1a1b26; 
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
 
         .btn-action {
             display: block; width: 100%; text-align: center; padding: 15px;
