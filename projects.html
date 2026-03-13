@@ -82,6 +82,7 @@
         .project-card {
             background: rgba(26, 27, 38, 0.9); border: 1px solid rgba(0, 240, 255, 0.1);
             padding: 25px; border-radius: 8px; transition: 0.3s;
+            box-sizing: border-box; /* Évite que le padding ne fasse déborder la carte */
         }
 
         .img-wrapper {
@@ -95,6 +96,7 @@
             justify-content: center;
             align-items: center;
             border: 1px solid #1a1b26;
+            box-sizing: border-box;
         }
 
         .project-img {
@@ -114,12 +116,12 @@
         .badge {
             font-size: 0.7em; color: #00f0ff; border: 1px solid #00f0ff;
             padding: 3px 10px; border-radius: 4px; text-transform: uppercase;
+            flex-shrink: 0; /* Empêche le badge de s'écraser */
         }
 
-        details { border: 1px solid #1a1b26; background: #07080c; margin-bottom: 20px; border-radius: 4px; }
+        details { border: 1px solid #1a1b26; background: #07080c; margin-bottom: 20px; border-radius: 4px; width: 100%; box-sizing: border-box; }
         summary { padding: 12px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.75em; color: #00f0ff; }
         
-        /* MODIFICATION ICI : Interprétation des sauts de ligne */
         .desc-content { 
             padding: 15px; 
             font-size: 0.9em; 
@@ -127,12 +129,28 @@
             border-top: 1px solid #1a1b26; 
             line-height: 1.6;
             white-space: pre-wrap;
+            word-wrap: break-word; /* Force la coupure des mots trop longs */
         }
 
         .btn-action {
-            display: block; width: 100%; text-align: center; padding: 15px;
-            background: transparent; color: #00f0ff; border: 1px solid #00f0ff;
-            text-decoration: none; font-family: 'Orbitron'; font-size: 0.85em; border-radius: 4px;
+            display: block; 
+            width: 100%; 
+            box-sizing: border-box; /* LA CORRECTION EST ICI : Inclut le padding dans les 100% */
+            text-align: center; 
+            padding: 15px;
+            background: transparent; 
+            color: #00f0ff; 
+            border: 1px solid #00f0ff;
+            text-decoration: none; 
+            font-family: 'Orbitron'; 
+            font-size: 0.85em; 
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .btn-action:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
         }
 
         footer { text-align: center; padding: 60px; color: #444; font-size: 0.8em; }
@@ -205,7 +223,7 @@
                     </div>
                 ` : ''}
                 <div class="card-header">
-                    <h3 class="card-title">${file.title.toUpperCase()}</h3>
+                    <h3 class="card-title" style="margin:0; font-size:1.1em;">${file.title.toUpperCase()}</h3>
                     <span class="badge">${file.category || 'LAB'}</span>
                 </div>
                 <details>
