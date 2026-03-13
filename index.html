@@ -6,19 +6,16 @@
     <title>Portfolio | Lemaire Thomas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
-        * { box-sizing: border-box; }
-
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            background: #0b0c13;
-            color: white;
-            font-family: 'Inter', sans-serif;
+        body { 
+            background: #0b0c13; 
+            color: white; 
+            margin: 0; 
+            font-family: 'Inter', sans-serif; 
         }
 
+        /* --- NAVIGATION RESPONSIVE --- */
         .main-nav {
             display: flex;
             justify-content: center;
@@ -50,6 +47,7 @@
             .main-nav a { font-size: 0.65em; }
         }
 
+        /* --- BOUTON CV --- */
         .cv-button {
             display: inline-block;
             margin-top: 15px;
@@ -73,6 +71,9 @@
             color: #fff;
         }
 
+        .cv-button i { margin-right: 10px; }
+
+        /* --- LOADER & ZOOM --- */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #0b0c13; display: flex; flex-direction: column;
@@ -94,7 +95,8 @@
         }
         .loader-text { color: #00f0ff; font-family: 'Orbitron'; font-weight: bold; letter-spacing: 4px; }
 
-        #dynamic-header { min-height: 1.5em; font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 20px; word-wrap: break-word; }
+        /* --- TYPING EFFECT --- */
+        #dynamic-header { min-height: 1.5em; font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 20px; }
         #typewriter-text::after {
             content: "_";
             animation: blink 0.8s infinite;
@@ -102,6 +104,7 @@
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
+        /* --- TERMINAL STYLE --- */
         .terminal-style {
             background: #050505 !important;
             border: 1px solid #333 !important;
@@ -121,32 +124,16 @@
         .term-body { padding: 20px; line-height: 1.6; color: #fff; }
         .term-prompt { color: #00f0ff; font-weight: bold; }
 
-        h2 { 
-            font-family: 'Orbitron'; 
-            margin-top: 40px; 
-            word-wrap: break-word; 
-            overflow-wrap: break-word;
-        }
-
-        .skills-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 20px; 
-        }
-
-        @media (max-width: 480px) {
-            .skills-grid { grid-template-columns: 1fr; }
-        }
-
+        /* --- CARDS --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .skill-card-monitor { 
             position: relative; 
             background: rgba(15, 16, 25, 0.9) !important; 
             border: 1px solid #333 !important; 
             padding: 25px 20px 20px 20px !important; 
         }
-
         .status-led { position: absolute; top: 15px; right: 15px; width: 10px; height: 10px; border-radius: 50%; background: #27c93f; box-shadow: 0 0 10px #27c93f; }
-        .tag { background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 10px; border-radius: 4px; font-size: 0.75em; border: 1px solid rgba(0, 240, 255, 0.2); margin-right: 5px; display: inline-block; margin-bottom: 5px; }
+        .tag { background: rgba(0, 240, 255, 0.1); color: #00f0ff; padding: 4px 10px; border-radius: 4px; font-size: 0.75em; border: 1px solid rgba(0, 240, 255, 0.2); margin-right: 5px; }
         
         h3 { font-family: 'Orbitron', sans-serif; color: #fff; margin-top: 0; }
 
@@ -170,8 +157,8 @@
 </div>
 
 <header style="text-align: center; padding: 40px 20px;">
-    <h1 style="margin: 0;">LEMAIRE THOMAS</h1>
-    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px; font-size: 0.9em;">Technicien Systèmes & Réseaux</p>
+    <h1>LEMAIRE THOMAS</h1>
+    <p style="color: #00f0ff; font-family: 'Orbitron'; margin-top: 10px;">Technicien Systèmes & Réseaux</p>
     
     <a href="CV_Lemaire_Thomas.pdf" download class="cv-button">
         <i class="fas fa-file-pdf"></i> Mon CV
@@ -204,7 +191,7 @@
         </div>
     </div>
 
-    <h2><i class="fas fa-certificate"></i> ACCRÉDITATIONS_ET_OBJECTIFS</h2>
+    <h2 style="font-family: 'Orbitron'; margin-top: 40px;"><i class="fas fa-certificate"></i> ACCRÉDITATIONS_ET_OBJECTIFS</h2>
     <div class="skills-grid">
         <div class="card skill-card-monitor">
             <div class="status-led"></div>
@@ -276,3 +263,4 @@
 </script>
 </body>
 </html>
+
