@@ -14,7 +14,6 @@
             color: #e0e5eb;
         }
 
-        
         header {
             text-align: center;
             padding: 40px 20px;
@@ -30,6 +29,7 @@
             text-shadow: 0 0 15px #00f0ff66, 0 0 25px #00fff099;
             animation: pulse 3s infinite;
             margin: 0;
+            word-wrap: break-word;
         }
 
         .subtitle {
@@ -45,7 +45,6 @@
             50% { text-shadow: 0 0 25px #00f0ff99, 0 0 40px #00fff0aa; }
         }
 
-       
         .main-nav {
             display: flex;
             justify-content: center;
@@ -73,7 +72,6 @@
             text-shadow: 0 0 10px #00f0ff;
         }
 
-        
         #contact { 
             max-width: 600px; 
             margin: 40px auto; 
@@ -95,6 +93,7 @@
             padding: 30px;
             border-radius: 8px;
             transition: 0.3s;
+            box-sizing: border-box; /* Sécurité pour le padding */
         }
 
         .card-contact:hover {
@@ -107,7 +106,8 @@
             margin-bottom: 25px; 
             display: block; 
             text-align: center; 
-            font-size: 0.9em; 
+            font-size: 0.9em;
+            word-break: break-all; /* Évite que l'email dépasse sur mobile */
         }
 
         form input, form textarea { 
@@ -141,6 +141,7 @@
             letter-spacing: 2px;
             font-weight: bold;
             border-radius: 4px;
+            box-sizing: border-box;
         }
 
         button:hover { 
@@ -156,10 +157,37 @@
             font-size: 0.8em;
         }
 
-        @media (max-width: 768px) {
-            .main-nav { gap: 8px; padding: 12px 5px; justify-content: space-around; }
-            .main-nav a { font-size: 0.65em; }
-            header h1 { font-size: 2.2em; }
+        /* --- HARMONISATION MOBILE --- */
+        @media (max-width: 600px) {
+            header {
+                padding: 30px 15px !important;
+            }
+
+            header h1 {
+                font-size: 1.8em !important;
+                letter-spacing: 1px;
+            }
+
+            .subtitle {
+                font-size: 0.9em !important;
+            }
+
+            .main-nav {
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .main-nav a {
+                font-size: 0.7em;
+            }
+
+            .card-contact {
+                padding: 20px;
+            }
+
+            .contact-header {
+                font-size: 1.1em;
+            }
         }
     </style>
 </head>
