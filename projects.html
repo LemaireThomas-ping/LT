@@ -87,32 +87,20 @@
         }
 
         .img-wrapper {
-            width: 100%;
-            height: 450px;
-            background-color: #e6e0d1;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #1a1b26;
-            box-sizing: border-box;
+            width: 100%; height: 450px; background-color: #e6e0d1;
+            border-radius: 4px; margin-bottom: 20px; overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+            border: 1px solid #1a1b26; box-sizing: border-box;
         }
 
         .project-img {
-            max-width: 90%;
-            max-height: 90%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            display: block;
+            max-width: 90%; max-height: 90%; width: auto; height: auto;
+            object-fit: contain; display: block;
         }
 
         .card-header {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 15px; font-family: 'Orbitron'; color: #eee;
-            gap: 15px;
+            margin-bottom: 15px; font-family: 'Orbitron'; color: #eee; gap: 15px;
         }
 
         .card-title { margin: 0; font-size: 1.1em; flex: 1; }
@@ -127,13 +115,8 @@
         summary { padding: 12px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.75em; color: #00f0ff; }
         
         .desc-content { 
-            padding: 15px; 
-            font-size: 0.9em; 
-            color: #aaa; 
-            border-top: 1px solid #1a1b26; 
-            line-height: 1.6;
-            white-space: pre-wrap !important;
-            word-wrap: break-word;
+            padding: 15px; font-size: 0.9em; color: #aaa; border-top: 1px solid #1a1b26; 
+            line-height: 1.6; white-space: pre-wrap !important; word-wrap: break-word;
         }
 
         .btn-action {
@@ -150,16 +133,20 @@
 
         footer { text-align: center; padding: 60px; color: #444; font-size: 0.8em; }
 
-        /* --- MEDIA QUERIES MOBILE --- */
+        /* --- CORRECTION VERSION TÉLÉPHONE (Uniquement) --- */
         @media (max-width: 600px) {
-            header { padding: 30px 15px; }
-            header h1 { font-size: 1.8em; }
-            .subtitle { font-size: 0.9em; }
+            header { padding: 30px 15px !important; }
+            header h1 { 
+                font-size: 1.8em !important; /* Taille réduite pour mobile */
+                letter-spacing: 1px;
+            }
+            .subtitle { font-size: 0.85em !important; }
             .main-nav { gap: 10px; padding: 10px; }
             .main-nav a { font-size: 0.7em; }
-            .img-wrapper { height: 250px; }
-            .card-header { flex-direction: column; align-items: flex-start; }
+            .img-wrapper { height: 250px; } /* Image moins haute sur mobile */
+            .card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
             .badge { align-self: flex-start; }
+            .project-card { padding: 15px; }
         }
     </style>
 </head>
@@ -205,7 +192,6 @@
             const jsonData = await response.json();
             const decodedContent = decodeURIComponent(escape(atob(jsonData.content)));
             allProjects = JSON.parse(decodedContent).reverse();
-            
             renderProjects(allProjects);
         } catch (e) {
             container.innerHTML = "<p style='text-align:center;'>Erreur de chargement...</p>";
@@ -247,13 +233,8 @@
     function filterProjects(category, btn) {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        if (category === 'all') {
-            renderProjects(allProjects);
-        } else {
-            const filtered = allProjects.filter(p => p.category === category);
-            renderProjects(filtered);
-        }
+        if (category === 'all') { renderProjects(allProjects); } 
+        else { renderProjects(allProjects.filter(p => p.category === category)); }
     }
 
     loadProjects();
