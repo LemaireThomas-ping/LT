@@ -66,8 +66,10 @@ h2 {
     color: #aaa;
     border-top: 1px solid #1a1b26;
     line-height: 1.6;
-    /* Indispensable pour que les sauts de ligne de l'uploader fonctionnent */
-    white-space: pre-wrap; 
+    /* Convertit les \n en sauts de ligne visibles et gère les longs mots */
+    white-space: pre-wrap !important;
+    word-wrap: break-word;
+    text-align: left;
 }
 
 details {
