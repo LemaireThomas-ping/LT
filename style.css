@@ -58,6 +58,35 @@ h2 {
     text-shadow: 0 0 8px #00f0ff44;
 }
 
+/* --- SECTION PROJETS & AUTOMATISATION --- */
+
+.desc-content {
+    padding: 15px;
+    font-size: 0.9em;
+    color: #aaa;
+    border-top: 1px solid #1a1b26;
+    line-height: 1.6;
+    /* Indispensable pour que les sauts de ligne de l'uploader fonctionnent */
+    white-space: pre-wrap; 
+}
+
+details {
+    border: 1px solid #1a1b26;
+    background: #07080c;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+summary {
+    padding: 12px;
+    cursor: pointer;
+    font-family: 'Orbitron';
+    font-size: 0.75em;
+    color: #00f0ff;
+}
+
+/* ----------------------------------------- */
+
 .card {
     background-color: #1b1d26;
     padding: 25px;
