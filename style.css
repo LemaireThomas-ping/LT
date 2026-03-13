@@ -66,8 +66,7 @@ h2 {
     color: #aaa;
     border-top: 1px solid #1a1b26;
     line-height: 1.6;
-    /* Convertit les \n en sauts de ligne visibles et gère les longs mots */
-    white-space: pre-wrap !important;
+    white-space: pre-wrap !important; /* */
     word-wrap: break-word;
     text-align: left;
 }
@@ -87,6 +86,31 @@ summary {
     color: #00f0ff;
 }
 
+/* --- BOUTON OUVRIR LE DOCUMENT (Correction du décalage) --- */
+
+.btn-open {
+    display: block;
+    width: 100%;
+    /* Empêche le bouton de dépasser à droite malgré le padding */
+    box-sizing: border-box; 
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #00f0ff;
+    background: transparent;
+    color: #00f0ff;
+    font-family: 'Orbitron', sans-serif;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-open:hover {
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
 /* ----------------------------------------- */
 
 .card {
@@ -97,6 +121,9 @@ summary {
     transition: 0.3s;
     border: 1px solid #00f0ff33;
     box-shadow: 0 6px 15px rgba(0,255,255,0.15);
+    /* Sécurité supplémentaire pour le contenu interne */
+    box-sizing: border-box; 
+    overflow: hidden; 
 }
 
 .card:hover {
@@ -140,6 +167,7 @@ form input, form textarea {
     background-color: #0b0c13;
     color: #e0e5eb;
     font-size: 1em;
+    box-sizing: border-box;
 }
 
 form input:focus, form textarea:focus {
