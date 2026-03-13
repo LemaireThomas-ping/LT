@@ -83,7 +83,6 @@
     const username = "LemaireThomas-ping";
     const repo = "LT";
 
-    // Fonctions utilitaires pour l'encodage UTF-8 sécurisé
     function utoa(str) { return btoa(unescape(encodeURIComponent(str))); }
     function atou(str) { return decodeURIComponent(escape(atob(str))); }
 
@@ -109,7 +108,7 @@
             try {
                 status.innerText = "⏳ ENVOI_DOCUMENT...";
                 
-                // 1. Upload du fichier
+               
                 await fetch(`https://api.github.com/repos/${username}/${repo}/contents/docs/${file.name}`, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}` },
@@ -118,14 +117,14 @@
 
                 status.innerText = "⏳ SYNCHRONISATION_REGISTRE...";
                 
-                // 2. Récupération du data.json (toujours via l'API pour le SHA frais)
+                
                 const resJson = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
                     headers: { 'Authorization': `token ${token}` }
                 });
                 const jsonData = await resJson.json();
                 let projects = JSON.parse(atou(jsonData.content));
 
-                // 3. Mise à jour des données
+               
                 projects.push({
                     name: file.name,
                     title: title,
@@ -134,7 +133,7 @@
                     category: cat
                 });
 
-                // 4. Renvoi du JSON mis à jour
+                
                 const updateRes = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json`, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}` },
@@ -164,7 +163,7 @@
         const listContainer = document.getElementById('projects-list');
         const token = document.getElementById('gh-token').value;
         try {
-            // Lecture via l'API pour éviter le cache et les problèmes d'accents
+            
             const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/data.json?t=${Date.now()}`, {
                 headers: token ? { 'Authorization': `token ${token}` } : {}
             });
