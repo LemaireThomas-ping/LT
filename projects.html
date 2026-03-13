@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet | Lemaire Thomas</title>
+    <title>projets | Lemaire Thomas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -29,6 +29,7 @@
             text-shadow: 0 0 15px #00f0ff66, 0 0 25px #00fff099;
             animation: pulse 3s infinite;
             margin: 0;
+            word-wrap: break-word;
         }
 
         .subtitle {
@@ -82,7 +83,7 @@
         .project-card {
             background: rgba(26, 27, 38, 0.9); border: 1px solid rgba(0, 240, 255, 0.1);
             padding: 25px; border-radius: 8px; transition: 0.3s;
-            box-sizing: border-box; /* Évite que le padding ne fasse déborder la carte */
+            box-sizing: border-box;
         }
 
         .img-wrapper {
@@ -111,15 +112,18 @@
         .card-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 15px; font-family: 'Orbitron'; color: #eee;
+            gap: 15px;
         }
+
+        .card-title { margin: 0; font-size: 1.1em; flex: 1; }
 
         .badge {
             font-size: 0.7em; color: #00f0ff; border: 1px solid #00f0ff;
             padding: 3px 10px; border-radius: 4px; text-transform: uppercase;
-            flex-shrink: 0; /* Empêche le badge de s'écraser */
+            white-space: nowrap;
         }
 
-        details { border: 1px solid #1a1b26; background: #07080c; margin-bottom: 20px; border-radius: 4px; width: 100%; box-sizing: border-box; }
+        details { border: 1px solid #1a1b26; background: #07080c; margin-bottom: 20px; border-radius: 4px; box-sizing: border-box; }
         summary { padding: 12px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.75em; color: #00f0ff; }
         
         .desc-content { 
@@ -128,24 +132,15 @@
             color: #aaa; 
             border-top: 1px solid #1a1b26; 
             line-height: 1.6;
-            white-space: pre-wrap;
-            word-wrap: break-word; /* Force la coupure des mots trop longs */
+            white-space: pre-wrap !important;
+            word-wrap: break-word;
         }
 
         .btn-action {
-            display: block; 
-            width: 100%; 
-            box-sizing: border-box; /* LA CORRECTION EST ICI : Inclut le padding dans les 100% */
-            text-align: center; 
-            padding: 15px;
-            background: transparent; 
-            color: #00f0ff; 
-            border: 1px solid #00f0ff;
-            text-decoration: none; 
-            font-family: 'Orbitron'; 
-            font-size: 0.85em; 
-            border-radius: 4px;
-            transition: 0.3s;
+            display: block; width: 100%; text-align: center; padding: 15px;
+            background: transparent; color: #00f0ff; border: 1px solid #00f0ff;
+            text-decoration: none; font-family: 'Orbitron'; font-size: 0.85em; border-radius: 4px;
+            box-sizing: border-box; transition: 0.3s;
         }
 
         .btn-action:hover {
@@ -154,6 +149,18 @@
         }
 
         footer { text-align: center; padding: 60px; color: #444; font-size: 0.8em; }
+
+        /* --- MEDIA QUERIES MOBILE --- */
+        @media (max-width: 600px) {
+            header { padding: 30px 15px; }
+            header h1 { font-size: 1.8em; }
+            .subtitle { font-size: 0.9em; }
+            .main-nav { gap: 10px; padding: 10px; }
+            .main-nav a { font-size: 0.7em; }
+            .img-wrapper { height: 250px; }
+            .card-header { flex-direction: column; align-items: flex-start; }
+            .badge { align-self: flex-start; }
+        }
     </style>
 </head>
 <body>
@@ -223,7 +230,7 @@
                     </div>
                 ` : ''}
                 <div class="card-header">
-                    <h3 class="card-title" style="margin:0; font-size:1.1em;">${file.title.toUpperCase()}</h3>
+                    <h3 class="card-title">${file.title.toUpperCase()}</h3>
                     <span class="badge">${file.category || 'LAB'}</span>
                 </div>
                 <details>
