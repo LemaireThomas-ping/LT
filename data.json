@@ -12,5 +12,12 @@
     "description": "Le serveur LAMP permet de faire fonctionner des sites web dynamiques. Il combine Linux pour le système, Apache pour le serveur web, MariaDB/MySQL pour gérer les données, et PHP pour créer des pages interactives.\n\nCette configuration est fiable et sécurisée, capable de gérer contenus et informations des utilisateurs. Elle reste flexible et peut s’adapter à différents projets, du petit site personnel aux applications web plus complexes, offrant une base pour construire et maintenir un site.",
     "image": "",
     "category": "linux"
+  },
+  {
+    "name": "Configuration du Routage Inter-VLAN.docx",
+    "title": "Administration d'infrastructure réseau et routage inter-VLAN",
+    "description": "Mise en œuvre d'une architecture réseau commutée et routée simulant une structure d'entreprise multi-services. Ce projet assure l'isolation des flux de données et la gestion du trafic inter-départements via des technologies de niveau 2 et 3.\n\nCaractéristiques Techniques\nSegmentation LAN : Création de VLANs dédiés (RH, Comptabilité, IT, Vente) pour limiter les domaines de diffusion.\n\nCommutation Cisco : Configuration des interfaces en mode Access et Trunking (802.1Q) sur switches 2960.\n\nRoutage Inter-VLAN : Déploiement d'une solution Router-on-a-Stick sur routeur 1841 via des sous-interfaces logiques.\n\nAdministration : Configuration complète par ligne de commande (CLI Cisco IOS) et tests de connectivité ICMP.\n\n⚠️ Sécurité et Filtrage : L'architecture actuelle permet une communication libre entre les segments. En environnement de production, l'implémentation de Listes de Contrôle d'Accès (ACL) est requise pour restreindre les flux et sécuriser les données sensibles entre les services.\n",
+    "image": "",
+    "category": "reseaux"
   }
 ]
