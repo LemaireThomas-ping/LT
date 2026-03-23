@@ -6,6 +6,9 @@
     <title>Contact | Lemaire Thomas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <style>
         body { 
             margin: 0;
@@ -93,7 +96,7 @@
             padding: 30px;
             border-radius: 8px;
             transition: 0.3s;
-            box-sizing: border-box; /* Sécurité pour le padding */
+            box-sizing: border-box;
         }
 
         .card-contact:hover {
@@ -107,7 +110,7 @@
             display: block; 
             text-align: center; 
             font-size: 0.9em;
-            word-break: break-all; /* Évite que l'email dépasse sur mobile */
+            word-break: break-all;
         }
 
         form input, form textarea { 
@@ -157,37 +160,10 @@
             font-size: 0.8em;
         }
 
-        /* --- HARMONISATION MOBILE --- */
         @media (max-width: 600px) {
-            header {
-                padding: 30px 15px !important;
-            }
-
-            header h1 {
-                font-size: 1.8em !important;
-                letter-spacing: 1px;
-            }
-
-            .subtitle {
-                font-size: 0.9em !important;
-            }
-
-            .main-nav {
-                gap: 10px;
-                padding: 10px;
-            }
-
-            .main-nav a {
-                font-size: 0.7em;
-            }
-
-            .card-contact {
-                padding: 20px;
-            }
-
-            .contact-header {
-                font-size: 1.1em;
-            }
+            header h1 { font-size: 1.8em !important; }
+            .subtitle { font-size: 0.9em !important; }
+            .main-nav a { font-size: 0.7em; }
         }
     </style>
 </head>
@@ -211,17 +187,51 @@
     <div class="card-contact">
         <span class="email-info"><i class="fas fa-envelope"></i> thomas.lemaire77515@gmail.com</span>
         
-        <form action="#" method="POST">
-            <input type="text" placeholder="NOM_UTILISATEUR" required>
-            <input type="email" placeholder="EMAIL_DE_RETOUR" required>
-            <textarea rows="5" placeholder="CORPS_DU_MESSAGE..." required></textarea>
-            <button type="submit">ENVOYER LA REQUÊTE</button>
+        <form id="contact-form">
+            <input type="text" name="name" placeholder="NOM_UTILISATEUR" required>
+            <input type="email" name="user_email" placeholder="EMAIL_DE_RETOUR" required>
+            <textarea name="message" rows="5" placeholder="CORPS_DU_MESSAGE..." required></textarea>
+            <button type="submit" id="submit-btn">ENVOYER LA REQUÊTE</button>
         </form>
     </div>
 </section>
 
 <footer>© 2026 Lemaire Thomas | Portfolio IT</footer>
 
+<script>
+    // Configuration EmailJS avec tes identifiants
+    const SERVICE_ID = "service_9gqsa8a";
+    const TEMPLATE_ID = "template_pjevurx";
+    const PUBLIC_KEY = "YwSPZMrytiM6CDpEc";
+
+    (function() {
+        emailjs.init(PUBLIC_KEY);
+    })();
+
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const btn = document.getElementById('submit-btn');
+        const originalText = btn.innerText;
+        
+        btn.innerText = 'TRANSMISSION...';
+        btn.disabled = true;
+
+        // Envoi des données du formulaire
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, this)
+            .then(() => {
+                alert('Message envoyé avec succès ! Je te répondrai rapidement.');
+                this.reset();
+            }, (err) => {
+                alert("Erreur lors de l'envoi. Vérifie ta console (F12) pour les détails.");
+                console.error("Détail de l'erreur EmailJS :", err);
+            })
+            .finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+    });
+</script>
+
 </body>
 </html>
-
