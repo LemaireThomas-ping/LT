@@ -91,7 +91,7 @@
         const fileInput = document.getElementById('file-input');
         const title = document.getElementById('proj-title').value;
         
-        // CORRECTION : On prend la valeur brute, JSON.stringify gérera les sauts de ligne
+       
         const desc = document.getElementById('proj-desc').value;
         
         const img = document.getElementById('img-url').value;
@@ -125,7 +125,7 @@
                 const jsonData = await resJson.json();
                 let projects = JSON.parse(atou(jsonData.content));
 
-                // CORRECTION : Structure propre de l'objet
+                
                 projects.push({
                     name: file.name,
                     title: title,
@@ -147,7 +147,7 @@
                 if(updateRes.ok) {
                     status.innerText = "✅ PROJET_PUBLIÉ_AVEC_SUCCÈS";
                     loadProjectsList();
-                    // Nettoyage des champs
+                   
                     document.getElementById('proj-title').value = "";
                     document.getElementById('proj-desc').value = "";
                     document.getElementById('file-input').value = "";
